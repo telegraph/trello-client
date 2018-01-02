@@ -2,7 +2,7 @@
 
 Trello Client Extensions API
 
-## Trello Client Instance: 
+## Trello Client Instance: 
 
 ```javascript
 const TrelloClient= require("trello-client");
@@ -20,9 +20,9 @@ let client = new TrelloClient({
 | baseUrl | String | No        | Trellos Base Url. (Default: https://api.trello.com/1) |
 
 
-## Trello Client Operations: 
+## Trello Client Operations: 
 
-### Organization:
+### Organization:
 It is possible to interact Organization using the object `client.organization`. 
 
 #### Create
@@ -65,7 +65,7 @@ let resultP = client.organization.getBoards(idOrganization);
 let resultP = client.organization.searchFor(searchTerm);
 ```
 
-### Boards:
+### Boards
 It is possible to interact Boards using the object `client.board`. 
 
 #### Create
@@ -103,7 +103,7 @@ let resultP = client.board.getByName(idOrganization, boardName)
 let resultP = client.board.searchFor(searchTerm)
 ```
 
-### Lists:
+### Lists
 It is possible to interact Lists using the object `client.list`. 
 
 create(data, force = false)
@@ -123,7 +123,7 @@ rotateRight(idBoard, count)
 
 ### Cards:
 
-## On going:
+## On going:
  - Adding more operations;
  - Improving Documentation;
  - Adding more tests;
