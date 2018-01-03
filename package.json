@@ -1,5 +1,5 @@
 {
-  "name": "trello-client",
+  "name": "@telegraph-engineering/trello-client",
   "version": "0.0.1",
   "author": "Newsroom Team",
   "description": "Telegraph Trello Client API",
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/telegraph/trello-client",
   "repository": {
     "type": "git",
-    "url": "https://github.com/telegraph/trello-client.git"
+    "url": "git+https://github.com/telegraph/trello-client.git"
   },
   "bugs": {
     "url": "https://github.com/telegraph/trello-client/issues"
@@ -44,5 +44,8 @@
     "jsdoc": "^3.5.5",
     "jsdock": "^1.0.4",
     "proxyquire": "1.8.0"
+  },
+  "directories": {
+    "lib": "lib"
   }
 }

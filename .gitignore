@@ -59,7 +59,3 @@ typings/
 
 *.iml
 .idea
-
-
-#JS Docs
-jsdoc/
