@@ -2,7 +2,7 @@
 
 Trello Client Extensions API 
 
-##Build Status
+## Build Status
 ![build status](https://api.travis-ci.org/telegraph/trello-client.svg?branch=master "Build Status")
 
 ## Trello Client Instance: 
