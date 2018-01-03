@@ -3,11 +3,9 @@ node_js: "8"
 
 jobs:
   include:
-    - stage: install
-      script: npm install
-    - stage: test
+    - stage: test and docs
       script: npm test
-    - stage: Build Docs
+    -
       script: npm docs
     - stage: npm release
       script: echo "Deploying to npm ..."
