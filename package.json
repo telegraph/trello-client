@@ -1,6 +1,6 @@
 {
-  "name": "trello-client",
-  "version": "0.1.0-SNAPSHOT",
+  "name": "@telegraph-engineering/trello-client",
+  "version": "0.0.2",
   "author": "Newsroom Team",
   "description": "Telegraph Trello Client API",
   "main": "./lib/trello.js",
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/telegraph/trello-client",
   "repository": {
     "type": "git",
-    "url": "https://github.com/telegraph/trello-client.git"
+    "url": "git+https://github.com/telegraph/trello-client.git"
   },
   "bugs": {
     "url": "https://github.com/telegraph/trello-client/issues"
@@ -30,7 +30,9 @@
   "scripts": {
     "clean": "rm -rf node_modules dist",
     "test": "istanbul cover --config ./spec/support/.istanbul.yml node_modules/jasmine/bin/jasmine.js",
-    "pack": "npm pack; mkdir -p dist; mv trello-client*.tgz dist/."
+    "pack": "npm pack; mkdir -p dist; mv trello-client*.tgz dist/.",
+    "docs": "jsdoc2md lib/*.js --param-list-format list > api.md",
+    "htmlDocs": "jsdoc lib/*.js -d ./jsdoc"
   },
   "dependencies": {
     "lodash": "4.17.4",
@@ -40,6 +42,15 @@
     "istanbul": "0.4.5",
     "jasmine": "2.8.0",
     "jasmine-console-reporter": "2.0.1",
+    "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^3.0.3",
+    "jsdock": "^1.0.4",
     "proxyquire": "1.8.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
