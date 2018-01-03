@@ -12,5 +12,6 @@ jobs:
       deploy:
         provider: npm
         api_key: $NPM_API_KEY
+        skip_cleanup: true
         on:
           tags: true
