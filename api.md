@@ -30,6 +30,12 @@
     * [new TrelloBoards(trelloClient)](#new_TrelloBoards_new)
     * [.searchFor(searchTerm)](#TrelloBoards+searchFor)
     * [.create(data, force)](#TrelloBoards+create) ⇒ <code>Promise.&lt;Array.&lt;{name:String, idOrganization:String, id:String, lists:Array}&gt;&gt;</code>
+    * [.delete(boardId)](#TrelloBoards+delete)
+    * [.clone(fromBoard, toBoard)](#TrelloBoards+clone)
+    * [.getById(idBoard)](#TrelloBoards+getById)
+    * [.update()](#TrelloBoards+update)
+    * [.getLists(idBoards)](#TrelloBoards+getLists)
+    * [.getByName(idOrganization, boardName)](#TrelloBoards+getByName)
 
 <a name="new_TrelloBoards_new"></a>
 
@@ -59,6 +65,69 @@ Create a board if it does not exist.
     - .idOrganization <code>String</code>
     - .lists <code>Array</code>
 - force <code>Boolean</code> - force list creation
+
+<a name="TrelloBoards+delete"></a>
+
+### trelloBoards.delete(boardId)
+TODO: Delete an existing board
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- boardId <code>string</code>
+
+<a name="TrelloBoards+clone"></a>
+
+### trelloBoards.clone(fromBoard, toBoard)
+TODO: Delete an existing board
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- fromBoard <code>object</code>
+    - [.name] <code>string</code> - This must be set if id is not defined
+    - [.id] <code>string</code> - This must be set if name is not defined
+- toBoard <code>object</code>
+    - .name <code>String</code>
+    - .idOrganization <code>String</code>
+    - .lists <code>Array</code>
+
+<a name="TrelloBoards+getById"></a>
+
+### trelloBoards.getById(idBoard)
+Get board by ID
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- idBoard <code>string</code>
+
+<a name="TrelloBoards+update"></a>
+
+### trelloBoards.update()
+TODO - Update
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+<a name="TrelloBoards+getLists"></a>
+
+### trelloBoards.getLists(idBoards)
+Create a board if it does not exist.
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- idBoards <code>String</code>
+
+<a name="TrelloBoards+getByName"></a>
+
+### trelloBoards.getByName(idOrganization, boardName)
+Get a board by name
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- idOrganization <code>String</code>
+- boardName <code>String</code>
 
 <a name="TrelloCards"></a>
 
@@ -111,16 +180,19 @@ Create a list if it does not exist.
 Apply a Rotate Left Operation to all lists inside a board.
 
 Operation:
+```
   +------------------------------------+
   |   +---+---+---+---+---+---+---+    |
   +-- | 1 | 2 | 3 | . | . | . | n | <--+
       +---+---+---+---+---+---+---+
+```
 
 Outcome:
-
+```
        +---+---+---+---+---+---+---+
        | 2 | 3 | . | . | . | n | 1 |
        +---+---+---+---+---+---+---+
+```
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
@@ -134,16 +206,19 @@ Outcome:
 Apply a Rotate Right Operation to all lists inside a board.
 
 Operation:
+```
   +------------------------------------+
   |    +---+---+---+---+---+---+---+   |
   +--> | 1 | 2 | 3 | . | . | . | n | --+
        +---+---+---+---+---+---+---+
+```
 
 Outcome:
-
+```
        +---+---+---+---+---+---+---+
        | n | 1 | 2 | . | . | . |n-1|
        +---+---+---+---+---+---+---+
+```
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
@@ -154,7 +229,7 @@ Outcome:
 <a name="TrelloLists+createAtIndex"></a>
 
 ### trelloLists.createAtIndex(data, index)
-Apply a Shift Right Operation to all lists inside a board
+TODO - Apply a Shift Right Operation to all lists inside a board
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
@@ -165,7 +240,7 @@ Apply a Shift Right Operation to all lists inside a board
 <a name="TrelloLists+shiftLeft"></a>
 
 ### trelloLists.shiftLeft(idBoard, count)
-Apply a Shift Left Operation to all lists inside a board
+TODO - Apply a Shift Left Operation to all lists inside a board
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
@@ -176,7 +251,7 @@ Apply a Shift Left Operation to all lists inside a board
 <a name="TrelloLists+shiftRight"></a>
 
 ### trelloLists.shiftRight(idBoard, count)
-Apply a Shift Right Operation to all lists inside a board
+TODO - Apply a Shift Right Operation to all lists inside a board
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
