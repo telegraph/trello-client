@@ -1,16 +1,16 @@
 language: node_js
 
-node_js:
-  - "8"
-
-install:
-  - npm install
-script:
-  - npm test
-  - npm docs
-
 jobs:
   include:
+    - stage: install
+      node_js: "8"
+      script: npm install
+    - stage: test
+      node_js: "8"
+      script: npm test
+    - stage: Build Docs
+      node_js: "8"
+      script: npm docs
     - stage: npm release
       node_js: "8"
       script: echo "Deploying to npm ..."
