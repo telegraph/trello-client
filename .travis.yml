@@ -1,10 +1,24 @@
 language: node_js
 
 node_js:
-  = "8"
+  - "7"
+  - "6"
+  - "5"
+  - "4"
 
 install:
   - npm install
 script:
   - npm test
   - npm docs
+
+jobs:
+  include:
+    - stage: npm release
+      node_js: "7"
+      script: echo "Deploying to npm ..."
+      deploy:
+        provider: npm
+        api_key: $NPM_API_KEY
+        on:
+          tags: true
