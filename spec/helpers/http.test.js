@@ -95,7 +95,7 @@ describe("Given a 'HttpHelper' library", () => {
             });
             HttpHelper(method, uri, mockConfig, undefined)
                 .then((data) => {
-                    expect(data).toEqual(jasmine.objectContaining(sampleData));
+                    expect(data).toEqual(sampleData);
                     done();
                 });
         });
