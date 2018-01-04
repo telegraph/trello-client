@@ -150,6 +150,8 @@ Get a board by name
     * [.create(data, force)](#TrelloLists+create) ⇒ <code>Promise.&lt;{name:String, idBoard:String, id:String}&gt;</code>
     * [.rotateLeft(idBoard, count)](#TrelloLists+rotateLeft)
     * [.rotateRight(idBoard, count)](#TrelloLists+rotateRight)
+    * [.archiveAllCards(data, index)](#TrelloLists+archiveAllCards)
+    * [.archiveList(listId, options)](#TrelloLists+archiveList)
     * [.createAtIndex(data, index)](#TrelloLists+createAtIndex)
     * [.shiftLeft(idBoard, count)](#TrelloLists+shiftLeft)
     * [.shiftRight(idBoard, count)](#TrelloLists+shiftRight)
@@ -225,6 +227,29 @@ Outcome:
 
 - idBoard <code>String</code> - Board Identifier
 - count <code>Number</code> - number of items to be rotated
+
+<a name="TrelloLists+archiveAllCards"></a>
+
+### trelloLists.archiveAllCards(data, index)
+TODO - Apply a Shift Right Operation to all lists inside a board
+
+**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
+**Params**
+
+- data <code>Object</code> - List Details
+- index <code>Number</code> - list index
+
+<a name="TrelloLists+archiveList"></a>
+
+### trelloLists.archiveList(listId, options)
+Archive a list
+
+**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
+**Params**
+
+- listId <code>String</code>
+- options <code>Object</code>
+    - .archiveCards <code>Boolean</code> - If this is set to true, all cards on the list will be archived before the list is archived
 
 <a name="TrelloLists+createAtIndex"></a>
 
