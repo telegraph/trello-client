@@ -33,7 +33,7 @@ describe("Given a 'Trello List'", () => {
                     const postCalledUrl = postStub.getCall(0).args[0];
                     const putCalledUrl = putStub.getCall(0).args[0];
                     expect(postCalledUrl).toBe(`/lists/${boardId}/archiveAllCards`);
-                    expect(putCalledUrl).toBe(`/lists/${boardId}/closed`);
+                    expect(putCalledUrl).toBe(`/lists/${boardId}/closed?value=true`);
                 })
                 .then(done);
        });
