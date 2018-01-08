@@ -192,6 +192,575 @@
     
 
     
+    <h4 class="name" id="archiveAllCardsOnList"><span class="type-signature"></span>archiveAllCardsOnList<span class="signature">(listId)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Archive all cards on a list
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>listId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="archiveList"><span class="type-signature"></span>archiveList<span class="signature">(listId, options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Archive a list
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>listId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>archiveCards</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">If this is set to true, all cards on the list will be archived before the list is archived</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="copyList"><span class="type-signature"></span>copyList<span class="signature">(listId, toBoardId, toListName, pos)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    copy a list
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>listId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">ID of the list to be copied</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toBoardId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Board Identifier to copy the list to</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toListName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Name of the cloned list</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pos</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    bottom
+                
+                </td>
+            
+
+            <td class="description last">The position to place the list, possible values are "top", "bottom", or a positive floating point number</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line191">line 191</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(data, force)</span><span class="type-signature"> &rarr; {Promise.&lt;{name:String, idBoard:String, id:String}>}</span></h4>
     
 
@@ -448,7 +1017,7 @@
 
 
 <div class="description">
-    Apply a Shift Right Operation to all lists inside a board
+    TODO - Apply a Shift Right Operation to all lists inside a board
 </div>
 
 
@@ -564,7 +1133,392 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line111">line 111</a>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="moveList"><span class="type-signature"></span>moveList<span class="signature">(listId, toBoardId, toListName, pos)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Move a list
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>listId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">ID of the list to be moved</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toBoardId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Board Identifier to move the list to</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>toListName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">New name of the list</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pos</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    bottom
+                
+                </td>
+            
+
+            <td class="description last">The position to place the list, possible values are "top", "bottom", or a positive floating point number</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line179">line 179</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="renameList"><span class="type-signature"></span>renameList<span class="signature">(listId, newName)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    rename a list
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>listId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID of the list to be copied</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Name for the list to be changed to</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line201">line 201</a>
     </li></ul></dd>
     
 
@@ -609,16 +1563,19 @@
     Apply a Rotate Left Operation to all lists inside a board.
 
 Operation:
+```
   +------------------------------------+
   |   +---+---+---+---+---+---+---+    |
   +-- | 1 | 2 | 3 | . | . | . | n | <--+
       +---+---+---+---+---+---+---+
+```
 
 Outcome:
-
+```
        +---+---+---+---+---+---+---+
        | 2 | 3 | . | . | . | n | 1 |
        +---+---+---+---+---+---+---+
+```
 </div>
 
 
@@ -734,7 +1691,7 @@ Outcome:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line66">line 66</a>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -779,16 +1736,19 @@ Outcome:
     Apply a Rotate Right Operation to all lists inside a board.
 
 Operation:
+```
   +------------------------------------+
   |    +---+---+---+---+---+---+---+   |
   +--> | 1 | 2 | 3 | . | . | . | n | --+
        +---+---+---+---+---+---+---+
+```
 
 Outcome:
-
+```
        +---+---+---+---+---+---+---+
        | n | 1 | 2 | . | . | . |n-1|
        +---+---+---+---+---+---+---+
+```
 </div>
 
 
@@ -904,7 +1864,7 @@ Outcome:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line88">line 88</a>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -946,7 +1906,7 @@ Outcome:
 
 
 <div class="description">
-    Apply a Shift Left Operation to all lists inside a board
+    TODO - Apply a Shift Left Operation to all lists inside a board
 </div>
 
 
@@ -1062,7 +2022,7 @@ Outcome:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line121">line 121</a>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line157">line 157</a>
     </li></ul></dd>
     
 
@@ -1104,7 +2064,7 @@ Outcome:
 
 
 <div class="description">
-    Apply a Shift Right Operation to all lists inside a board
+    TODO - Apply a Shift Right Operation to all lists inside a board
 </div>
 
 
@@ -1220,7 +2180,7 @@ Outcome:
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line131">line 131</a>
+        <a href="trello-list.js.html">trello-list.js</a>, <a href="trello-list.js.html#line167">line 167</a>
     </li></ul></dd>
     
 
@@ -1270,7 +2230,7 @@ Outcome:
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jan 03 2018 16:52:01 GMT+0000 (GMT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jan 08 2018 11:42:21 GMT+0000 (GMT)
 </footer>
 
 <script> prettyPrint(); </script>

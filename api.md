@@ -155,8 +155,9 @@ Get a board by name
     * [.createAtIndex(data, index)](#TrelloLists+createAtIndex)
     * [.shiftLeft(idBoard, count)](#TrelloLists+shiftLeft)
     * [.shiftRight(idBoard, count)](#TrelloLists+shiftRight)
-    * [.moveList(listId, toBoardId, toListName)](#TrelloLists+moveList)
-    * [.copyList(fromListId, toBoardId, toListName)](#TrelloLists+copyList)
+    * [.moveList(listId, toBoardId, toListName, pos)](#TrelloLists+moveList)
+    * [.copyList(listId, toBoardId, toListName, pos)](#TrelloLists+copyList)
+    * [.renameList(listId, newName)](#TrelloLists+renameList)
 
 <a name="new_TrelloLists_new"></a>
 
@@ -287,7 +288,7 @@ TODO - Apply a Shift Right Operation to all lists inside a board
 
 <a name="TrelloLists+moveList"></a>
 
-### trelloLists.moveList(listId, toBoardId, toListName)
+### trelloLists.moveList(listId, toBoardId, toListName, pos)
 Move a list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
@@ -296,18 +297,31 @@ Move a list
 - listId <code>String</code> - ID of the list to be moved
 - toBoardId <code>String</code> - Board Identifier to move the list to
 - toListName <code>Number</code> - New name of the list
+- pos <code>String</code> | <code>Number</code> <code> = bottom</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 
 <a name="TrelloLists+copyList"></a>
 
-### trelloLists.copyList(fromListId, toBoardId, toListName)
+### trelloLists.copyList(listId, toBoardId, toListName, pos)
 copy a list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
-- fromListId <code>String</code> - ID of the list to be copied
+- listId <code>String</code> - ID of the list to be copied
 - toBoardId <code>String</code> - Board Identifier to copy the list to
 - toListName <code>Number</code> - Name of the cloned list
+- pos <code>String</code> | <code>Number</code> <code> = bottom</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
+
+<a name="TrelloLists+renameList"></a>
+
+### trelloLists.renameList(listId, newName)
+rename a list
+
+**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
+**Params**
+
+- listId <code>String</code> - ID of the list to be copied
+- newName <code>Number</code> - Name for the list to be changed to
 
 <a name="TrelloOrganizations"></a>
 
