@@ -157,6 +157,7 @@ Get a board by name
     * [.shiftRight(idBoard, count)](#TrelloLists+shiftRight)
     * [.moveList(listId, toBoardId, toListName, pos)](#TrelloLists+moveList)
     * [.copyList(listId, toBoardId, toListName, pos)](#TrelloLists+copyList)
+    * [.moveCards(listId, toBoardId, toListId)](#TrelloLists+moveCards)
     * [.renameList(listId, newName)](#TrelloLists+renameList)
 
 <a name="new_TrelloLists_new"></a>
@@ -311,6 +312,18 @@ copy a list
 - toBoardId <code>String</code> - Board Identifier to copy the list to
 - toListName <code>Number</code> - Name of the cloned list
 - pos <code>String</code> | <code>Number</code> <code> = bottom</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
+
+<a name="TrelloLists+moveCards"></a>
+
+### trelloLists.moveCards(listId, toBoardId, toListId)
+Move all cards to list
+
+**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
+**Params**
+
+- listId <code>String</code> - ID of the list cards should be move to
+- toBoardId <code>String</code> - Board Identifier of the board containing the list to move the cards to
+- toListId <code>Number</code> - ID of the list to move the cards to
 
 <a name="TrelloLists+renameList"></a>
 
