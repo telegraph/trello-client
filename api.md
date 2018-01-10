@@ -311,7 +311,7 @@ copy a list
 - listId <code>String</code> - ID of the list to be copied
 - toBoardId <code>String</code> - Board Identifier to copy the list to
 - toListName <code>Number</code> - Name of the cloned list
-- pos <code>String</code> | <code>Number</code> <code> = bottom</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
+- pos <code>String</code> | <code>Number</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 
 <a name="TrelloLists+moveCards"></a>
 
