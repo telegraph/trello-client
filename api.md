@@ -178,6 +178,7 @@ Create a list if it does not exist.
 - data <code>object</code>
     - .name <code>string</code>
     - .idBoard <code>string</code>
+    - [.pos] <code>String</code> | <code>Number</code> <code> = &#x27;bottom&#x27;</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 - force <code>Boolean</code> - force list creation
 
 <a name="TrelloLists+rotateLeft"></a>
