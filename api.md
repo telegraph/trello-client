@@ -36,6 +36,7 @@
     * [.update()](#TrelloBoards+update)
     * [.getLists(idBoards)](#TrelloBoards+getLists)
     * [.getByName(idOrganization, boardName)](#TrelloBoards+getByName)
+    * [.renameBoard(boardId, newName)](#TrelloBoards+renameBoard)
 
 <a name="new_TrelloBoards_new"></a>
 
@@ -129,6 +130,17 @@ Get a board by name
 - idOrganization <code>String</code>
 - boardName <code>String</code>
 
+<a name="TrelloBoards+renameBoard"></a>
+
+### trelloBoards.renameBoard(boardId, newName)
+rename a board
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- boardId <code>String</code> - ID of the board to be renamed
+- newName <code>Number</code> - Name for the list to be changed to
+
 <a name="TrelloCards"></a>
 
 ## TrelloCards
@@ -155,9 +167,9 @@ Get a board by name
     * [.createAtIndex(data, index)](#TrelloLists+createAtIndex)
     * [.shiftLeft(idBoard, count)](#TrelloLists+shiftLeft)
     * [.shiftRight(idBoard, count)](#TrelloLists+shiftRight)
-    * [.moveList(listId, toBoardId, toListName, pos)](#TrelloLists+moveList)
-    * [.copyList(listId, toBoardId, toListName, pos)](#TrelloLists+copyList)
-    * [.moveCards(listId, toBoardId, toListId)](#TrelloLists+moveCards)
+    * [.moveList(toBoardId, listId, toListName, pos)](#TrelloLists+moveList)
+    * [.copyList(toBoardId, listId, toListName, pos)](#TrelloLists+copyList)
+    * [.moveCards(toBoardId, listId, toListId)](#TrelloLists+moveCards)
     * [.renameList(listId, newName)](#TrelloLists+renameList)
 
 <a name="new_TrelloLists_new"></a>
@@ -178,7 +190,7 @@ Create a list if it does not exist.
 - data <code>object</code>
     - .name <code>string</code>
     - .idBoard <code>string</code>
-    - [.pos] <code>String</code> | <code>Number</code> <code> = &#x27;bottom&#x27;</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
+    - [.pos] <code>String</code> | <code>Number</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 - force <code>Boolean</code> - force list creation
 
 <a name="TrelloLists+rotateLeft"></a>
@@ -290,41 +302,41 @@ TODO - Apply a Shift Right Operation to all lists inside a board
 
 <a name="TrelloLists+moveList"></a>
 
-### trelloLists.moveList(listId, toBoardId, toListName, pos)
+### trelloLists.moveList(toBoardId, listId, toListName, pos)
 Move a list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
-- listId <code>String</code> - ID of the list to be moved
 - toBoardId <code>String</code> - Board Identifier to move the list to
-- toListName <code>Number</code> - New name of the list
+- listId <code>String</code> - ID of the list to be moved
+- toListName <code>String</code> - New name of the list
 - pos <code>String</code> | <code>Number</code> <code> = bottom</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 
 <a name="TrelloLists+copyList"></a>
 
-### trelloLists.copyList(listId, toBoardId, toListName, pos)
+### trelloLists.copyList(toBoardId, listId, toListName, pos)
 copy a list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
-- listId <code>String</code> - ID of the list to be copied
 - toBoardId <code>String</code> - Board Identifier to copy the list to
-- toListName <code>Number</code> - Name of the cloned list
+- listId <code>String</code> - ID of the list to be copied
+- toListName <code>String</code> - Name of the cloned list
 - pos <code>String</code> | <code>Number</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 
 <a name="TrelloLists+moveCards"></a>
 
-### trelloLists.moveCards(listId, toBoardId, toListId)
+### trelloLists.moveCards(toBoardId, listId, toListId)
 Move all cards to list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
-- listId <code>String</code> - ID of the list cards should be move to
 - toBoardId <code>String</code> - Board Identifier of the board containing the list to move the cards to
-- toListId <code>Number</code> - ID of the list to move the cards to
+- listId <code>String</code> - ID of the list cards should be move to
+- toListId <code>String</code> - ID of the list to move the cards to
 
 <a name="TrelloLists+renameList"></a>
 
@@ -334,7 +346,7 @@ rename a list
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
-- listId <code>String</code> - ID of the list to be copied
+- listId <code>String</code> - ID of the list to be renamed
 - newName <code>Number</code> - Name for the list to be changed to
 
 <a name="TrelloOrganizations"></a>
