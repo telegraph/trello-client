@@ -1,7 +1,17 @@
 
 'use strict';
 
-const TrelloClient = require('../lib/trello');
+const Proxyquire   = require('proxyquire');
+
+const MockHttp = {
+    httpHelper: function(){}
+};
+
+const TrelloClient = Proxyquire('../lib/trello', {
+    "./helper/http": function(method, uri, config, data){
+        return MockHttp.httpHelper(method, uri, config, data);
+    }
+});
 
 describe("Given a 'TrelloClient' library", () => {
 
@@ -81,4 +91,46 @@ describe("Given a 'TrelloClient' library", () => {
             expect(obj1).toBe(obj2);
         });
     });
+
+    describe("When an instance is created successfully, it should be possible to invoke HTTP Methods directly", () => {
+        let client = new TrelloClient({
+            key  : "fake-key",
+            token: "fake-token"
+        });
+
+        it("/GET", (done) => {
+            testRequest('get', '/boards/1234', undefined, done)
+        });
+
+        it("/POST", (done) => {
+            testRequest('post', '/boards', {name: 'test', idOrganization: '1'}, done)
+        });
+
+        it("/DELETE", (done) => {
+            testRequest('delete', '/boards/1234', undefined, done)
+        });
+
+        it("/PUT", (done) => {
+            testRequest('put', '/boards/1234', {name: 'test', idOrganization: '1'}, done)
+        });
+
+        function testRequest(method, uri, data, done ){
+            MockHttp.httpHelper = function(){
+                return Promise.resolve({});
+            };
+            spyOn(MockHttp, 'httpHelper').and.callThrough();
+
+            client[method](uri, data)
+                .catch(() => fail("Should not fail execution"))
+                .then (() => {
+                    expect(MockHttp.httpHelper).toHaveBeenCalledTimes(1);
+                    expect(MockHttp.httpHelper.calls.mostRecent().args[0]).toEqual(method);
+                    expect(MockHttp.httpHelper.calls.mostRecent().args[1]).toEqual(uri);
+                    expect(MockHttp.httpHelper.calls.mostRecent().args[2]).toEqual(client._config);
+                    expect(MockHttp.httpHelper.calls.mostRecent().args[3]).toEqual(data);
+                    done()
+                });
+        }
+    })
+
 });
