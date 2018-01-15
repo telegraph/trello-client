@@ -33,10 +33,10 @@
     * [.delete(boardId)](#TrelloBoards+delete)
     * [.clone(fromBoard, toBoard)](#TrelloBoards+clone)
     * [.getById(idBoard)](#TrelloBoards+getById)
-    * [.update()](#TrelloBoards+update)
+    * [.update(board)](#TrelloBoards+update) ⇒ <code>Promise.&lt;\*&gt;</code>
     * [.getLists(idBoards)](#TrelloBoards+getLists)
     * [.getByName(idOrganization, boardName)](#TrelloBoards+getByName)
-    * [.renameBoard(boardId, newName)](#TrelloBoards+renameBoard)
+    * ~~[.renameBoard(boardId, newName)](#TrelloBoards+renameBoard)~~
 
 <a name="new_TrelloBoards_new"></a>
 
@@ -90,7 +90,6 @@ TODO: Delete an existing board
     - [.id] <code>string</code> - This must be set if name is not defined
 - toBoard <code>object</code>
     - .name <code>String</code>
-    - .idOrganization <code>String</code>
     - .lists <code>Array</code>
 
 <a name="TrelloBoards+getById"></a>
@@ -105,10 +104,17 @@ Get board by ID
 
 <a name="TrelloBoards+update"></a>
 
-### trelloBoards.update()
-TODO - Update
+### trelloBoards.update(board) ⇒ <code>Promise.&lt;\*&gt;</code>
+This method allow us to update a board definition. If the board id is not present or not
+valid properties exist to be updated, an error is thrown.
 
 **Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- board <code>object</code> - Board object to be updated
+    - [.id] <code>string</code>
+    - [.name] <code>string</code>
+
 <a name="TrelloBoards+getLists"></a>
 
 ### trelloBoards.getLists(idBoards)
@@ -132,14 +138,16 @@ Get a board by name
 
 <a name="TrelloBoards+renameBoard"></a>
 
-### trelloBoards.renameBoard(boardId, newName)
+### ~~trelloBoards.renameBoard(boardId, newName)~~
+***Deprecated***
+
 rename a board
 
 **Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
 **Params**
 
 - boardId <code>String</code> - ID of the board to be renamed
-- newName <code>Number</code> - Name for the list to be changed to
+- newName <code>String</code> - Name for the list to be changed to
 
 <a name="TrelloCards"></a>
 
@@ -160,17 +168,17 @@ rename a board
 * [TrelloLists](#TrelloLists)
     * [new TrelloLists(trelloClient)](#new_TrelloLists_new)
     * [.create(data, force)](#TrelloLists+create) ⇒ <code>Promise.&lt;{name:String, idBoard:String, id:String}&gt;</code>
+    * [.setPosition(idList, position)](#TrelloLists+setPosition) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [.getByName(idBoard, listName)](#TrelloLists+getByName) ⇒ <code>PromiseLike.&lt;T&gt;</code>
     * [.rotateLeft(idBoard, count)](#TrelloLists+rotateLeft)
     * [.rotateRight(idBoard, count)](#TrelloLists+rotateRight)
     * [.archiveAllCardsOnList(listId)](#TrelloLists+archiveAllCardsOnList)
     * [.archiveList(listId, options)](#TrelloLists+archiveList)
-    * [.createAtIndex(data, index)](#TrelloLists+createAtIndex)
-    * [.shiftLeft(idBoard, count)](#TrelloLists+shiftLeft)
-    * [.shiftRight(idBoard, count)](#TrelloLists+shiftRight)
-    * [.moveList(toBoardId, listId, toListName, pos)](#TrelloLists+moveList)
-    * [.copyList(toBoardId, listId, toListName, pos)](#TrelloLists+copyList)
+    * [.moveList(toBoardId, fromListId, toListName, pos)](#TrelloLists+moveList)
+    * [.copyList(toBoardId, fromListId, toListName, pos)](#TrelloLists+copyList)
     * [.moveCards(toBoardId, listId, toListId)](#TrelloLists+moveCards)
-    * [.renameList(listId, newName)](#TrelloLists+renameList)
+    * [.update(list)](#TrelloLists+update) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * ~~[.renameList(listId, newName)](#TrelloLists+renameList)~~
 
 <a name="new_TrelloLists_new"></a>
 
@@ -192,6 +200,29 @@ Create a list if it does not exist.
     - .idBoard <code>string</code>
     - [.pos] <code>String</code> | <code>Number</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 - force <code>Boolean</code> - force list creation
+
+<a name="TrelloLists+setPosition"></a>
+
+### trelloLists.setPosition(idList, position) ⇒ <code>Promise.&lt;\*&gt;</code>
+This method sets a list position.
+
+**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
+**Params**
+
+- idList <code>String</code> - List Id.
+- position <code>String</code> | <code>Number</code> - List Position
+
+<a name="TrelloLists+getByName"></a>
+
+### trelloLists.getByName(idBoard, listName) ⇒ <code>PromiseLike.&lt;T&gt;</code>
+This method is used to search for a list By name in a Board.
+The board is identified by a `idBoard`.
+
+**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
+**Params**
+
+- idBoard <code>String</code> - Board Identifier
+- listName <code>String</code> - List Name to search for
 
 <a name="TrelloLists+rotateLeft"></a>
 
@@ -267,64 +298,31 @@ Archive a list
 - options <code>Object</code>
     - .archiveCards <code>Boolean</code> - If this is set to true, all cards on the list will be archived before the list is archived
 
-<a name="TrelloLists+createAtIndex"></a>
-
-### trelloLists.createAtIndex(data, index)
-TODO - Apply a Shift Right Operation to all lists inside a board
-
-**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
-**Params**
-
-- data <code>Object</code> - List Details
-- index <code>Number</code> - list index
-
-<a name="TrelloLists+shiftLeft"></a>
-
-### trelloLists.shiftLeft(idBoard, count)
-TODO - Apply a Shift Left Operation to all lists inside a board
-
-**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
-**Params**
-
-- idBoard <code>String</code> - Board Identifier
-- count <code>Number</code> - number of items to be shifted
-
-<a name="TrelloLists+shiftRight"></a>
-
-### trelloLists.shiftRight(idBoard, count)
-TODO - Apply a Shift Right Operation to all lists inside a board
-
-**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
-**Params**
-
-- idBoard <code>String</code> - Board Identifier
-- count <code>Number</code> - number of items to be shifted
-
 <a name="TrelloLists+moveList"></a>
 
-### trelloLists.moveList(toBoardId, listId, toListName, pos)
+### trelloLists.moveList(toBoardId, fromListId, toListName, pos)
 Move a list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
 - toBoardId <code>String</code> - Board Identifier to move the list to
-- listId <code>String</code> - ID of the list to be moved
+- fromListId <code>String</code> - ID of the list to be moved
 - toListName <code>String</code> - New name of the list
 - pos <code>String</code> | <code>Number</code> <code> = bottom</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 
 <a name="TrelloLists+copyList"></a>
 
-### trelloLists.copyList(toBoardId, listId, toListName, pos)
+### trelloLists.copyList(toBoardId, fromListId, toListName, pos)
 copy a list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
 - toBoardId <code>String</code> - Board Identifier to copy the list to
-- listId <code>String</code> - ID of the list to be copied
+- fromListId <code>String</code> - ID of the list to be copied
 - toListName <code>String</code> - Name of the cloned list
-- pos <code>String</code> | <code>Number</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
+- pos <code>String</code> | <code>Number</code> <code> = bottom</code> - The position to place the list, possible values are "top", "bottom", or a positive floating point number
 
 <a name="TrelloLists+moveCards"></a>
 
@@ -338,16 +336,31 @@ Move all cards to list
 - listId <code>String</code> - ID of the list cards should be move to
 - toListId <code>String</code> - ID of the list to move the cards to
 
+<a name="TrelloLists+update"></a>
+
+### trelloLists.update(list) ⇒ <code>Promise.&lt;\*&gt;</code>
+This method allow us to update a list definition. If the list id is not present or not
+valid properties exist to be updated, an error is thrown.
+
+**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
+**Params**
+
+- list <code>object</code> - List object to be updated
+    - [.id] <code>string</code>
+    - [.name] <code>string</code>
+
 <a name="TrelloLists+renameList"></a>
 
-### trelloLists.renameList(listId, newName)
+### ~~trelloLists.renameList(listId, newName)~~
+***Deprecated***
+
 rename a list
 
 **Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
 **Params**
 
 - listId <code>String</code> - ID of the list to be renamed
-- newName <code>Number</code> - Name for the list to be changed to
+- newName <code>String</code> - Name for the list to be changed to
 
 <a name="TrelloOrganizations"></a>
 
@@ -356,7 +369,10 @@ rename a list
 
 * [TrelloOrganizations](#TrelloOrganizations)
     * [new TrelloOrganizations(trelloClient)](#new_TrelloOrganizations_new)
-    * [.searchFor(searchTerm)](#TrelloOrganizations+searchFor)
+    * [.searchFor(searchTerm)](#TrelloOrganizations+searchFor) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.create(data, force)](#TrelloOrganizations+create) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [.delete(data, deleteBoards)](#TrelloOrganizations+delete) ⇒ <code>Promise.&lt;\*&gt;</code>
+    * [.getById(idOrganization)](#TrelloOrganizations+getById) ⇒ <code>Promise.&lt;{\*}&gt;</code>
 
 <a name="new_TrelloOrganizations_new"></a>
 
@@ -367,11 +383,51 @@ rename a list
 
 <a name="TrelloOrganizations+searchFor"></a>
 
-### trelloOrganizations.searchFor(searchTerm)
+### trelloOrganizations.searchFor(searchTerm) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+This method allow us to search for an organization given a 'searchTerm' String
+
 **Kind**: instance method of [<code>TrelloOrganizations</code>](#TrelloOrganizations)  
+**Returns**: <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code> - Array containing organizations  
 **Params**
 
 - searchTerm <code>String</code>
+
+<a name="TrelloOrganizations+create"></a>
+
+### trelloOrganizations.create(data, force) ⇒ <code>Promise.&lt;\*&gt;</code>
+This method allow us to create an organization if it doesn't exist or force the
+creation of it if another organization with the same name already exists.
+If the organization contains boards, then they are created.
+
+**Kind**: instance method of [<code>TrelloOrganizations</code>](#TrelloOrganizations)  
+**Params**
+
+- data <code>Object</code>
+- force <code>Boolean</code> <code> = false</code> - Force the organization creation even if it already exists another
+with the same name.
+
+<a name="TrelloOrganizations+delete"></a>
+
+### trelloOrganizations.delete(data, deleteBoards) ⇒ <code>Promise.&lt;\*&gt;</code>
+Deletes an organization and inner structure (boards) if the `deleteBoards` is set to true.
+At least the organization id or name must be provided.
+
+**Kind**: instance method of [<code>TrelloOrganizations</code>](#TrelloOrganizations)  
+**Params**
+
+- data <code>Object</code>
+- deleteBoards <code>Boolean</code> <code> = false</code> - When true, deletes all inner boards.
+
+<a name="TrelloOrganizations+getById"></a>
+
+### trelloOrganizations.getById(idOrganization) ⇒ <code>Promise.&lt;{\*}&gt;</code>
+Gets an organization for a given Id
+
+**Kind**: instance method of [<code>TrelloOrganizations</code>](#TrelloOrganizations)  
+**Returns**: <code>Promise.&lt;{\*}&gt;</code> - Object that describes an organization wrapped inside a promise  
+**Params**
+
+- idOrganization <code>String</code>
 
 <a name="TrelloClient"></a>
 
