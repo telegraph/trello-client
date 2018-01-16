@@ -153,12 +153,28 @@ rename a board
 
 ## TrelloCards
 **Kind**: global class  
+
+* [TrelloCards](#TrelloCards)
+    * [new TrelloCards(trelloClient)](#new_TrelloCards_new)
+    * [.updateCard(idCard, parameters)](#TrelloCards+updateCard)
+
 <a name="new_TrelloCards_new"></a>
 
 ### new TrelloCards(trelloClient)
 **Params**
 
 - trelloClient [<code>TrelloClient</code>](#TrelloClient)
+
+<a name="TrelloCards+updateCard"></a>
+
+### trelloCards.updateCard(idCard, parameters)
+Update a card
+
+**Kind**: instance method of [<code>TrelloCards</code>](#TrelloCards)  
+**Params**
+
+- idCard <code>String</code>
+- parameters <code>Object</code> - valid options can be found here https://developers.trello.com/reference#cardsid-1
 
 <a name="TrelloLists"></a>
 
