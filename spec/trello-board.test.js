@@ -428,7 +428,7 @@ describe("Given a 'Trello Board'", () => {
                     (data) => {
                         expect(_clientMock.put).toHaveBeenCalledTimes(1);
                         expect(_clientMock.put.calls.mostRecent().args).toEqual([
-                            `/boards/boardA?name=Board B`
+                            `/boards/boardA?name=Board%20B`
                         ]);
                         expect(data).toEqual({});
                         done();

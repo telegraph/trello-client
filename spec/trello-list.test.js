@@ -237,7 +237,7 @@ describe("Given a 'Trello List'", () => {
                     (data) => {
                         expect(_clientMock.put).toHaveBeenCalledTimes(1);
                         expect(_clientMock.put.calls.mostRecent().args).toEqual([
-                            `/lists/${fromListId}?name=${toListName}&closed=false&idBoard=${toBoardId}&pos=${position}`
+                            `/lists/${fromListId}?name=${encodeURIComponent(toListName)}&closed=false&idBoard=${toBoardId}&pos=${position}`
                         ]);
                         expect(data).toEqual({});
                         done()
@@ -257,7 +257,7 @@ describe("Given a 'Trello List'", () => {
                     (error) => {
                         expect(_clientMock.put).toHaveBeenCalledTimes(1);
                         expect(_clientMock.put.calls.mostRecent().args).toEqual([
-                            `/lists/${fromListId}?name=${toListName}&closed=false&idBoard=${toBoardId}&pos=${position}`
+                            `/lists/${fromListId}?name=${encodeURIComponent(toListName)}&closed=false&idBoard=${toBoardId}&pos=${position}`
                         ]);
                         expect(error).toEqual("Failure");
                         done()
