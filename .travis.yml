@@ -9,9 +9,9 @@ jobs:
     script: echo "Deploying to npm ..."
     deploy:
       provider: npm
-      email: alan.churley@gmail.com
+      email: telegraph.engineering@telepgraph.co.uk
       api_key:
-        secure: u4Zf4rXh/lAZHxwm22LCNZNR2ldGH+wubhf04zvzlpuU7VdM5oDyoBSG12TkeI9CLsWVqz5uMqINTFM+Zp5iAg3EWtgC5ldZVcz6I1iuz9zeG/ET6FjTT/Ixv+5D06QvBuUKD16byxPymwih3QNePU8DVwXlP6HB5DihDu8WyPgUuPr9RwXZOKnn9qqLJYOQTuumRFrTdbv8H23htjBVQcFn3E69jO/CVdud/fU+f3JFJK5iLfshk7BAXVK2LhNnQyrJVOnjkXyYyEWG+vgjIfGCRz8t9udCWFk+GSaJwN429GoBtC5QVTDNcIzOKVBIw/lxCLGTTiVWmMKLSfyLAfeiozW8cPptwDst7ohNh97YG0Fn7xaHXcsjcxtRDeueuhb0e4ZQ771KGodzt6s/9c/Fhp5tKvUu6DThnHBjBeI0rlepH/doDWPvpQxKHeQWfWiszD+QiMoErwpjm2KNfqfpgsT+MThmL0KIrMqK1FEkRn7eHlfvwRABuJNee766Cr6PiPmGVy8b0Cf9MNZaQP4P6T/4iFNHJGvdBGPxFKo/4n8P+P5EmZqndhXlvq/5sIM+1qqrtsoQi83zgCsFZugP5t5l5vR5n75OW+8GH9AJHNskkPfuE1ZEXfxvmMZTbSaOjCmmzFFEAmyurh1/V3xI+8GUjC7unP9Lqmh0slA=
+        secure: Cp0iHUuf9DlChsv5InOkHnIjZlD0ri4lDIPf1PwOZjS5G289pSvhffBRHcO03hoXU2xYNcSu/+OgfrDQggoc1WJhpc7RznkOayTJtRkEfz1xYHBDEg85ezZN0jtFB1aiCANMq5otfBRyUvcwLCU5kBxngOWDKwwttbGsJ2/+JAriBcSxkiFFOgAIsTSEIpd9APtbjn1QUNYaHK9IrGLgzORoc3pcqYbHlFUCffyj3FPVj22WT4mjYIV4gge0ofAeMsLyoYlpb6DOfgkv9W3l+txD2SBF9pj/HxhzYwUT2eZtc7yincjqPhKagv0hO8w5404r0WiKn5bArYYeX2bCvWGV1Ae+QuGvGbmxJRQccLfq8+VYy8UN9UanV2k56+SUByBrILJtVaGfBrdJnbTcsMa21br9hiRtGoxOuf7fztBofLkyh7XTHaXSbpNXZ+ZgkgM2OMPRDxxm3yb8iDgg9Qbz1Be5CYkLTE/hwWplmsiLuFeEdtXXizce/mrZPGC3bWUBkRKKTjq7HVxQt6uHLa4OnhJlbs39dQaJjJcfauAt8IYt1F86mbVkvuj7ekWOiVdDvk6QIaYq9SNq64r1xnlPyS6WP+l4NM8zZa33jXT92eX8+O9mERbxOznnB37svV1Ar8qBij2IqVxLacMze4TVTLYiTyRkdNbwLT//STs=
       on:
         tags: true
         repo: telegraph/trello-client
