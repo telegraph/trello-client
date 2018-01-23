@@ -185,7 +185,7 @@ Update a card
     * [new TrelloLists(trelloClient)](#new_TrelloLists_new)
     * [.create(data, force)](#TrelloLists+create) ⇒ <code>Promise.&lt;{name:String, idBoard:String, id:String}&gt;</code>
     * [.setPosition(idList, position)](#TrelloLists+setPosition) ⇒ <code>Promise.&lt;\*&gt;</code>
-    * [.getByName(idBoard, listName)](#TrelloLists+getByName) ⇒ <code>PromiseLike.&lt;T&gt;</code>
+    * [.getByName(idBoard, listName, allowMultiple)](#TrelloLists+getByName) ⇒ <code>PromiseLike.&lt;T&gt;</code>
     * [.rotateLeft(idBoard, count)](#TrelloLists+rotateLeft)
     * [.rotateRight(idBoard, count)](#TrelloLists+rotateRight)
     * [.archiveAllCardsOnList(listId)](#TrelloLists+archiveAllCardsOnList)
@@ -230,7 +230,7 @@ This method sets a list position.
 
 <a name="TrelloLists+getByName"></a>
 
-### trelloLists.getByName(idBoard, listName) ⇒ <code>PromiseLike.&lt;T&gt;</code>
+### trelloLists.getByName(idBoard, listName, allowMultiple) ⇒ <code>PromiseLike.&lt;T&gt;</code>
 This method is used to search for a list By name in a Board.
 The board is identified by a `idBoard`.
 
@@ -239,6 +239,7 @@ The board is identified by a `idBoard`.
 
 - idBoard <code>String</code> - Board Identifier
 - listName <code>String</code> - List Name to search for
+- allowMultiple <code>Boolean</code> - If this is set to true, an array of lists will be returned, otherwise only one list will be returned or an error thown if the number of found list !==1
 
 <a name="TrelloLists+rotateLeft"></a>
 
