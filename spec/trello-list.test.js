@@ -176,6 +176,45 @@ describe("Given a 'Trello List'", () => {
                     }
                 );
             });
+            it("multiple lists are found and allowMultiple is true", (done) => {
+                let listsMultiple = [
+                    {id: "listA", name: "List A", idBoard:"boardA"},
+                    {id: "listAB", name: "List A", idBoard:"boardA"},
+                    {id: "listB", name: "List B", idBoard:"boardB"},
+                    {id: "listC", name: "List B", idBoard:"boardB"}
+                ];
+                spyOn(_clientMock.board, 'getLists').and.returnValue(Promise.resolve(listsMultiple));
+
+                List.getByName(boardId, "List A", true).then(
+                    (data) => {
+                        expect(_clientMock.board.getLists).toHaveBeenCalledTimes(1);
+                        expect(_clientMock.board.getLists.calls.mostRecent().args).toEqual([
+                            boardId
+                        ]);
+
+                        expect(data.length).toEqual(2);
+                        expect(data[0]).toEqual(listsMultiple[0]);
+                        expect(data[1]).toEqual(listsMultiple[1]);
+                        done()
+                    }
+                );
+            });
+            it("no lists are found and allowMultiple is true", (done) => {
+                spyOn(_clientMock.board, 'getLists').and.returnValue(Promise.resolve([]));
+
+                List.getByName(boardId, "List A", true).then(
+                    (data) => {
+                        expect(_clientMock.board.getLists).toHaveBeenCalledTimes(1);
+                        expect(_clientMock.board.getLists.calls.mostRecent().args).toEqual([
+                            boardId
+                        ]);
+
+                        expect(data.length).toEqual(0);
+                        expect(typeof data).toEqual("object");
+                        done()
+                    }
+                );
+            });
         });
 
         describe("should fail when", () => {
