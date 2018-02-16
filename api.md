@@ -157,6 +157,7 @@ rename a board
 * [TrelloCards](#TrelloCards)
     * [new TrelloCards(trelloClient)](#new_TrelloCards_new)
     * [.updateCard(idCard, parameters)](#TrelloCards+updateCard)
+    * [.getCardDetails(idCard)](#TrelloCards+getCardDetails)
 
 <a name="new_TrelloCards_new"></a>
 
@@ -175,6 +176,16 @@ Update a card
 
 - idCard <code>String</code>
 - parameters <code>Object</code> - valid options can be found here https://developers.trello.com/reference#cardsid-1
+
+<a name="TrelloCards+getCardDetails"></a>
+
+### trelloCards.getCardDetails(idCard)
+Get a cards details
+
+**Kind**: instance method of [<code>TrelloCards</code>](#TrelloCards)  
+**Params**
+
+- idCard <code>String</code>
 
 <a name="TrelloLists"></a>
 
