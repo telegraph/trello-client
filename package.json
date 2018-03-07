@@ -1,6 +1,6 @@
 {
   "name": "@telegraph-engineering/trello-client",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "TMG Newsroom Team",
   "description": "Telegraph Trello Client API",
   "main": "./lib/trello.js",
