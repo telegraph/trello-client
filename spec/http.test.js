@@ -165,6 +165,23 @@ describe("Given a 'HttpHelper' library", () => {
                 });
         });
 
+        it("when status code 401 is returned with a body", (done) => {
+            const method = 'GET';
+            const uri = 'resource';
+            spyOn(HttpMock, 'request').and.callFake(function(data, callback){
+                callback(null, {statusCode: 401, body:'Error happened within the test'}, {})
+            });
+            HttpHelper(method, `${uri}?param1=value1&param2=???`, mockConfig).then(
+                () => {
+                    fail("should fail");
+                    done();
+                },
+                error => {
+                    expect(error.message).toEqual('Error happened within the test');
+                    done()
+                });
+        });
+
         it("when status code 401 is returned", (done) => {
             const method = 'GET';
             const uri = 'resource';
