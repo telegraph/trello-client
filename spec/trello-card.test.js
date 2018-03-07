@@ -20,11 +20,34 @@ const _clientMock = {
 describe("Given a 'Trello Card'", () => {
     const Card = new TrelloCard(_clientMock);
 
+    describe("'updateCard'", () =>{
+        describe("should succeed if", () => {
+            it('No params are passed', (done) => {
+                spyOn(_clientMock, 'put').and.returnValue(Promise.resolve());
+                Card.updateCard('12345', {})
+                    .then((res) => {
+                        expect(_clientMock.put.calls.mostRecent().args).toEqual([
+                            `cards/12345/?`
+                        ]);
+                        done();
+                    })
+            });
+            it('Params are passed', (done) => {
+                spyOn(_clientMock, 'put').and.returnValue(Promise.resolve());
+                Card.updateCard('12345', {param1: 'value1', param2: 'value2'})
+                    .then((res) => {
+                        expect(_clientMock.put.calls.mostRecent().args).toEqual([
+                            `cards/12345/?param1=value1&param2=value2`
+                        ]);
+                        done();
+                    })
+            });
+        });
+    });
     describe("'getCardDetails'", () =>{
         describe("should succeed if", () => {
             it("card is found and no options are passed", (done) => {
                 spyOn(_clientMock, 'get').and.returnValue(Promise.resolve());
-
 
                 Card.getCardDetails('CardId')
                     .then((data) => {
