@@ -35,6 +35,7 @@
     * [.getById(idBoard)](#TrelloBoards+getById)
     * [.update(board)](#TrelloBoards+update) ⇒ <code>Promise.&lt;\*&gt;</code>
     * [.getLists(idBoards)](#TrelloBoards+getLists)
+    * [.getCustomFields(idBoards)](#TrelloBoards+getCustomFields)
     * [.getByName(idOrganization, boardName)](#TrelloBoards+getByName)
     * ~~[.renameBoard(boardId, newName)](#TrelloBoards+renameBoard)~~
 
@@ -125,6 +126,16 @@ Create a board if it does not exist.
 
 - idBoards <code>String</code>
 
+<a name="TrelloBoards+getCustomFields"></a>
+
+### trelloBoards.getCustomFields(idBoards)
+Get custom fields assigned to a board.
+
+**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
+**Params**
+
+- idBoards <code>String</code>
+
 <a name="TrelloBoards+getByName"></a>
 
 ### trelloBoards.getByName(idOrganization, boardName)
@@ -157,7 +168,7 @@ rename a board
 * [TrelloCards](#TrelloCards)
     * [new TrelloCards(trelloClient)](#new_TrelloCards_new)
     * [.updateCard(idCard, parameters)](#TrelloCards+updateCard)
-    * [.getCardDetails(idCard)](#TrelloCards+getCardDetails)
+    * [.getCardDetails(idCard, options)](#TrelloCards+getCardDetails)
 
 <a name="new_TrelloCards_new"></a>
 
@@ -179,13 +190,15 @@ Update a card
 
 <a name="TrelloCards+getCardDetails"></a>
 
-### trelloCards.getCardDetails(idCard)
+### trelloCards.getCardDetails(idCard, options)
 Get a cards details
 
 **Kind**: instance method of [<code>TrelloCards</code>](#TrelloCards)  
 **Params**
 
 - idCard <code>String</code>
+- options <code>Object</code>
+    - [.customFields] <code>Boolean</code> - If custom fields should be included in the response
 
 <a name="TrelloLists"></a>
 
