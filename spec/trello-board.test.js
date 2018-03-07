@@ -325,7 +325,7 @@ describe("Given a 'Trello Board'", () => {
                             `/boards/boardA`
                         ]);
                         expect(error).toEqual("Failure");
-                        done()
+                        done();
                     }
                 );
         });
@@ -409,6 +409,49 @@ describe("Given a 'Trello Board'", () => {
                     expect(_clientMock.get).toHaveBeenCalledTimes(1);
                     expect(_clientMock.get.calls.mostRecent().args).toEqual([
                         `/boards/boardA/lists`
+                    ]);
+                    expect(error).toEqual("Failure");
+                    done()
+                }
+            );
+        });
+    });
+
+    describe("'getCustomFields'", () =>{
+        const Board = new TrelloBoard(_clientMock);
+
+        it("should return success if the rest call succeeds", (done) => {
+            spyOn(_clientMock, 'get').and.returnValue(Promise.resolve({}));
+
+            Board.getCustomFields("boardA")
+                .then(
+                    (data) => {
+                        expect(_clientMock.get).toHaveBeenCalledTimes(1);
+                        expect(_clientMock.get.calls.mostRecent().args).toEqual([
+                            `/boards/boardA/customFields`
+                        ]);
+                        expect(data).toEqual({});
+                        done();
+                    },
+                    () => {
+                        fail("Should not fail");
+                        done()
+                    }
+                );
+        });
+
+        it("should fail if the rest call fails", (done) => {
+            spyOn(_clientMock, 'get').and.returnValue(Promise.reject("Failure"));
+
+            Board.getCustomFields("boardA").then(
+                () => {
+                    fail("Should not succeed");
+                    done();
+                },
+                (error) => {
+                    expect(_clientMock.get).toHaveBeenCalledTimes(1);
+                    expect(_clientMock.get.calls.mostRecent().args).toEqual([
+                        `/boards/boardA/customFields`
                     ]);
                     expect(error).toEqual("Failure");
                     done()
