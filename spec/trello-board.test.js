@@ -574,7 +574,7 @@ describe("Given a 'Trello Board'", () => {
                     },
                     (error) => {
                         expect(_clientMock.get).toHaveBeenCalledTimes(0);
-                        expect(error).toEqual("No board name found found!");
+                        expect(error).toEqual("No board name found!");
                         done();
                     }
                 );
