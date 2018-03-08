@@ -30,11 +30,13 @@
   "scripts": {
     "clean": "rm -rf node_modules dist",
     "test": "istanbul cover --config ./spec/support/.istanbul.yml node_modules/jasmine/bin/jasmine.js",
+    "codacyCoverage": "npm test && cat ./dist/coverage/lcov.info | codacy-coverage",
     "pack": "npm pack; mkdir -p dist; mv trello-client*.tgz dist/.",
     "docs": "jsdoc2md lib/*.js --param-list-format list > api.md",
     "htmlDocs": "jsdoc lib/*.js -d ./jsdoc"
   },
   "dependencies": {
+    "codacy-coverage": "^2.1.0",
     "lodash": "4.17.4",
     "request": "2.83.0"
   },
