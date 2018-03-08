@@ -182,6 +182,23 @@ describe("Given a 'HttpHelper' library", () => {
                 });
         });
 
+        it("when back end error status code is returned", (done) => {
+            const method = 'GET';
+            const uri = 'resource';
+            spyOn(HttpMock, 'request').and.callFake(function(data, callback){
+                callback(null, {statusCode: 500}, {})
+            });
+            HttpHelper(method, `${uri}?param1=value1&param2=???`, mockConfig).then(
+                () => {
+                    fail("should fail");
+                    done();
+                },
+                error => {
+                    expect(error.message).toEqual('An unknown error occurred');
+                    done()
+                });
+        });
+
         it("when status code 401 is returned", (done) => {
             const method = 'GET';
             const uri = 'resource';
