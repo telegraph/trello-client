@@ -145,8 +145,8 @@ describe("Given a 'Trello Card'", () => {
                     spyOn(_clientMock.board, 'getCustomFields').and.returnValue(Promise.resolve(customFields));
 
                     Card.getCardCustomDataByName('1', 'CardThree')
-                        .then((customField) => {
-                            expect(customField).toEqual(undefined);
+                        .catch((customField) => {
+                            expect(customField).toEqual('Field not found');
                             done();
                         });
                 });

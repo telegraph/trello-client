@@ -4,6 +4,7 @@ Trello Client Extensions API
 
 ## Build Status
 ![build status](https://api.travis-ci.org/telegraph/trello-client.svg?branch=master "Build Status")
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1eba0437ec224b52a9127c628de41e49)](https://www.codacy.com/app/telegraph/trello-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=telegraph/trello-client&amp;utm_campaign=Badge_Grade)
 
 ## Trello Client Instance: 
 
