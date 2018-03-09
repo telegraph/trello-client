@@ -37,7 +37,6 @@
     * [.getLists(idBoards)](#TrelloBoards+getLists)
     * [.getCustomFields(idBoards)](#TrelloBoards+getCustomFields)
     * [.getByName(idOrganization, boardName)](#TrelloBoards+getByName)
-    * ~~[.renameBoard(boardId, newName)](#TrelloBoards+renameBoard)~~
 
 <a name="new_TrelloBoards_new"></a>
 
@@ -147,19 +146,6 @@ Get a board by name
 - idOrganization <code>String</code>
 - boardName <code>String</code>
 
-<a name="TrelloBoards+renameBoard"></a>
-
-### ~~trelloBoards.renameBoard(boardId, newName)~~
-***Deprecated***
-
-rename a board
-
-**Kind**: instance method of [<code>TrelloBoards</code>](#TrelloBoards)  
-**Params**
-
-- boardId <code>String</code> - ID of the board to be renamed
-- newName <code>String</code> - Name for the list to be changed to
-
 <a name="TrelloCards"></a>
 
 ## TrelloCards
@@ -169,6 +155,7 @@ rename a board
     * [new TrelloCards(trelloClient)](#new_TrelloCards_new)
     * [.updateCard(idCard, parameters)](#TrelloCards+updateCard)
     * [.getCardDetails(idCard, options)](#TrelloCards+getCardDetails)
+    * [.getCardCustomDataByName(idCard, customFieldName)](#TrelloCards+getCardCustomDataByName)
 
 <a name="new_TrelloCards_new"></a>
 
@@ -200,6 +187,17 @@ Get a cards details
 - options <code>Object</code>
     - [.customFields] <code>Boolean</code> - If custom fields should be included in the response
 
+<a name="TrelloCards+getCardCustomDataByName"></a>
+
+### trelloCards.getCardCustomDataByName(idCard, customFieldName)
+Get a custom field on a card by name
+
+**Kind**: instance method of [<code>TrelloCards</code>](#TrelloCards)  
+**Params**
+
+- idCard <code>String</code>
+- customFieldName <code>String</code>
+
 <a name="TrelloLists"></a>
 
 ## TrelloLists
@@ -218,7 +216,6 @@ Get a cards details
     * [.copyList(toBoardId, fromListId, toListName, pos)](#TrelloLists+copyList)
     * [.moveCards(toBoardId, listId, toListId)](#TrelloLists+moveCards)
     * [.update(list)](#TrelloLists+update) ⇒ <code>Promise.&lt;\*&gt;</code>
-    * ~~[.renameList(listId, newName)](#TrelloLists+renameList)~~
 
 <a name="new_TrelloLists_new"></a>
 
@@ -389,19 +386,6 @@ valid properties exist to be updated, an error is thrown.
 - list <code>object</code> - List object to be updated
     - [.id] <code>string</code>
     - [.name] <code>string</code>
-
-<a name="TrelloLists+renameList"></a>
-
-### ~~trelloLists.renameList(listId, newName)~~
-***Deprecated***
-
-rename a list
-
-**Kind**: instance method of [<code>TrelloLists</code>](#TrelloLists)  
-**Params**
-
-- listId <code>String</code> - ID of the list to be renamed
-- newName <code>String</code> - Name for the list to be changed to
 
 <a name="TrelloOrganizations"></a>
 

@@ -660,26 +660,4 @@ describe("Given a 'Trello List'", () => {
         });
     });
 
-
-    describe('renameList', () => {
-        const List    = new TrelloList(_clientMock);
-        const listId = "boardA";
-        const newName = "newName";
-
-        it('should call update with correct params', (done) => {
-            spyOn(List, 'update').and.returnValue(Promise.resolve({}));
-            List.renameList(listId, newName)
-                .then(() => {
-                    expect(List.update).toHaveBeenCalledTimes(1);
-                    expect(List.update.calls.mostRecent().args).toEqual([
-                        {
-                            id: listId,
-                            name: newName
-                        }
-                    ]);
-                    done();
-                });
-
-        });
-    })
 });
