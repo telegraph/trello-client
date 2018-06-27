@@ -12,7 +12,8 @@ const _clientMock = {
     get   : () => {},
     delete: () => {},
     board : {
-        getCustomFields: () => {}
+        getCustomFields: () => {},
+		getChecklistData: () => {}
     }
 };
 
@@ -152,6 +153,49 @@ describe("Given a 'Trello Card'", () => {
                 });
             });
         });
+
+		describe("getChecklistData", () => {
+			const Board = new TrelloCard(_clientMock);
+
+			it("should return success if the rest call succeeds", (done) => {
+				spyOn(_clientMock, 'get').and.returnValue(Promise.resolve({}));
+
+				Board.getChecklistData("boardA")
+					.then(
+						(data) => {
+							expect(_clientMock.get).toHaveBeenCalledTimes(1);
+							expect(_clientMock.get.calls.mostRecent().args).toEqual([
+								`cards/boardA/checklists`
+							]);
+							expect(data).toEqual({});
+							done();
+						},
+						() => {
+							fail("Should not fail");
+							done()
+						}
+					);
+			});
+
+			it("should fail if the rest call fails", (done) => {
+				spyOn(_clientMock, 'get').and.returnValue(Promise.reject("Failure"));
+
+				Board.getChecklistData("boardA").then(
+					() => {
+						fail("Should not succeed");
+						done();
+					},
+					(error) => {
+						expect(_clientMock.get).toHaveBeenCalledTimes(1);
+						expect(_clientMock.get.calls.mostRecent().args).toEqual([
+							`cards/boardA/checklists`
+						]);
+						expect(error).toEqual("Failure");
+						done()
+					}
+				);
+			});
+		});
 
     });
 });

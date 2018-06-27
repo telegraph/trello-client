@@ -374,7 +374,7 @@ describe("Given a 'Trello Board'", () => {
         });
     });
 
-    describe("'getLists'", () =>{
+    describe("'getLists'", () => {
         const Board = new TrelloBoard(_clientMock);
 
         it("should return success if the rest call succeeds", (done) => {
