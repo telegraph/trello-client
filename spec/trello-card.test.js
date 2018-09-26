@@ -54,7 +54,7 @@ describe("Given a 'Trello Card'", () => {
                     .then((data) => {
                         expect(_clientMock.get).toHaveBeenCalledTimes(1);
                         expect(_clientMock.get.calls.mostRecent().args).toEqual([
-                            `cards/12345?`
+                            `cards/12345`
                         ]);
                         done();
                     });
