@@ -70,8 +70,7 @@ describe("Given a 'Trello Card'", () => {
                             'cards/12345?customFieldItems=true&actions=createCard%2CcopyCard&actions_limit=50'
                         ]);
                         done();
-
-                    })
+                    });
             });
         });
 
