@@ -50,39 +50,24 @@ describe("Given a 'Trello Card'", () => {
             it("card is found and no options are passed", (done) => {
                 spyOn(_clientMock, 'get').and.returnValue(Promise.resolve());
 
-                Card.getCardDetails('CardId')
+                Card.getCardDetails('12345')
                     .then((data) => {
                         expect(_clientMock.get).toHaveBeenCalledTimes(1);
                         expect(_clientMock.get.calls.mostRecent().args).toEqual([
-                            `cards/CardId`
+                            `cards/12345`
                         ]);
                         done();
                     });
             });
-            it("card is found and options.customFields is true", (done) => {
+
+            it('card id found and Params are passed', (done) => {
                 spyOn(_clientMock, 'get').and.returnValue(Promise.resolve());
-                Card.getCardDetails('CardId', {customFields: true})
+
+                Card.getCardDetails('12345', {customFieldItems: true, actions: 'createCard,copyCard', actions_limit: 50})
                     .then((data) => {
                         expect(_clientMock.get).toHaveBeenCalledTimes(1);
                         expect(_clientMock.get.calls.mostRecent().args[0]).toContain([
-                            'cards/CardId'
-                        ]);
-                        expect(_clientMock.get.calls.mostRecent().args[0]).toContain([
-                            'customFieldItems=true'
-                        ]);
-                        done();
-                    });
-            });
-            it("card is found and options.customFields is false", (done) => {
-                spyOn(_clientMock, 'get').and.returnValue(Promise.resolve());
-                Card.getCardDetails('CardId', {customFields: false})
-                    .then((data) => {
-                        expect(_clientMock.get).toHaveBeenCalledTimes(1);
-                        expect(_clientMock.get.calls.mostRecent().args[0]).toContain([
-                            'cards/CardId'
-                        ]);
-                        expect(_clientMock.get.calls.mostRecent().args[0]).not.toContain([
-                            'customFieldItems=true'
+                            'cards/12345?customFieldItems=true&actions=createCard%2CcopyCard&actions_limit=50'
                         ]);
                         done();
                     });

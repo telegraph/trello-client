@@ -184,9 +184,8 @@ Get a cards details
 **Params**
 
 - idCard <code>String</code>
-- options <code>Object</code>
-    - [.customFields] <code>Boolean</code> - If custom fields should be included in the response
-
+- parameters <code>Object</code> - valid options can be found here https://developers.trello.com/reference#cardsid    
+    
 <a name="TrelloCards+getCardCustomDataByName"></a>
 
 ### trelloCards.getCardCustomDataByName(idCard, customFieldName)
