@@ -1,0 +1,54 @@
+{
+  "extends": [
+    "eslint:recommended"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    // Possible Errors
+    "no-extra-parens": ["error", "all"],
+    "no-import-assign": "error",
+    "no-setter-return": "error",
+    "no-template-curly-in-string": "error",
+
+    // Best Practices
+    "block-scoped-var": "error",
+    "complexity": ["error", 10],
+    "curly": ["error", "all"],
+    "eqeqeq": ["error", "smart"],
+    "max-classes-per-file": ["error", 1],
+    "no-alert": "error",
+    "no-caller": "error",
+    "no-constructor-return": "error",
+    "no-else-return": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
+    "no-extend-native": "error",
+    "no-floating-decimal": "error",
+    "no-implicit-coercion": "error",
+
+    // Stylistic Issues
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "space-in-parens": ["error", "never"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}
