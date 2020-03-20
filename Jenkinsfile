@@ -90,7 +90,7 @@ pipeline {
           steps {
             sh '''
               npm run trello &
-              TRELLO_SERVICE_PID=$!
+              export TRELLO_SERVICE_PID=$!
               timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/health)" != "200" ]]; do sleep 1; done'
               npm run test:integration
             '''
