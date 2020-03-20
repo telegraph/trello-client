@@ -90,14 +90,14 @@ pipeline {
           steps {
             sh '''
               npm run trello &
-              export TRELLO_SERVICE_PID=$!
+              TRELLO_SERVICE_PID=$!
               timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/health)" != "200" ]]; do sleep 1; done'
               npm run test:integration
+              kill $TRELLO_SERVICE_PID
             '''
           }
           post {
             always {
-              sh 'kill -s TERM $TRELLO_SERVICE_PID'
               junit 'reports/test/junit-integration.xml'
             }
           }
