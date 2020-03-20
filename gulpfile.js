@@ -18,15 +18,17 @@ const {dest, parallel, series, src} = require('gulp')
 const babel = require('gulp-babel')
 const del = require('del')
 const jeditor = require('gulp-json-editor')
+const nodemon = require('gulp-nodemon')
 
 const SRC_FOLDER = 'src'
 const BUILD_FOLDER = 'dist'
+const INTEGRATION_TEST_FOLDER = '__integration_tests__'
 const REPORTS_FOLDER = 'reports'
 const VERSION = process.env.TAG_NAME ? process.env.TAG_NAME : '2.0.0-LOCAL_SNAPSHOT'
 
 exports.build = series(clean, productionEnv, parallel(transpileSources, copyResources))
-exports.clean = clean
 exports['clean-all'] = parallel(clean, cleanDependencies)
+exports['trello-watch'] = trelloSimulatorWatch
 
 function clean() {
   return del([
@@ -64,4 +66,12 @@ function transpileSources() {
     .pipe(
       dest(`${BUILD_FOLDER}/src`)
     )
+}
+
+async function trelloSimulatorWatch() {
+  return nodemon({
+    delay: 2000,
+    script: `${INTEGRATION_TEST_FOLDER}/trello-simulator/index.js`,
+    watch: [`${INTEGRATION_TEST_FOLDER}/trello-simulator`]
+  })
 }

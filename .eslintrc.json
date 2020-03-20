@@ -49,6 +49,17 @@
       "env": {
         "jest": true
       }
+    },
+    {
+      "files": [
+        "__integration_tests__/**/*.js"
+      ],
+      "env": {
+        "jest": true
+      },
+      "globals": {
+        "trelloDatabase": true
+      }
     }
   ]
 }

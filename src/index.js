@@ -20,14 +20,20 @@ import _ from 'lodash'
 import OrganizationRepository from './repositories/OrganizationRepository'
 import TrelloService from './services/TrelloService'
 
+const DEFAULT_OPTIONS = {
+  baseUrl: 'https://api.trello.com/1'
+}
+
 export default class Trello {
 
-  constructor(apiKey, apiToken) {
+  constructor(apiKey, apiToken, options = {}) {
     if (_.isNil(apiKey) || _.isNil(apiToken)) {
       throw new Error('apiKey and apiToken parameters are mandatory')
     }
 
-    this._trelloService = new TrelloService(apiKey, apiToken)
+    this._options = Object.assign(DEFAULT_OPTIONS, options)
+
+    this._trelloService = new TrelloService(apiKey, apiToken, this._options.baseUrl)
   }
 
   get organization() {

@@ -21,11 +21,11 @@ const TRELLO_API_BASE_URL = 'https://api.trello.com/1'
 
 export default class TrelloService {
 
-  constructor(apiKey, apiToken) {
+  constructor(apiKey, apiToken, baseUrl = TRELLO_API_BASE_URL) {
     if (_.isNil(apiKey) || _.isNil(apiToken)) {
       throw new Error('apiKey and apiToken parameters are mandatory')
     }
-    configureAxios(apiKey, apiToken)
+    configureAxios(apiKey, apiToken, baseUrl)
   }
 
   async get(path, params = {}) {
@@ -40,12 +40,27 @@ export default class TrelloService {
     })
   }
 
-  async put(path, body = {}) {
+  async put(path, params = {}) {
     if (_.isNil(path)) {
       throw new Error('path parameter is mandatory')
     }
-    return axios.post(path, {
-      data: body
+
+    return axios.put(path, null, {
+      params: params
+    }).then(response => {
+      return response.data
+    })
+  }
+
+  async post(path, params = {}) {
+    if (_.isNil(path)) {
+      throw new Error('path parameter is mandatory')
+    }
+
+    return axios.post(path, null,{
+      params: params
+    }).then(response => {
+      return response.data
     })
   }
 
@@ -57,8 +72,8 @@ export default class TrelloService {
   }
 }
 
-function configureAxios(apiKey, apiToken) {
-  axios.defaults.baseURL = TRELLO_API_BASE_URL
+function configureAxios(apiKey, apiToken, baseUrl) {
+  axios.defaults.baseURL = baseUrl
 
   axios.interceptors.request.use(config => {
     config.params = {

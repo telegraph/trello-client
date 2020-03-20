@@ -62,13 +62,13 @@ pipeline {
           }
         }
 
-        stage('Testing') {
+        stage('Unit testing') {
           steps {
             sh 'npm test'
           }
           post {
             always {
-              junit 'reports/junit.xml'
+              junit 'reports/test/junit.xml'
             }
             success {
               step([
@@ -76,6 +76,29 @@ pipeline {
                 cloverReportDir: "reports/coverage",
                 cloverReportFileName: "clover.xml"
               ])
+            }
+          }
+        }
+
+        stage('Integration testing') {
+          when {
+            anyOf {
+              branch "${env.MAIN_BRANCH}"
+              changeRequest()
+            }
+          }
+          steps {
+            sh '''
+              npm run trello &
+              TRELLO_SERVICE_PID=$!
+              timeout 60 bash -c 'while [[ "$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/health)" != "200" ]]; do sleep 1; done'
+              npm run test:integration
+            '''
+          }
+          post {
+            always {
+              sh 'kill $TRELLO_SERVICE_PID'
+              junit 'reports/test/junit-integration.xml'
             }
           }
         }

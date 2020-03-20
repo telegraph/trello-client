@@ -24,7 +24,7 @@
       "sourceMaps": false
     },
     "test": {
-      "plugins": ["@babel/plugin-transform-runtime"]
+      "plugins": ["@babel/plugin-transform-runtime"],
     }
   }
 }

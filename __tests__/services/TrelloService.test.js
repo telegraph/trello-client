@@ -18,19 +18,8 @@ import TrelloService from '../../src/services/TrelloService'
 import axios from 'axios'
 import ORGANIZATION_FROM_TRELLO from '../data/trello-organization'
 
-const API_KEY = 'B7iAY9dP8fMrIVH8ZinJ6hp9qq4Zvl5Q1UJ9IO83v5DD27zvL8VIIFHlQsnTxB0v'
-const API_TOKEN = 'dnW2scnIp5bsgjOBCHeXf9nVjIRjjzQT'
-
-axios.get = (path, config) => {
-  if (path === '/organizations/5e73c00ff23df0e7b81e5f3c') {
-    return Promise.resolve({
-      data: ORGANIZATION_FROM_TRELLO,
-      status: 200,
-      statusText: 'OK'
-    })
-  }
-  throw new Error()
-}
+const API_KEY = 'dnW2scnIp5bsgjOBCHeXf9nVjIRjjzQT'
+const API_TOKEN = 'B7iAY9dP8fMrIVH8ZinJ6hp9qq4Zvl5Q1UJ9IO83v5DD27zvL8VIIFHlQsnTxB0v'
 
 describe('Trello service tests', () => {
   describe('Construction', () => {
@@ -52,10 +41,119 @@ describe('Trello service tests', () => {
   })
 
   describe('Rests', () => {
-    test('Should do a get request', async () => {
-      const trelloService = new TrelloService(API_KEY, API_TOKEN)
+    const trelloService = new TrelloService(API_KEY, API_TOKEN)
+
+    axios.get = (path, config) => {
+      if (path === '/organizations/5e73c00ff23df0e7b81e5f3c') {
+        return Promise.resolve({
+          data: ORGANIZATION_FROM_TRELLO,
+          status: 200,
+          statusText: 'OK'
+        })
+      }
+      throw new Error()
+    }
+
+    test('Should do a get request', async () =>
       await expect(trelloService.get('/organizations/5e73c00ff23df0e7b81e5f3c'))
         .resolves.toEqual(ORGANIZATION_FROM_TRELLO)
-    })
+    )
+
+    test('Should throw error if get request is rejected', async() =>
+      await expect(trelloService.get('/organizations/5e73c00ff23df0e7'))
+        .rejects.toThrow()
+    )
+
+    test('Should throw error if path in get request is not set', async() =>
+      await expect(trelloService.get())
+        .rejects.toThrow()
+    )
+
+    axios.put = (path, data, config) => {
+      if (path === '/organizations/5e73c00ff23df0e7b81e5f3c'
+          && config.params.displayName === 'Updated name'
+          && config.params.desc === 'Updated description') {
+        return Promise.resolve({
+          data: ORGANIZATION_FROM_TRELLO,
+          status: 200,
+          statusText: 'OK'
+        })
+      }
+      throw new Error()
+    }
+
+    test('Should do a put request', async () =>
+      await expect(trelloService.put('/organizations/5e73c00ff23df0e7b81e5f3c', {
+        displayName: 'Updated name',
+        desc: 'Updated description'
+      }))
+        .resolves.toEqual(ORGANIZATION_FROM_TRELLO)
+    )
+
+    test('Should throw error if put request is rejected', async() =>
+      await expect(trelloService.put('/organizations/5e73c00ff23df0e7'))
+        .rejects.toThrow()
+    )
+
+    test('Should throw error if path is not set', async() =>
+      await expect(trelloService.put())
+        .rejects.toThrow()
+    )
+
+    axios.post = (path, data, config) => {
+      if (path === '/organizations/5e73c00ff23df0e7b81e5f3c'
+        && config.params.displayName === 'Updated name'
+        && config.params.desc === 'Updated description') {
+        return Promise.resolve({
+          data: ORGANIZATION_FROM_TRELLO,
+          status: 201,
+          statusText: 'OK'
+        })
+      }
+      throw new Error()
+    }
+
+    test('Should do a post request', async () =>
+      await expect(trelloService.post('/organizations/5e73c00ff23df0e7b81e5f3c', {
+        displayName: 'Updated name',
+        desc: 'Updated description'
+      }))
+        .resolves.toEqual(ORGANIZATION_FROM_TRELLO)
+    )
+
+    test('Should throw error if request is rejected', async() =>
+      await expect(trelloService.post('/organizations/5e73c00ff23df0e7'))
+        .rejects.toThrow()
+    )
+
+    test('Should throw error if path is not set', async() =>
+      await expect(trelloService.post())
+        .rejects.toThrow()
+    )
+
+    axios.delete = (path, config) => {
+      if (path === '/organizations/5e73c00ff23df0e7b81e5f3c') {
+        return Promise.resolve({
+          status: 200,
+          statusText: 'OK'
+        })
+      }
+      throw new Error()
+    }
+
+    test('Should do a delete request', async () =>
+      await expect(trelloService.delete('/organizations/5e73c00ff23df0e7b81e5f3c'))
+        .resolves.not.toThrow()
+    )
+
+    test('Should throw error if a delete request is rejected', async() =>
+      await expect(trelloService.delete('/organizations/5e73c00ff23df0e7'))
+        .rejects.toThrow()
+    )
+
+    test('Should throw error if path is not set', async() =>
+      await expect(trelloService.delete())
+        .rejects.toThrow()
+    )
   })
 })
