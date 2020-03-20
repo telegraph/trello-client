@@ -97,7 +97,7 @@ pipeline {
           }
           post {
             always {
-              sh 'kill $TRELLO_SERVICE_PID'
+              sh 'kill -s TERM $TRELLO_SERVICE_PID'
               junit 'reports/test/junit-integration.xml'
             }
           }
