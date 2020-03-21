@@ -14,37 +14,36 @@
  * limitations under the License.
  */
 
-import Organization from '../../src/domain/Organization'
+import Team from '../../src/domain/Team'
 import ORGANIZATION_FROM_TRELLO from '../data/trello-organization'
 
 jest.mock('../../src/services/TrelloService')
 
-describe('Organization domain object', () => {
+describe('Team domain object', () => {
   describe('Constructor', () => {
     test('Should construct an object', () => {
-      const organization = new Organization(ORGANIZATION_FROM_TRELLO)
+      const organization = new Team(ORGANIZATION_FROM_TRELLO)
 
       expect(organization)
         .not.toBeNull()
       expect(organization)
-        .toBeInstanceOf(Organization)
+        .toBeInstanceOf(Team)
     })
 
-    test('Should thrown an error if trelloObject is not set', () =>
-      expect(() => new Organization())
-        .toThrow(TypeError)
-    )
-
-    test('Should thrown an error if trelloObject is not an object', () =>
-      expect(() => new Organization('foo'))
+    test.each([
+      undefined,
+      null,
+      'foo'
+    ])('Should throw error on construction new Team(%p)', value =>
+      expect(() => new Team(value))
         .toThrow(TypeError)
     )
   })
 
   describe('Value operations', () => {
-    let organization
+    let organization = null
 
-    beforeEach(() => organization = new Organization(ORGANIZATION_FROM_TRELLO))
+    beforeEach(() => organization = new Team(ORGANIZATION_FROM_TRELLO))
 
     test('Should return id', () =>
       expect(organization.id)
@@ -143,7 +142,7 @@ describe('Organization domain object', () => {
 
   describe('JSON conversion', () => {
     test('Should convert to JSON', () => {
-      const organization = new Organization(ORGANIZATION_FROM_TRELLO)
+      const organization = new Team(ORGANIZATION_FROM_TRELLO)
       expect(organization.toJSON())
         .toEqual(JSON.stringify(ORGANIZATION_FROM_TRELLO))
     })

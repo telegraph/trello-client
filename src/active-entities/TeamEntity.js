@@ -15,34 +15,15 @@
  */
 
 import _ from 'lodash'
-import Trello from '../index'
+import Team from '../domain/Team'
+import TeamRepository from '../repositories/TeamRepository'
 
-export default class OrganizationRepository {
-
-  constructor(trello) {
-    if (_.isNil(trello) || !(trello instanceof Trello)) {
-      throw new Error('trello parameter must be a not null Trello instance')
+export default class TeamEntity extends Team {
+  constructor(trelloObject, repository) {
+    super(trelloObject)
+    if (_.isNil(repository) || !(repository instanceof TeamRepository)) {
+      throw new TypeError('trelloObject parameter must be a not null TeamRepository')
     }
-    this._trello = trello
-  }
-
-  create(displayName, desc, name, website) {
-
-  }
-
-  delete(organization) {
-
-  }
-
-  findById(id) {
-
-  }
-
-  deleteById(id) {
-
-  }
-
-  update(organizations) {
-
+    this._repository = repository
   }
 }

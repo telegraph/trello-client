@@ -23,50 +23,44 @@ export default class TrelloService {
 
   constructor(apiKey, apiToken, baseUrl = TRELLO_API_BASE_URL) {
     if (isBlank(apiKey) || isBlank(apiToken)) {
-      throw new Error('apiKey and apiToken parameters are mandatory')
+      throw new TypeError('apiKey and apiToken parameters are mandatory')
     }
     configureAxios(apiKey, apiToken, baseUrl)
   }
 
   async get(path, params = {}) {
     if (isBlank(path)) {
-      throw new Error('path parameter is mandatory')
+      throw new TypeError('path parameter is mandatory')
     }
 
-    return await axios.get(path, {
+    return axios.get(path, {
       params: params
-    }).then(response => {
-      return response.data
-    })
+    }).then(response => response.data)
   }
 
   async put(path, params = {}) {
     if (isBlank(path)) {
-      throw new Error('path parameter is mandatory')
+      throw new TypeError('path parameter is mandatory')
     }
 
     return axios.put(path, null, {
       params: params
-    }).then(response => {
-      return response.data
-    })
+    }).then(response => response.data)
   }
 
   async post(path, params = {}) {
     if (isBlank(path)) {
-      throw new Error('path parameter is mandatory')
+      throw new TypeError('path parameter is mandatory')
     }
 
     return axios.post(path, null,{
       params: params
-    }).then(response => {
-      return response.data
-    })
+    }).then(response => response.data)
   }
 
   async delete(path) {
     if (isBlank(path)) {
-      throw new Error('path parameter is mandatory')
+      throw new TypeError('path parameter is mandatory')
     }
     return axios.delete(path)
   }

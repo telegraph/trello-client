@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-import Organization from '../domain/Organization'
 import _ from 'lodash'
-import OrganizationRepository from '../repositories/OrganizationRepository'
 
-export default class OrganizationEntity extends Organization {
-  constructor(trelloObject, repository) {
-    super(trelloObject)
-    if (_.isNil(repository) || !(repository instanceof OrganizationRepository)) {
-      throw new TypeError('trelloObject parameter must be a not null ObjectRepository')
-    }
-    this._repository = repository
-  }
+export function isValidOrganizationDisplayName(displayName) {
+  return !_.isNil(displayName) && /^(?! ).+(?! )$/.test(displayName)
+}
+
+export function isValidOrganizationName(name) {
+  return /^[a-z0-9_]{3,}$/.test(name)
 }

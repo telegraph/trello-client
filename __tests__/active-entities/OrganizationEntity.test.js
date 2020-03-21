@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 
-import OrganizationEntity from '../../src/active-entities/OrganizationEntity'
-import OrganizationRepository from '../../src/repositories/OrganizationRepository'
+import TeamEntity from '../../src/active-entities/TeamEntity'
+import TeamRepository from '../../src/repositories/TeamRepository'
 import ORGANIZATION_FROM_TRELLO from '../data/trello-organization'
 
-jest.mock('../../src/repositories/OrganizationRepository')
+jest.mock('../../src/repositories/TeamRepository')
 
 describe('Organization active entity test', () => {
-  const repository = new OrganizationRepository()
+  const repository = new TeamRepository()
 
   describe('Constructor', () => {
     test('Should construct object', () => {
-      const organization = new OrganizationEntity(ORGANIZATION_FROM_TRELLO, repository)
+      const organization = new TeamEntity(ORGANIZATION_FROM_TRELLO, repository)
       expect(organization)
         .not.toBeNull()
       expect(organization)
-        .toBeInstanceOf(OrganizationEntity)
+        .toBeInstanceOf(TeamEntity)
     })
 
     test('Should thrown an error if repository is not set', () =>
-      expect(() => new OrganizationEntity(ORGANIZATION_FROM_TRELLO))
+      expect(() => new TeamEntity(ORGANIZATION_FROM_TRELLO))
         .toThrow(TypeError)
     )
 
     test('Should thrown an error if repository is not a OrganizationRepository instance', () =>
-      expect(() => new OrganizationEntity(ORGANIZATION_FROM_TRELLO, {}))
+      expect(() => new TeamEntity(ORGANIZATION_FROM_TRELLO, {}))
         .toThrow(TypeError)
     )
   })

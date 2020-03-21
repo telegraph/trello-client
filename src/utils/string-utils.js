@@ -19,3 +19,7 @@ import _ from 'lodash'
 export function isBlank(string) {
   return _.isNil(string) || _.trim(string) === ''
 }
+
+export function isUrl(url) {
+  return /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url)
+}

@@ -29,21 +29,23 @@ describe('Trello service tests', () => {
         .not.toBeNull()
     })
 
-    test('Should throw an error if apiToken is not set', () =>
-      expect(() => new TrelloService(API_KEY))
-        .toThrow('apiKey and apiToken parameters are mandatory')
-    )
-
-    test('Should throw an error if apiKey is not set', () =>
-      expect(() => new TrelloService(null, API_TOKEN))
-        .toThrow('apiKey and apiToken parameters are mandatory')
+    test.each([
+      [undefined, undefined],
+      [null, undefined],
+      [null, null],
+      [API_KEY, undefined],
+      [API_KEY, null],
+      [null, API_TOKEN]
+    ])('Should throw error on construction new TrelloService(%p)', (key, token) =>
+      expect(() => new TrelloService(key, token))
+        .toThrow(TypeError)
     )
   })
 
   describe('Rests', () => {
     const trelloService = new TrelloService(API_KEY, API_TOKEN)
 
-    axios.get = (path, config) => {
+    axios.get = (path) => {
       if (path === '/organizations/5e73c00ff23df0e7b81e5f3c') {
         return Promise.resolve({
           data: ORGANIZATION_FROM_TRELLO,
@@ -97,7 +99,7 @@ describe('Trello service tests', () => {
 
     test('Should throw error if path is not set', async() =>
       await expect(trelloService.put())
-        .rejects.toThrow()
+        .rejects.toThrow(TypeError)
     )
 
     axios.post = (path, data, config) => {
@@ -128,10 +130,10 @@ describe('Trello service tests', () => {
 
     test('Should throw error if path is not set', async() =>
       await expect(trelloService.post())
-        .rejects.toThrow()
+        .rejects.toThrow(TypeError)
     )
 
-    axios.delete = (path, config) => {
+    axios.delete = (path) => {
       if (path === '/organizations/5e73c00ff23df0e7b81e5f3c') {
         return Promise.resolve({
           status: 200,
@@ -153,7 +155,7 @@ describe('Trello service tests', () => {
 
     test('Should throw error if path is not set', async() =>
       await expect(trelloService.delete())
-        .rejects.toThrow()
+        .rejects.toThrow(TypeError)
     )
   })
 })

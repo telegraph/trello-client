@@ -17,7 +17,7 @@
 import 'regenerator-runtime/runtime.js'
 
 import _ from 'lodash'
-import OrganizationRepository from './repositories/OrganizationRepository'
+import TeamRepository from './repositories/TeamRepository'
 import TrelloService from './services/TrelloService'
 
 const DEFAULT_OPTIONS = {
@@ -38,7 +38,7 @@ export default class Trello {
 
   get organization() {
     if (!_.has(this, '_organization')) {
-      this._organization = new OrganizationRepository(this)
+      this._organization = new TeamRepository(this)
     }
     return this._organization
   }

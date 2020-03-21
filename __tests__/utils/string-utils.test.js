@@ -14,28 +14,42 @@
  * limitations under the License.
  */
 
-import {isBlank} from '../../src/utils/string-utils'
+import {isBlank, isUrl} from '../../src/utils/string-utils'
 
-describe('String utils tests', () => {
-  describe('isBlank tests', () => {
-    test('Should return true if the string is undefined', () =>
-      expect(isBlank(undefined)).toBe(true)
+describe('String utils', () => {
+  describe('isBlank', () => {
+    test.each([
+      [undefined, true],
+      [null, true],
+      ['', true],
+      ['   ', true],
+      [' Some string ', false]
+    ])('isBlank(%p) should return %p', (value, expected) =>
+      expect(isBlank(value)).toBe(expected)
     )
+  })
 
-    test('Should return true if the string is null', () =>
-      expect(isBlank(null)).toBe(true)
-    )
-
-    test('Should return true if the string is empty', () =>
-      expect(isBlank('')).toBe(true)
-    )
-
-    test('Should return true if the string does contain only whitespaces', () =>
-      expect(isBlank('    ')).toBe(true)
-    )
-
-    test('Should return false if the string contain text', () =>
-      expect(isBlank('Some string ')).toBe(false)
+  describe('isUrl', () => {
+    test.each([
+      [undefined, false],
+      [null, false],
+      ['', false],
+      ['   ', false],
+      [{}, false],
+      [[], false],
+      ['https://www.example.com', true],
+      ['http://www.example.com', true],
+      ['www.example.com', false],
+      ['example.com', false],
+      ['http://blog.example.com', true],
+      ['https://www.example.com/product', true],
+      ['http://www.example.com/products?id=1&page=2', true],
+      ['https://www.example.com#up', true],
+      ['http://255.255.255.255', true],
+      ['255.255.255.255', false],
+      ['https://www.site.com:8008', true]
+    ])('isUrl(%p) should return %p', (value, expected) =>
+      expect(isUrl(value)).toBe(expected)
     )
   })
 })

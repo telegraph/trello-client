@@ -16,7 +16,7 @@
 
 import _ from 'lodash'
 
-export default class Organization {
+export default class Team {
   constructor(trelloObject) {
     if (_.isNil(trelloObject) || !_.isObject(trelloObject)) {
       throw new TypeError('trelloObject parameter must be a not null object')
@@ -24,18 +24,33 @@ export default class Organization {
     this._trelloObject = trelloObject
   }
 
+  /**
+   * Returns the ID of the team
+   * @returns string
+   */
   get id() {
     return this._trelloObject.id
   }
 
+  /**
+   * Returns the description of the team
+   * @returns string
+   */
   get desc() {
     return this._trelloObject.desc
   }
 
+  /**
+   * Sets the description of the team
+   */
   set desc(desc) {
     this._trelloObject.desc = desc
   }
 
+  /**
+   * Return information about custom emojies in the team description
+   * @returns {{emoji: {}}|{emoji: {}}}
+   */
   get descData() {
     return this._trelloObject.descData
   }
