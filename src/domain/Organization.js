@@ -17,39 +17,66 @@
 import _ from 'lodash'
 
 export default class Organization {
-  constructor(trelloService, trelloObject) {
-    if (_.isNil(trelloService) || _.isNil(trelloObject)) {
-      throw new Error('trelloService and trelloObject parameters are mandatory')
+  constructor(trelloObject) {
+    if (_.isNil(trelloObject) || !_.isObject(trelloObject)) {
+      throw new TypeError('trelloObject parameter must be a not null object')
     }
-    this._trelloService = trelloService
-    initValuesFromTrelloObject(this, trelloObject)
+    this._trelloObject = trelloObject
   }
 
-  getId() {
-    return this._id
+  get id() {
+    return this._trelloObject.id
   }
 
-  getDesc() {
-    return this._desc
+  get desc() {
+    return this._trelloObject.desc
   }
 
-  async setDesc(desc) {
-    updateOrganizationField(this, 'desc', desc)
-      .then(() => this._desc = desc)
+  set desc(desc) {
+    this._trelloObject.desc = desc
+  }
+
+  get descData() {
+    return this._trelloObject.descData
+  }
+
+  get displayName() {
+    return this._trelloObject.displayName
+  }
+
+  set displayName(displayName) {
+    this._trelloObject.displayName = displayName
+  }
+
+  get idBoards() {
+    return this._trelloObject.idBoards
+  }
+
+  get name() {
+    return this._trelloObject.name
+  }
+
+  set name(name) {
+    this._trelloObject.name = name
+  }
+
+  get prefs() {
+    return this._trelloObject.prefs
+  }
+
+  get url() {
+    return this._trelloObject.url
+  }
+
+  get website() {
+    return this._trelloObject.website
+  }
+
+  set website(website) {
+    this._trelloObject.website = website
   }
 
   toJSON() {
-    return JSON.stringify({
-      id: this._id
-    })
+    return JSON.stringify(this._trelloObject)
   }
-}
-
-function initValuesFromTrelloObject(organization, trelloObject) {
-  organization._id = _.get(trelloObject, 'id')
-  organization._desc = _.get(trelloObject, 'desc')
-}
-
-async function updateOrganizationField(organization, field, value) {
-  return Promise.resolve(null)
 }

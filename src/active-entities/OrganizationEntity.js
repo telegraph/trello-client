@@ -14,35 +14,16 @@
  * limitations under the License.
  */
 
+import Organization from '../domain/Organization'
 import _ from 'lodash'
-import Trello from '../index'
+import OrganizationRepository from '../repositories/OrganizationRepository'
 
-export default class OrganizationRepository {
-
-  constructor(trello) {
-    if (_.isNil(trello) || !(trello instanceof Trello)) {
-      throw new Error('trello parameter must be a not null Trello instance')
+export default class OrganizationEntity extends Organization {
+  constructor(trelloObject, repository) {
+    super(trelloObject)
+    if (_.isNil(repository) || !(repository instanceof OrganizationRepository)) {
+      throw new TypeError('trelloObject parameter must be a not null ObjectRepository')
     }
-    this._trello = trello
-  }
-
-  create(displayName, desc, name, website) {
-
-  }
-
-  delete(organization) {
-
-  }
-
-  findById(id) {
-
-  }
-
-  deleteById(id) {
-
-  }
-
-  update(organizations) {
-
+    this._repository = repository
   }
 }

@@ -71,10 +71,10 @@
   "products": [
     100
   ],
-  "billableMemberCount": null,
-  "activeBillableMemberCount": null,
+  "billableMemberCount": 5,
+  "activeBillableMemberCount": 1,
   "url": "https://trello.com/trelloinc",
-  "website": null,
+  "website": "https://trello.com",
   "logoHash": "da3ff465abd3a3e1b687c52ff803af74",
   "premiumFeatures": [
     "export",

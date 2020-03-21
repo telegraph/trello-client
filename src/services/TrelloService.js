@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-import _ from 'lodash'
 import axios from 'axios'
+import {isBlank} from '../utils/string-utils'
 
 const TRELLO_API_BASE_URL = 'https://api.trello.com/1'
 
 export default class TrelloService {
 
   constructor(apiKey, apiToken, baseUrl = TRELLO_API_BASE_URL) {
-    if (_.isNil(apiKey) || _.isNil(apiToken)) {
+    if (isBlank(apiKey) || isBlank(apiToken)) {
       throw new Error('apiKey and apiToken parameters are mandatory')
     }
     configureAxios(apiKey, apiToken, baseUrl)
   }
 
   async get(path, params = {}) {
-    if (_.isNil(path)) {
+    if (isBlank(path)) {
       throw new Error('path parameter is mandatory')
     }
 
@@ -41,7 +41,7 @@ export default class TrelloService {
   }
 
   async put(path, params = {}) {
-    if (_.isNil(path)) {
+    if (isBlank(path)) {
       throw new Error('path parameter is mandatory')
     }
 
@@ -53,7 +53,7 @@ export default class TrelloService {
   }
 
   async post(path, params = {}) {
-    if (_.isNil(path)) {
+    if (isBlank(path)) {
       throw new Error('path parameter is mandatory')
     }
 
@@ -65,7 +65,7 @@ export default class TrelloService {
   }
 
   async delete(path) {
-    if (_.isNil(path)) {
+    if (isBlank(path)) {
       throw new Error('path parameter is mandatory')
     }
     return axios.delete(path)

@@ -15,34 +15,7 @@
  */
 
 import _ from 'lodash'
-import Trello from '../index'
 
-export default class OrganizationRepository {
-
-  constructor(trello) {
-    if (_.isNil(trello) || !(trello instanceof Trello)) {
-      throw new Error('trello parameter must be a not null Trello instance')
-    }
-    this._trello = trello
-  }
-
-  create(displayName, desc, name, website) {
-
-  }
-
-  delete(organization) {
-
-  }
-
-  findById(id) {
-
-  }
-
-  deleteById(id) {
-
-  }
-
-  update(organizations) {
-
-  }
+export function isBlank(string) {
+  return _.isNil(string) || _.trim(string) === ''
 }

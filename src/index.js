@@ -38,9 +38,24 @@ export default class Trello {
 
   get organization() {
     if (!_.has(this, '_organization')) {
-      this._organization = new OrganizationRepository(this._trelloService)
+      this._organization = new OrganizationRepository(this)
     }
     return this._organization
   }
 
+  async get(path, params = {}) {
+    return this._trelloService.get(path, params)
+  }
+
+  async put(path, params = {}) {
+    return this._trelloService.put(path, params)
+  }
+
+  async post(path, params = {}) {
+    return this._trelloService.post(path, params)
+  }
+
+  async delete(path) {
+    return this._trelloService.delete(path)
+  }
 }

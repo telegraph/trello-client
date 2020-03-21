@@ -27,7 +27,6 @@
     "trello:watch": "gulp trello-watch"
   },
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
     "axios": "^0.19.2",
     "lodash": "^4.17.15",
     "regenerator-runtime": "^0.13.5"
