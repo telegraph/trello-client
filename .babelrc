@@ -3,15 +3,7 @@
     [
       "@babel/preset-env",
       {
-        "targets": {
-          "android": "78",
-          "chrome": "77",
-          "edge": "17",
-          "firefox":"68",
-          "ie": "11",
-          "ios": "12.2",
-          "node": "10"
-        }
+        "targets": "> 0.25%, not dead"
       }
     ]
   ],
