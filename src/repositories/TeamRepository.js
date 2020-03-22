@@ -15,9 +15,10 @@
  */
 
 import _ from 'lodash'
-import Trello from '../index'
-import {isUrl} from '../utils/string-utils'
+import {isBlank, isUrl} from '../utils/string-utils'
 import {isValidOrganizationDisplayName, isValidOrganizationName} from '../domain/validators/organization-validators'
+import Trello from '../index'
+import TeamEntity from '../active-entities/TeamEntity'
 
 export default class TeamRepository {
 
@@ -47,17 +48,36 @@ export default class TeamRepository {
       name: name,
       website: website
     })
+      .then(trelloOrganization => new TeamEntity(trelloOrganization, this))
   }
 
   async findById(id) {
+    if (isBlank(id)) {
+      throw new TypeError('id parameter must be a not empty team id')
+    }
 
+    return this._trello.get(`/organizations/${id}`)
+      .then(trelloOrganization => new TeamEntity(trelloOrganization, this))
   }
 
   async deleteById(id) {
+    if (isBlank(id)) {
+      throw new TypeError('id parameter must be a not empty team id')
+    }
 
+    return this._trello.delete(`/organizations/${id}`)
   }
 
-  async update(organizations) {
+  async update(teamEntity) {
+    if (_.isNil(teamEntity) || !(teamEntity instanceof TeamEntity)) {
+      throw new TypeError('team parameter must be a not null TeamEntity object instance')
+    }
 
+    return this._trello.put(`/organizations/${teamEntity.id}`, {
+      displayName: teamEntity.displayName,
+      desc: teamEntity.desc,
+      name: teamEntity.name,
+      website: teamEntity.website
+    })
   }
 }
