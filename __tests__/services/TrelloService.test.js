@@ -57,17 +57,17 @@ describe('Trello service tests', () => {
     }
 
     test('Should do a get request', async () =>
-      await expect(trelloService.get('/organizations/5e73c00ff23df0e7b81e5f3c'))
+      expect(trelloService.get('/organizations/5e73c00ff23df0e7b81e5f3c'))
         .resolves.toEqual(ORGANIZATION_FROM_TRELLO)
     )
 
     test('Should throw error if get request is rejected', async() =>
-      await expect(trelloService.get('/organizations/5e73c00ff23df0e7'))
+      expect(trelloService.get('/organizations/5e73c00ff23df0e7'))
         .rejects.toThrow()
     )
 
     test('Should throw error if path in get request is not set', async() =>
-      await expect(trelloService.get())
+      expect(trelloService.get())
         .rejects.toThrow()
     )
 
@@ -85,7 +85,7 @@ describe('Trello service tests', () => {
     }
 
     test('Should do a put request', async () =>
-      await expect(trelloService.put('/organizations/5e73c00ff23df0e7b81e5f3c', {
+      expect(trelloService.put('/organizations/5e73c00ff23df0e7b81e5f3c', {
         displayName: 'Updated name',
         desc: 'Updated description'
       }))
@@ -93,12 +93,12 @@ describe('Trello service tests', () => {
     )
 
     test('Should throw error if put request is rejected', async() =>
-      await expect(trelloService.put('/organizations/5e73c00ff23df0e7'))
+      expect(trelloService.put('/organizations/5e73c00ff23df0e7'))
         .rejects.toThrow()
     )
 
     test('Should throw error if path is not set', async() =>
-      await expect(trelloService.put())
+      expect(trelloService.put())
         .rejects.toThrow(TypeError)
     )
 
@@ -116,7 +116,7 @@ describe('Trello service tests', () => {
     }
 
     test('Should do a post request', async () =>
-      await expect(trelloService.post('/organizations/5e73c00ff23df0e7b81e5f3c', {
+      expect(trelloService.post('/organizations/5e73c00ff23df0e7b81e5f3c', {
         displayName: 'Updated name',
         desc: 'Updated description'
       }))
@@ -124,12 +124,12 @@ describe('Trello service tests', () => {
     )
 
     test('Should throw error if request is rejected', async() =>
-      await expect(trelloService.post('/organizations/5e73c00ff23df0e7'))
+      expect(trelloService.post('/organizations/5e73c00ff23df0e7'))
         .rejects.toThrow()
     )
 
     test('Should throw error if path is not set', async() =>
-      await expect(trelloService.post())
+      expect(trelloService.post())
         .rejects.toThrow(TypeError)
     )
 
@@ -144,17 +144,17 @@ describe('Trello service tests', () => {
     }
 
     test('Should do a delete request', async () =>
-      await expect(trelloService.delete('/organizations/5e73c00ff23df0e7b81e5f3c'))
+      expect(trelloService.delete('/organizations/5e73c00ff23df0e7b81e5f3c'))
         .resolves.not.toThrow()
     )
 
     test('Should throw error if a delete request is rejected', async() =>
-      await expect(trelloService.delete('/organizations/5e73c00ff23df0e7'))
+      expect(trelloService.delete('/organizations/5e73c00ff23df0e7'))
         .rejects.toThrow()
     )
 
     test('Should throw error if path is not set', async() =>
-      await expect(trelloService.delete())
+      expect(trelloService.delete())
         .rejects.toThrow(TypeError)
     )
   })

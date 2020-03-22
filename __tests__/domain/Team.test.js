@@ -43,7 +43,9 @@ describe('Team domain object', () => {
   describe('Value operations', () => {
     let organization = null
 
-    beforeEach(() => organization = new Team(ORGANIZATION_FROM_TRELLO))
+    beforeEach(() => {
+      organization = new Team(ORGANIZATION_FROM_TRELLO)
+    })
 
     test('Should return id', () =>
       expect(organization.id)
@@ -51,7 +53,9 @@ describe('Team domain object', () => {
     )
 
     test('Should not set id', () =>
-      expect(() => organization.id = 'asdfasdfasdfasdf')
+      expect(() => {
+        organization.id = 'asdfasdfasdfasdf'
+      })
         .toThrow()
     )
 
@@ -72,7 +76,9 @@ describe('Team domain object', () => {
     )
 
     test('Should not set descData', () =>
-      expect(() => organization.descData = {emoji: null})
+      expect(() => {
+        organization.descData = {emoji: null}
+      })
         .toThrow()
     )
 
@@ -93,7 +99,9 @@ describe('Team domain object', () => {
     )
 
     test('Should not set idBoards', () =>
-      expect(() => organization.idBoards = ['5e7556184eef41173a927fc1'])
+      expect(() => {
+        organization.idBoards = ['5e7556184eef41173a927fc1']
+      })
         .toThrow()
     )
 
@@ -114,7 +122,9 @@ describe('Team domain object', () => {
     )
 
     test('Should not set prefs', () =>
-      expect(() => organization.prefs = {})
+      expect(() => {
+        organization.prefs = {}
+      })
         .toThrow()
     )
 
@@ -124,7 +134,9 @@ describe('Team domain object', () => {
     )
 
     test('Should not set url', () =>
-      expect(() => organization.url = 'https://trello.com/trello-inc')
+      expect(() => {
+        organization.url = 'https://trello.com/trello-inc'
+      })
         .toThrow()
     )
 
