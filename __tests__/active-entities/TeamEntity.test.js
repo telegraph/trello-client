@@ -16,7 +16,7 @@
 
 import TeamEntity from '../../src/active-entities/TeamEntity'
 import TeamRepository from '../../src/repositories/TeamRepository'
-import ORGANIZATION_FROM_TRELLO from '../data/trello-organization'
+import ORGANIZATION_FROM_TRELLO from '../data/trello-team'
 
 jest.mock('../../src/repositories/TeamRepository')
 

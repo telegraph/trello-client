@@ -17,7 +17,7 @@
 import {
   isValidOrganizationDisplayName,
   isValidOrganizationName
-} from '../../../src/domain/validators/organization-validators'
+} from '../../../src/domain/validators/team-validators'
 
 describe('Organization values validators', () => {
   describe('Validate organization displayName', () =>{

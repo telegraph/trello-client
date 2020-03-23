@@ -16,7 +16,7 @@
 
 import TrelloService from '../../src/services/TrelloService'
 import axios from 'axios'
-import ORGANIZATION_FROM_TRELLO from '../data/trello-organization'
+import ORGANIZATION_FROM_TRELLO from '../data/trello-team'
 
 const API_KEY = 'dnW2scnIp5bsgjOBCHeXf9nVjIRjjzQT'
 const API_TOKEN = 'B7iAY9dP8fMrIVH8ZinJ6hp9qq4Zvl5Q1UJ9IO83v5DD27zvL8VIIFHlQsnTxB0v'

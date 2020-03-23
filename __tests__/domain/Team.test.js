@@ -15,18 +15,18 @@
  */
 
 import Team from '../../src/domain/Team'
-import ORGANIZATION_FROM_TRELLO from '../data/trello-organization'
+import ORGANIZATION_FROM_TRELLO from '../data/trello-team'
 
 jest.mock('../../src/services/TrelloService')
 
 describe('Team domain object', () => {
   describe('Constructor', () => {
     test('Should construct an object', () => {
-      const organization = new Team(ORGANIZATION_FROM_TRELLO)
+      const team = new Team(ORGANIZATION_FROM_TRELLO)
 
-      expect(organization)
+      expect(team)
         .not.toBeNull()
-      expect(organization)
+      expect(team)
         .toBeInstanceOf(Team)
     })
 

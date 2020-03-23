@@ -17,11 +17,11 @@
 import _ from 'lodash'
 
 export default class Team {
-  constructor(trelloObject) {
-    if (_.isNil(trelloObject) || !_.isObject(trelloObject)) {
-      throw new TypeError('trelloObject parameter must be a not null object')
+  constructor(trelloTeamObject) {
+    if (_.isNil(trelloTeamObject) || !_.isObject(trelloTeamObject)) {
+      throw new TypeError('trelloTeamObject parameter must be a not null object')
     }
-    this._trelloObject = trelloObject
+    this._trelloObject = trelloTeamObject
   }
 
   /**

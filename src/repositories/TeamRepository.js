@@ -16,7 +16,7 @@
 
 import _ from 'lodash'
 import {isBlank, isUrl} from '../utils/string-utils'
-import {isValidOrganizationDisplayName, isValidOrganizationName} from '../domain/validators/organization-validators'
+import {isValidOrganizationDisplayName, isValidOrganizationName} from '../domain/validators/team-validators'
 import Trello from '../index'
 import TeamEntity from '../active-entities/TeamEntity'
 
@@ -29,25 +29,21 @@ export default class TeamRepository {
     this._trello = trello
   }
 
-  async create(displayName, desc, name, website) {
-    if (!isValidOrganizationDisplayName(displayName)) {
+  async create(params) {
+    if (!isValidOrganizationDisplayName(_.get(params, 'displayName'))) {
       throw new TypeError('displayName parameter must be a not null 1 character long and not begin or end with a space')
     }
 
-    if (!isValidOrganizationName(name)) {
+    if (!isValidOrganizationName(_.get(params, 'name'))) {
       throw new TypeError('name parameter must have at least 3 lowercase letters, underscores, and numbers')
     }
 
+    const website = _.get(params, 'website')
     if (!_.isNil(website) && !isUrl(website)) {
       throw new TypeError('name parameter must be a valid absolute URL')
     }
 
-    return this._trello.post('/organizations', {
-      displayName: displayName,
-      desc: desc,
-      name: name,
-      website: website
-    })
+    return this._trello.post('/organizations', params)
       .then(trelloOrganization => new TeamEntity(trelloOrganization, this))
   }
 

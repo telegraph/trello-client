@@ -15,10 +15,10 @@
  */
 
 import Trello from '../../src/index'
-import TeamRepository from '../../src/repositories/TeamRepository'
 import Team from '../../src/domain/Team'
-import TRELLO_ORGANIZATION from '../data/trello-organization'
 import TeamEntity from '../../src/active-entities/TeamEntity'
+import TeamRepository from '../../src/repositories/TeamRepository'
+import TRELLO_ORGANIZATION from '../data/trello-team'
 
 jest.mock('../../src/index')
 
@@ -47,17 +47,17 @@ describe('Team repository tests', () => {
 
   describe('Create team', () => {
     test.each([
-      [undefined, undefined, undefined, undefined],
-      [null, undefined, undefined, undefined],
-      ['  ', undefined, undefined, undefined],
-      ['New team', null, '  ', undefined],
-      ['New team', null, 'Afeg34', undefined],
-      ['New team', null, null, 'example'],
-      ['New team', null, null, 'www.example.com'],
-      ['New team', null, null, 'example.com'],
-      ['New team', null, null, '255.255.255.255']
-    ])('Should throw error on create(%p, %p, %p, %p)', async (displayName, desc, name, website) =>
-      expect(repository.create(displayName, desc, name, website))
+      {},
+      {displayName: null},
+      {displayName: '  '},
+      {displayName: 'New team', desc: null, name: '  '},
+      {displayName: 'New team', desc: null, name: 'Afeg34'},
+      {displayName: 'New team', desc: null, name: null, website: 'example'},
+      {displayName: 'New team', desc: null, name: null, website: 'www.example.com'},
+      {displayName: 'New team', desc: null, name: null, website: 'example.com'},
+      {displayName: 'New team', desc: null, name: null, website: '255.255.255.255'}
+    ])('Should throw error on create(%p, %p, %p, %p)', async params =>
+      expect(repository.create(params))
         .rejects.toThrow(TypeError)
     )
 
@@ -70,12 +70,12 @@ describe('Team repository tests', () => {
         website: params.website
       })
 
-      const team = await repository.create(
-        'New Team',
-        'An amazing team',
-        'new_team',
-        'https://www.example.com'
-      )
+      const team = await repository.create({
+        displayName: 'New Team',
+        desc: 'An amazing team',
+        name: 'new_team',
+        website: 'https://www.example.com'
+      })
 
       expect(team).toBeInstanceOf(TeamEntity)
       expect(team.displayName).toBe('New Team')
