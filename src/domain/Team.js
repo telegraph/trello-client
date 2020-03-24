@@ -16,6 +16,9 @@
 
 import _ from 'lodash'
 
+/**
+ * Teams represent collections of members and boards.
+ */
 export default class Team {
   constructor(trelloTeamObject) {
     if (_.isNil(trelloTeamObject) || !_.isObject(trelloTeamObject)) {

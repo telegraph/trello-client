@@ -16,11 +16,83 @@
 
 import _ from 'lodash'
 
+/**
+ * Lists in Trello contain cards. A card belongs to exactly one list.
+ */
 export default class Card {
   constructor(trelloCardObject) {
     if (_.isNil(trelloCardObject) || !_.isObject(trelloCardObject)) {
       throw new TypeError('trelloCardObject parameter must be a not null object')
     }
     this._trelloObject = trelloCardObject
+  }
+
+  /**
+   * Returns the ID of the card.
+   * @return string
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * Whether the card is closed (archived).
+   * @return boolean
+   */
+  get closed() {
+    return this._trelloObject.closed
+  }
+
+  /**
+   * Sets whether the card is closed (archived).
+   * @param closed boolean
+   */
+  set closed(closed) {
+    if (!_.isBoolean(closed)) {
+      throw new TypeError('Closed parameter has to be a not null boolean')
+    }
+    this._trelloObject.closed = closed
+  }
+
+  /**
+   * Returns the datetime of the last activity on the card.
+   * @return Date Last activity date
+   */
+  get dateLastActivity() {
+    return new Date(this._trelloObject.dateLastActivity)
+  }
+
+  /**
+   * Returns the description for the card.
+   * @return string
+   */
+  get desc() {
+    return this._trelloObject.desc
+  }
+
+  /**
+   * Sets description for the card.
+   * @param desc string
+   */
+  set desc(desc) {
+    this._trelloObject.desc = desc
+  }
+
+  /**
+   * Returns the due date of the card.
+   * @return Date Due date.
+   */
+  get due() {
+    return _.isNil(this._trelloObject.due)
+      ? null : new Date(this._trelloObject.due)
+  }
+
+  /**
+   * Sets the due date of the card.
+   * @param date Date Due date.
+   */
+  set due(due) {
+    this._trelloObject.due = _.isNil(due)
+      ? null : due.toISOString()
   }
 }

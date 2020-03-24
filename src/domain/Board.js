@@ -16,6 +16,10 @@
 
 import _ from 'lodash'
 
+/**
+ * Boards are fundamental to Trello. A board may belong to 0
+ * or 1 teams and can have 0 or more lists.
+ */
 export default class Board {
   constructor(trelloBoardObject) {
     if (_.isNil(trelloBoardObject) || !_.isObject(trelloBoardObject)) {

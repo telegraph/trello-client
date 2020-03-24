@@ -54,7 +54,7 @@ describe('Board domain object', () => {
       expect(() => {
         board.id = 'asdfasdfasdfasdf'
       })
-        .toThrow()
+        .toThrow(TypeError)
     )
 
     test('Should return name', () =>

@@ -37,4 +37,86 @@ describe('Card domain object', () => {
         .toThrow(TypeError)
     )
   })
+
+  describe('Value operations', () => {
+    let card = null
+
+    beforeEach(() => {
+      card = new Card(TRELLO_CARD)
+    })
+
+    test('Should return id', () =>
+      expect(card.id)
+        .toBe(TRELLO_CARD.id)
+    )
+
+    test('Should not set id', () =>
+      expect(() => {
+        card.id = 'asdfasdfasdfasdf'
+      })
+        .toThrow(TypeError)
+    )
+
+    test('Should return if is closed', () =>
+      expect(card.closed)
+        .toBe(TRELLO_CARD.closed)
+    )
+
+    test('Should set closed status', () => {
+      card.closed = true
+      expect(card.closed)
+        .toBe(true)
+    })
+
+    test('Should throw and error if closed is not boolean', () => {
+      expect(() => {
+        card.closed = 'asdfasdfasdfasdf'
+      })
+        .toThrow(TypeError)
+    })
+
+    test('Should throw and error if closed is null', () => {
+      expect(() => {
+        card.closed = null
+      })
+        .toThrow(TypeError)
+    })
+
+    test('Should return last activity date', () =>
+      expect(card.dateLastActivity)
+        .toStrictEqual(new Date(TRELLO_CARD.dateLastActivity))
+    )
+
+    test('Should not set last activity date', () =>
+      expect(() => {
+        card.dateLastActivity = 'asdfasdfasdfasdf'
+      })
+        .toThrow(TypeError)
+    )
+
+    test('Should return desc', () =>
+      expect(card.desc)
+        .toBe(TRELLO_CARD.desc)
+    )
+
+    test('Should set desc', () => {
+      card.desc = 'Card description'
+      expect(card.desc)
+        .toBe('Card description')
+    })
+
+    test('Should return due date', () =>
+      expect(card.due.toISOString())
+        .toBe(TRELLO_CARD.due)
+    )
+
+    test('Should set due date', () => {
+      const date = new Date('2019-06-26T17:39:49.583Z')
+
+      card.due = date
+
+      expect(card.due)
+        .toStrictEqual(date)
+    })
+  })
 })
