@@ -18,10 +18,15 @@ import _ from 'lodash'
 import {isBlank, isUrl} from '../utils/string-utils'
 import {isValidOrganizationDisplayName, isValidOrganizationName} from '../domain/validators/team-validators'
 import Trello from '../index'
-import TeamEntity from '../active-entities/TeamEntity'
+import TeamEntity from '../entities/TeamEntity'
 
 export default class TeamRepository {
 
+  /**
+   * Creates a new TeamRepository instance.
+   * @private
+   * @param {Trello} trello
+   */
   constructor(trello) {
     if (_.isNil(trello) || !(trello instanceof Trello)) {
       throw new TypeError('trello parameter must be a not null Trello instance')
@@ -29,24 +34,36 @@ export default class TeamRepository {
     this._trello = trello
   }
 
-  async create(params) {
-    if (!isValidOrganizationDisplayName(_.get(params, 'displayName'))) {
+  /**
+   * Creates a new team.
+   * @param {{displayName: string, desc: ?string, name: ?string, website: ?string}} teamData Team data
+   * @returns {Promise<TeamEntity>} Created team entity.
+   * @throws {TypeError} Throw error when teamData properties does not validate.
+   */
+  async create(teamData) {
+    if (!isValidOrganizationDisplayName(_.get(teamData, 'displayName'))) {
       throw new TypeError('displayName parameter must be a not null 1 character long and not begin or end with a space')
     }
 
-    if (!isValidOrganizationName(_.get(params, 'name'))) {
+    if (!isValidOrganizationName(_.get(teamData, 'name'))) {
       throw new TypeError('name parameter must have at least 3 lowercase letters, underscores, and numbers')
     }
 
-    const website = _.get(params, 'website')
+    const website = _.get(teamData, 'website')
     if (!_.isNil(website) && !isUrl(website)) {
       throw new TypeError('name parameter must be a valid absolute URL')
     }
 
-    return this._trello.post('/organizations', params)
+    return this._trello.post('/organizations', teamData)
       .then(trelloOrganization => new TeamEntity(trelloOrganization, this))
   }
 
+  /**
+   * Loads a Team by id.
+   * @param {string} id Team id.
+   * @returns {Promise<TeamEntity>} Loaded team entity.
+   * @throws {TypeError} Throws error when id is null or empty.
+   */
   async findById(id) {
     if (isBlank(id)) {
       throw new TypeError('id parameter must be a not empty team id')
@@ -56,6 +73,32 @@ export default class TeamRepository {
       .then(trelloOrganization => new TeamEntity(trelloOrganization, this))
   }
 
+  /**
+   * Search teams.
+   * @param {string} query Query string
+   * @returns {Promise<Array<TeamEntity>>} Search results
+   * @throws {TypeError} Throws error when query string is null or empty.
+   */
+  async search(query) {
+    if (isBlank(query)) {
+      throw new TypeError('query parameter must be a not empty query string')
+    }
+
+    return this._trello.get('/search', {
+      query: query,
+      modelTypes: 'organizations'
+    })
+      .then(trelloOrganizations => trelloOrganizations
+        .map(trelloOrganization => new TeamEntity(trelloOrganization, this))
+      )
+  }
+
+  /**
+   * Deletes a team by id.
+   * @param {string} id Team id.
+   * @returns {Promise} Delete operation promise.
+   * @throws {TypeError} Throws error when id is null or empty.
+   */
   async deleteById(id) {
     if (isBlank(id)) {
       throw new TypeError('id parameter must be a not empty team id')
@@ -64,16 +107,23 @@ export default class TeamRepository {
     return this._trello.delete(`/organizations/${id}`)
   }
 
-  async update(teamEntity) {
-    if (_.isNil(teamEntity) || !(teamEntity instanceof TeamEntity)) {
+  /**
+   * Updates a team.
+   * @param {TeamEntity} team A team entity to be updated.
+   * @returns {Promise<TeamEntity>} Updated team entity.
+   * @throws {TypeError} Throws error when team parameter is null or empty.
+   */
+  async update(team) {
+    if (_.isNil(team) || !(team instanceof TeamEntity)) {
       throw new TypeError('team parameter must be a not null TeamEntity object instance')
     }
 
-    return this._trello.put(`/organizations/${teamEntity.id}`, {
-      displayName: teamEntity.displayName,
-      desc: teamEntity.desc,
-      name: teamEntity.name,
-      website: teamEntity.website
+    return this._trello.put(`/organizations/${team.id}`, {
+      displayName: team.displayName,
+      desc: team.desc,
+      name: team.name,
+      website: team.website
     })
+      .then(trelloOrganization => new TeamEntity(trelloOrganization, this))
   }
 }

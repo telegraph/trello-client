@@ -27,6 +27,7 @@ const REPORTS_FOLDER = 'reports'
 const VERSION = process.env.TAG_NAME ? process.env.TAG_NAME : '2.0.0-LOCAL_SNAPSHOT'
 
 exports.build = series(clean, productionEnv, parallel(transpileSources, copyResources))
+exports.clean = clean
 exports['clean-all'] = parallel(clean, cleanDependencies)
 exports['trello-watch'] = trelloSimulatorWatch
 

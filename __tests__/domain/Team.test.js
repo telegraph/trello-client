@@ -93,18 +93,6 @@ describe('Team domain object', () => {
         .toBe('Updated displayName')
     })
 
-    test('Should return idBoards', () =>
-      expect(organization.idBoards)
-        .toBe(ORGANIZATION_FROM_TRELLO.idBoards)
-    )
-
-    test('Should not set idBoards', () =>
-      expect(() => {
-        organization.idBoards = ['5e7556184eef41173a927fc1']
-      })
-        .toThrow()
-    )
-
     test('Should return name', () =>
       expect(organization.name)
         .toBe(ORGANIZATION_FROM_TRELLO.name)

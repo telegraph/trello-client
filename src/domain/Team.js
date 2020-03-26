@@ -29,7 +29,7 @@ export default class Team {
 
   /**
    * Returns the ID of the team
-   * @returns string
+   * @returns {string}
    */
   get id() {
     return this._trelloObject.id
@@ -37,7 +37,7 @@ export default class Team {
 
   /**
    * Returns the description of the team
-   * @returns string
+   * @returns {string}
    */
   get desc() {
     return this._trelloObject.desc
@@ -45,55 +45,88 @@ export default class Team {
 
   /**
    * Sets the description of the team
+   * @param {string} desc
    */
   set desc(desc) {
     this._trelloObject.desc = desc
   }
 
   /**
-   * Return information about custom emojies in the team description
-   * @returns {{emoji: {}}|{emoji: {}}}
+   * Returns information about custom emojies in the team description
+   * @returns {Object}
    */
   get descData() {
     return this._trelloObject.descData
   }
 
+  /**
+   * Returns the name of the team.
+   * @returns {string}
+   */
   get displayName() {
     return this._trelloObject.displayName
   }
 
+  /**
+   * Sets the name of the team.
+   * @param {string} displayName
+   */
   set displayName(displayName) {
     this._trelloObject.displayName = displayName
   }
 
-  get idBoards() {
-    return this._trelloObject.idBoards
-  }
-
+  /**
+   * Returns the programmatic name of the team.
+   * @returns {string}
+   */
   get name() {
     return this._trelloObject.name
   }
 
+  /**
+   * Sets the programmatic name of the team.
+   * @param {string} name
+   */
   set name(name) {
     this._trelloObject.name = name
   }
 
+  /**
+   * Returns the preference for the team.
+   * @returns {Object}
+   */
   get prefs() {
     return this._trelloObject.prefs
   }
 
+  /**
+   * Returns the URL to the team page on Trello.
+   * @returns {string}
+   */
   get url() {
     return this._trelloObject.url
   }
 
+  /**
+   * Returns team related website.
+   * @returns {string}
+   */
   get website() {
     return this._trelloObject.website
   }
 
+  /**
+   * Sets team related website.
+   * @param {string} website
+   */
   set website(website) {
     this._trelloObject.website = website
   }
 
+  /**
+   * Converts object to JSON.
+   * @returns {string}
+   */
   toJSON() {
     return JSON.stringify(this._trelloObject)
   }

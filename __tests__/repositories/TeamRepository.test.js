@@ -16,7 +16,7 @@
 
 import Trello from '../../src/index'
 import Team from '../../src/domain/Team'
-import TeamEntity from '../../src/active-entities/TeamEntity'
+import TeamEntity from '../../src/entities/TeamEntity'
 import TeamRepository from '../../src/repositories/TeamRepository'
 import TRELLO_ORGANIZATION from '../data/trello-team'
 
@@ -135,10 +135,11 @@ describe('Team repository tests', () => {
     )
 
     test('Should request team update', async () => {
-      trello.put.mockImplementation(async () => new TeamEntity(TRELLO_ORGANIZATION, repository))
+      trello.put.mockImplementation(async () => TRELLO_ORGANIZATION)
 
       const updatedEntity = await repository.update(new TeamEntity(TRELLO_ORGANIZATION, repository))
 
+      expect(updatedEntity).toBeInstanceOf(TeamEntity)
       expect(updatedEntity.id).toBe(TRELLO_ORGANIZATION.id)
       expect(updatedEntity.displayName).toBe(TRELLO_ORGANIZATION.displayName)
       expect(updatedEntity.desc).toBe(TRELLO_ORGANIZATION.desc)
@@ -154,6 +155,50 @@ describe('Team repository tests', () => {
             website: 'https://trello.com'
           }
         ])
+    })
+  })
+
+  describe('Search teams', () => {
+    test.each([
+      undefined,
+      null,
+      '',
+      '    ',
+      {}
+    ])('Should thrown a TypeError if query parameter is %p', async query =>
+      expect(repository.search(query))
+        .rejects.toThrow(TypeError)
+    )
+
+    test('Should search for teams', async () => {
+      trello.get = async (path, params) => {
+        if (path === '/search' && params.query === 'Trello'
+            && params.modelTypes === 'organizations') {
+          return [
+            TRELLO_ORGANIZATION,
+            {
+              ...TRELLO_ORGANIZATION,
+              id: '5e7cbcef4d185df6242c79e1',
+              name: 'trelloinc_preprod',
+              displayName: 'Trello Inc Preprod',
+              url: 'https://trello.com/trelloinc1'
+            }
+          ]
+        }
+      }
+
+      const teamsFound = await repository.search('Trello')
+
+      expect(teamsFound).toBeInstanceOf(Array)
+      expect(teamsFound.length).toBe(2)
+      expect(teamsFound[0]).toEqual(new TeamEntity(TRELLO_ORGANIZATION, repository))
+      expect(teamsFound[1]).toEqual(new TeamEntity({
+        ...TRELLO_ORGANIZATION,
+        id: '5e7cbcef4d185df6242c79e1',
+        name: 'trelloinc_preprod',
+        displayName: 'Trello Inc Preprod',
+        url: 'https://trello.com/trelloinc1'
+      }, repository))
     })
   })
 })

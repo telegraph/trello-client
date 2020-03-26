@@ -26,4 +26,15 @@ export default class TeamEntity extends Team {
     }
     this._repository = repository
   }
+
+  /**
+   * Apply property updates
+   * @returns {Promise<void>} Operation promise
+   */
+  async save() {
+    await this._repository.update(this)
+      .then(updatedTeam => {
+        this._trelloObject = updatedTeam._trelloObject
+      })
+  }
 }

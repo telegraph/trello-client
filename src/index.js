@@ -24,8 +24,26 @@ const DEFAULT_OPTIONS = {
   baseUrl: 'https://api.trello.com/1'
 }
 
+/**
+ * Trello client main class.
+ *
+ * @example
+ * const trello = new Trello(
+ *   'one-api-key-...',
+ *   'one-api-token-...',
+ *   {
+ *     baseUrl: 'https://api.trello.com/1'
+ *   }
+ * )
+ */
 export default class Trello {
 
+  /**
+   * Creates a new Trello client instance.
+   * @param {string} apiKey Trello API Key
+   * @param {string} apiToken Trello API Token
+   * @param {{basePath: ?string}} options Additional options
+   */
   constructor(apiKey, apiToken, options = {}) {
     if (_.isNil(apiKey) || _.isNil(apiToken)) {
       throw new Error('apiKey and apiToken parameters are mandatory')
@@ -36,11 +54,15 @@ export default class Trello {
     this._trelloService = new TrelloService(apiKey, apiToken, this._options.baseUrl)
   }
 
-  get organization() {
-    if (!_.has(this, '_organization')) {
-      this._organization = new TeamRepository(this)
+  /**
+   * Team repository. Provides team operations.
+   * @returns {TeamRepository}
+   */
+  get team() {
+    if (!_.has(this, '_team')) {
+      this._team = new TeamRepository(this)
     }
-    return this._organization
+    return this._team
   }
 
   async get(path, params = {}) {

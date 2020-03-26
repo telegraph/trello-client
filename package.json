@@ -20,6 +20,7 @@
     "clean": "gulp clean",
     "clean:all": "gulp clean-all",
     "cpd": "jscpd src -r console,html,xml -o ./reports/cpd",
+    "doc": "esdoc",
     "lint": "eslint src __tests__",
     "test": "jest --colors",
     "test:integration": "jest --colors --config=jest.config-integration.js",
@@ -38,6 +39,8 @@
     "@types/jest": "^25.1.4",
     "bson": "^4.0.3",
     "del": "^5.1.0",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
@@ -47,8 +50,6 @@
     "jest": "^25.1.0",
     "jest-junit": "^10.0.0",
     "jscpd": "^3.1.0",
-    "jsdoc": "^3.6.3",
-    "jsdock": "^1.0.4",
     "lokijs": "^1.5.8"
   },
   "publishConfig": {

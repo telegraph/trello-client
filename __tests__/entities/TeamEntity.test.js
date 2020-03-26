@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import TeamEntity from '../../src/active-entities/TeamEntity'
+import TeamEntity from '../../src/entities/TeamEntity'
 import TeamRepository from '../../src/repositories/TeamRepository'
 import ORGANIZATION_FROM_TRELLO from '../data/trello-team'
 
 jest.mock('../../src/repositories/TeamRepository')
 
-describe('Organization active entity test', () => {
+describe('Team entity test', () => {
   const repository = new TeamRepository()
 
   describe('Constructor', () => {
@@ -37,9 +37,24 @@ describe('Organization active entity test', () => {
         .toThrow(TypeError)
     )
 
-    test('Should thrown an error if repository is not a OrganizationRepository instance', () =>
+    test('Should thrown an error if repository is not a TeamRepository instance', () =>
       expect(() => new TeamEntity(ORGANIZATION_FROM_TRELLO, {}))
         .toThrow(TypeError)
     )
+  })
+
+  describe('Save changes', () => {
+    repository.update.mockImplementation(teamEntity => Promise.resolve(teamEntity._trelloObject))
+    const organization = new TeamEntity(ORGANIZATION_FROM_TRELLO, repository)
+
+    organization.displayName = 'Updated display name'
+    organization.save()
+
+    expect(organization.displayName)
+      .toBe('Updated display name')
+    expect(repository.update.mock.calls.length)
+      .toBe(1)
+    expect(repository.update.mock.calls[0])
+      .toEqual([organization])
   })
 })

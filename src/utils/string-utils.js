@@ -16,10 +16,20 @@
 
 import _ from 'lodash'
 
+/**
+ * Returns true if a string is blank
+ * @param {string} string String
+ * @returns {boolean}
+ */
 export function isBlank(string) {
   return _.isNil(string) || _.trim(string) === ''
 }
 
+/**
+ * Returns true if an http/https url is valid.
+ * @param {string} url
+ * @returns {boolean}
+ */
 export function isUrl(url) {
   return /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url)
 }

@@ -1,5 +1,6 @@
 ### Node ###
 /dist/
+/docs/
 /reports/
 /node_modules/
 
