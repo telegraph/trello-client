@@ -22,6 +22,7 @@ const nodemon = require('gulp-nodemon')
 
 const SRC_FOLDER = 'src'
 const BUILD_FOLDER = 'dist'
+const DOCUMENTATION_FOLDER = 'docs'
 const INTEGRATION_TEST_FOLDER = '__integration_tests__'
 const REPORTS_FOLDER = 'reports'
 const VERSION = process.env.TAG_NAME ? process.env.TAG_NAME : '2.0.0-LOCAL_SNAPSHOT'
@@ -34,6 +35,7 @@ exports['trello-watch'] = trelloSimulatorWatch
 function clean() {
   return del([
     BUILD_FOLDER,
+    DOCUMENTATION_FOLDER,
     REPORTS_FOLDER
   ])
 }

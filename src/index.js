@@ -40,9 +40,9 @@ export default class Trello {
 
   /**
    * Creates a new Trello client instance.
-   * @param {string} apiKey Trello API Key
-   * @param {string} apiToken Trello API Token
-   * @param {{basePath: ?string}} options Additional options
+   * @param {!string} apiKey Trello API Key
+   * @param {!string} apiToken Trello API Token
+   * @param {{basePath: ?string}} options={baseUrl:https://api.trello.com/1} Additional options
    */
   constructor(apiKey, apiToken, options = {}) {
     if (_.isNil(apiKey) || _.isNil(apiToken)) {
@@ -55,7 +55,7 @@ export default class Trello {
   }
 
   /**
-   * Team repository. Provides team operations.
+   * Team repository, provides team operations.
    * @returns {TeamRepository}
    */
   get team() {
@@ -65,18 +65,41 @@ export default class Trello {
     return this._team
   }
 
+  /**
+   * Generic Trello API get request.
+   * @param {!string} path Request path
+   * @param {Object} params={} Request query params
+   * @returns {Promise<Object>} API response
+   */
   async get(path, params = {}) {
     return this._trelloService.get(path, params)
   }
 
+  /**
+   * Generic Trello API put request.
+   * @param {!string} path Request path
+   * @param {Object} params={} Request query params
+   * @returns {Promise<Object>} API response
+   */
   async put(path, params = {}) {
     return this._trelloService.put(path, params)
   }
 
+  /**
+   * Generic Trello API post request.
+   * @param {!string} path Request path
+   * @param {Object} params={} Request query params
+   * @returns {Promise<Object>} API response
+   */
   async post(path, params = {}) {
     return this._trelloService.post(path, params)
   }
 
+  /**
+   * Generic Trello API delete request.
+   * @param {!string} path Request path
+   * @returns {Promise}
+   */
   async delete(path) {
     return this._trelloService.delete(path)
   }

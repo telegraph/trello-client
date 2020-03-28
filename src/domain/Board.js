@@ -21,16 +21,21 @@ import _ from 'lodash'
  * or 1 teams and can have 0 or more lists.
  */
 export default class Board {
+
+  /**
+   * Board constructor.
+   * @param {!Object} trelloBoardObject Trello API board object
+   */
   constructor(trelloBoardObject) {
     if (_.isNil(trelloBoardObject) || !_.isObject(trelloBoardObject)) {
-      throw new TypeError('trelloTeamObject parameter must be a not null object')
+      throw new TypeError('trelloBoardObject parameter must be a not null object')
     }
     this._trelloObject = trelloBoardObject
   }
 
   /**
    * Returns the ID of the board.
-   * @return string
+   * @return {string}
    */
   get id() {
     return this._trelloObject.id
@@ -38,7 +43,7 @@ export default class Board {
 
   /**
    * Returns the name of the board.
-   * @return string
+   * @return {string}
    */
   get name() {
     return this._trelloObject.name
@@ -46,7 +51,7 @@ export default class Board {
 
   /**
    * Sets the name of the board.
-   * @param name Board name
+   * @param {string} name Board name
    */
   set name(name) {
     this._trelloObject.name = name
@@ -54,7 +59,7 @@ export default class Board {
 
   /**
    * Returns whether the board has been closed or not.
-   * @return boolean
+   * @return {boolean}
    */
   get closed() {
     return this._trelloObject.closed
@@ -62,7 +67,7 @@ export default class Board {
 
   /**
    * Sets whether the board has been closed or not.
-   * @param closed Closed status.
+   * @param {boolean} closed Closed status.
    */
   set closed(closed) {
     this._trelloObject.closed = closed
@@ -78,7 +83,7 @@ export default class Board {
 
   /**
    * Sets whether the board has been pinned or not.
-   * @param pinned
+   * @param {boolean} pinned
    */
   set pinned(pinned) {
     this._trelloObject.pinned = pinned
@@ -86,7 +91,7 @@ export default class Board {
 
   /**
    * Persistent URL for the board.
-   * @return string
+   * @return {string}
    */
   get url() {
     return this._trelloObject.url
@@ -94,9 +99,17 @@ export default class Board {
 
   /**
    * Returns URL for the board using only its shortMongoID.
-   * @return string
+   * @return {string}
    */
   get shortUrl() {
     return this._trelloObject.shortUrl
+  }
+
+  /**
+   * Whether the board is owned by an Enterprise or not.
+   * @returns {boolean}
+   */
+  get enterpriseOwned() {
+    return this._trelloObject.enterpriseOwned
   }
 }

@@ -14,6 +14,70 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
+
+/**
+ * Actions are generated whenever an action occurs in Trello.
+ */
 export default class Action {
 
+  /**
+   * Action constructor.
+   * @param {!Object} trelloActionObject Trello API action object.
+   */
+  constructor(trelloActionObject) {
+    if (_.isNil(trelloActionObject) || !_.isObject(trelloActionObject)) {
+      throw new TypeError('trelloActionObject parameter must be a not null object')
+    }
+    this._trelloObject = _.cloneDeep(trelloActionObject)
+  }
+
+  /**
+   * Returns the id of the action.
+   * @returns {string} Action id.
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * Relevant information regarding the action.
+   * @returns {Object} Action information.
+   */
+  get data() {
+    return _.cloneDeep(this._trelloObject.data)
+  }
+
+  /**
+   * When the action occurred.
+   * @returns {Date} Action date
+   */
+  get date() {
+    return new Date(this._trelloObject.date)
+  }
+
+  /**
+   * The id of the member who caused the action.
+   * @returns {string} Creator member id.
+   */
+  get memberIdCause() {
+    return this._trelloObject.idMemberCreator
+  }
+
+  /**
+   * The type of the action.
+   * @see https://developers.trello.com/reference-link/action-types
+   * @returns {string} Action type.
+   */
+  get type() {
+    return this._trelloObject.type
+  }
+
+  /**
+   * Returns a copy of the underlying Trello action object.
+   * @returns {Object} Trello API action object.
+   */
+  getTrelloObject() {
+    return _.cloneDeep(this._trelloObject)
+  }
 }
