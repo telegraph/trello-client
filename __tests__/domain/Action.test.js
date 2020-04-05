@@ -42,7 +42,7 @@ describe('Action domain object', () => {
     )
   })
 
-  describe('Value operations', () => {
+  describe('Property operations', () => {
     let action = null
 
     beforeEach(() => {
@@ -91,13 +91,13 @@ describe('Action domain object', () => {
     )
 
     test('Should return the member creator id', () =>
-      expect(action.memberIdCause)
+      expect(action.memberCreatorId)
         .toEqual(TRELLO_ACTION.idMemberCreator)
     )
 
     test('Should not set member creator id', () =>
       expect(() => {
-        action.memberIdCause = '9834mnf9s8anaf89jsadf89'
+        action.memberCreatorId = '9834mnf9s8anaf89jsadf89'
       })
         .toThrow(TypeError)
     )
@@ -113,6 +113,14 @@ describe('Action domain object', () => {
       })
         .toThrow(TypeError)
     )
+  })
+
+  describe('Public methods', () => {
+    let action = null
+
+    beforeEach(() => {
+      action = new Action(TRELLO_ACTION)
+    })
 
     test('Should return a copy of the underlying Trello object', () => {
       const trelloObject = action.getTrelloObject()
@@ -121,6 +129,11 @@ describe('Action domain object', () => {
         .toEqual(TRELLO_ACTION)
       expect(trelloObject)
         .not.toBe(action._trelloObject)
+    })
+
+    test('Should convert to JSON', () => {
+      expect(action.toJSON())
+        .toEqual(JSON.stringify(TRELLO_ACTION))
     })
   })
 })

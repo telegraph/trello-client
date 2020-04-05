@@ -15,36 +15,23 @@
  */
 
 import _ from 'lodash'
-import Team from '../domain/Team'
-import TeamRepository from '../repositories/TeamRepository'
+import Action from '../domain/Action'
+import ActionRepository from '../repositories/ActionRepository'
 
-/**
- * Team active record.
- */
-export default class TeamEntity extends Team {
+export default class ActionEntity extends Action {
 
   /**
-   * Team entity constructor.
-   * @param {!Object} trelloObject Trello API team object.
-   * @param {!TeamRepository} repository Team repository object.
+   * Action entity constructor.
+   * @param {!Object} trelloObject Trello API action object.
+   * @param {!ActionRepository} repository Action repository object.
    * @throws TypeError If parameters are null or not valid objects.
    */
   constructor(trelloObject, repository) {
     super(trelloObject)
-    if (_.isNil(repository) || !(repository instanceof TeamRepository)) {
+    if (_.isNil(repository) || !(repository instanceof ActionRepository)) {
       throw new TypeError('trelloObject parameter must be a not null TeamRepository')
     }
     this._repository = repository
   }
 
-  /**
-   * Apply property updates
-   * @returns {Promise} Operation promise
-   */
-  async save() {
-    await this._repository.update(this)
-      .then(updatedTeam => {
-        this._trelloObject = updatedTeam._trelloObject
-      })
-  }
 }

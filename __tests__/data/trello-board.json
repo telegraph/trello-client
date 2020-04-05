@@ -2,7 +2,7 @@
   "id": "5612e4f91b25c15e873722b8",
   "name": "Employee Manual",
   "desc": "",
-  "descData": null,
+  "descData": {},
   "closed": false,
   "idOrganization": "54b58957112602c9a0be7aa3",
   "invited": false,
@@ -85,14 +85,6 @@
   "starred": false,
   "url": "https://trello.com/b/HbTEX5hb/employee-manual",
   "prefs": {
-    "permissionLevel": "public",
-    "voting": "disabled",
-    "comments": "members",
-    "invitations": "members",
-    "selfJoin": true,
-    "cardCovers": true,
-    "cardAging": "regular",
-    "calendarFeedEnabled": false,
     "background": "5925b78fa1bd45e1bfb835da",
     "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2560x1707/f3c8b6101072d80565d9b6368f05b19d/photo-1495571758719-6ec1e876d6ae",
     "backgroundImageScaled": [
@@ -147,14 +139,23 @@
         "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2560x1707/f3c8b6101072d80565d9b6368f05b19d/photo-1495571758719-6ec1e876d6ae"
       }
     ],
-    "backgroundTile": false,
-    "backgroundBrightness": "light",
     "backgroundBottomColor": "#332b09",
+    "backgroundBrightness": "light",
+    "backgroundTile": false,
     "backgroundTopColor": "#d3c4a9",
-    "canBePublic": false,
+    "calendarFeedEnabled": false,
     "canBeOrg": false,
     "canBePrivate": false,
-    "canInvite": true
+    "canBePublic": false,
+    "canInvite": true,
+    "cardAging": "regular",
+    "cardCovers": true,
+    "comments": "members",
+    "hideVotes": false,
+    "invitations": "members",
+    "permissionLevel": "public",
+    "selfJoin": true,
+    "voting": "members"
   },
   "invitations": [],
   "shortLink": "HbTEX5hb",
@@ -176,5 +177,6 @@
   "dateLastView": "2018-03-12T14:15:20.234Z",
   "shortUrl": "https://trello.com/b/HbTEX5hb",
   "idTags": [],
-  "datePluginDisable": null
+  "datePluginDisable": null,
+  "enterpriseOwned": true
 }

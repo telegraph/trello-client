@@ -20,12 +20,15 @@ import {isValidOrganizationDisplayName, isValidOrganizationName} from '../domain
 import Trello from '../index'
 import TeamEntity from '../entities/TeamEntity'
 
+/**
+ * Team objects repository.
+ */
 export default class TeamRepository {
 
   /**
-   * Creates a new TeamRepository instance.
-   * @private
-   * @param {Trello} trello
+   * Creates a new instance.
+   * @param {!Trello} trello
+   * @throws {TypeError} If trello is not a valid Trello client object
    */
   constructor(trello) {
     if (_.isNil(trello) || !(trello instanceof Trello)) {

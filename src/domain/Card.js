@@ -20,6 +20,11 @@ import _ from 'lodash'
  * Lists in Trello contain cards. A card belongs to exactly one list.
  */
 export default class Card {
+
+  /**
+   * Card constructor.
+   * @param {!Object} trelloCardObject Trello API card object.
+   */
   constructor(trelloCardObject) {
     if (_.isNil(trelloCardObject) || !_.isObject(trelloCardObject)) {
       throw new TypeError('trelloCardObject parameter must be a not null object')
@@ -29,7 +34,7 @@ export default class Card {
 
   /**
    * Returns the ID of the card.
-   * @return string
+   * @type {string}
    */
   get id() {
     return this._trelloObject.id
@@ -37,7 +42,7 @@ export default class Card {
 
   /**
    * Whether the card is closed (archived).
-   * @return boolean
+   * @type {boolean}
    */
   get closed() {
     return this._trelloObject.closed
@@ -45,7 +50,7 @@ export default class Card {
 
   /**
    * Sets whether the card is closed (archived).
-   * @param closed boolean
+   * @type {boolean}
    */
   set closed(closed) {
     if (!_.isBoolean(closed)) {
@@ -56,7 +61,7 @@ export default class Card {
 
   /**
    * Returns the datetime of the last activity on the card.
-   * @return Date Last activity date
+   * @type {Date}
    */
   get dateLastActivity() {
     return new Date(this._trelloObject.dateLastActivity)
@@ -64,7 +69,7 @@ export default class Card {
 
   /**
    * Returns the description for the card.
-   * @return string
+   * @type {string}
    */
   get desc() {
     return this._trelloObject.desc
@@ -72,7 +77,7 @@ export default class Card {
 
   /**
    * Sets description for the card.
-   * @param desc string
+   * @type {string}
    */
   set desc(desc) {
     this._trelloObject.desc = desc
@@ -80,7 +85,7 @@ export default class Card {
 
   /**
    * Returns the due date of the card.
-   * @return Date Due date.
+   * @type {Date}
    */
   get due() {
     return _.isNil(this._trelloObject.due)
@@ -89,7 +94,7 @@ export default class Card {
 
   /**
    * Sets the due date of the card.
-   * @param date Date Due date.
+   * @type {Date}
    */
   set due(due) {
     this._trelloObject.due = _.isNil(due)

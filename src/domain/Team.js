@@ -20,16 +20,21 @@ import _ from 'lodash'
  * Teams represent collections of members and boards.
  */
 export default class Team {
-  constructor(trelloTeamObject) {
-    if (_.isNil(trelloTeamObject) || !_.isObject(trelloTeamObject)) {
+
+  /**
+   * Team constructor.
+   * @param {!Object} trelloOrganizationObject Trello API organization object.
+   */
+  constructor(trelloOrganizationObject) {
+    if (_.isNil(trelloOrganizationObject) || !_.isObject(trelloOrganizationObject)) {
       throw new TypeError('trelloTeamObject parameter must be a not null object')
     }
-    this._trelloObject = trelloTeamObject
+    this._trelloObject = _.cloneDeep(trelloOrganizationObject)
   }
 
   /**
    * Returns the ID of the team
-   * @returns {string}
+   * @type {string}
    */
   get id() {
     return this._trelloObject.id
@@ -37,7 +42,7 @@ export default class Team {
 
   /**
    * Returns the description of the team
-   * @returns {string}
+   * @type {string}
    */
   get desc() {
     return this._trelloObject.desc
@@ -45,7 +50,7 @@ export default class Team {
 
   /**
    * Sets the description of the team
-   * @param {string} desc
+   * @type {string}
    */
   set desc(desc) {
     this._trelloObject.desc = desc
@@ -53,7 +58,7 @@ export default class Team {
 
   /**
    * Returns information about custom emojies in the team description
-   * @returns {Object}
+   * @type {Object}
    */
   get descData() {
     return this._trelloObject.descData
@@ -61,7 +66,7 @@ export default class Team {
 
   /**
    * Returns the name of the team.
-   * @returns {string}
+   * @type {string}
    */
   get displayName() {
     return this._trelloObject.displayName
@@ -69,7 +74,7 @@ export default class Team {
 
   /**
    * Sets the name of the team.
-   * @param {string} displayName
+   * @type {string}
    */
   set displayName(displayName) {
     this._trelloObject.displayName = displayName
@@ -77,7 +82,7 @@ export default class Team {
 
   /**
    * Returns the programmatic name of the team.
-   * @returns {string}
+   * @type {string}
    */
   get name() {
     return this._trelloObject.name
@@ -85,7 +90,7 @@ export default class Team {
 
   /**
    * Sets the programmatic name of the team.
-   * @param {string} name
+   * @type {string}
    */
   set name(name) {
     this._trelloObject.name = name
@@ -93,7 +98,7 @@ export default class Team {
 
   /**
    * Returns the preference for the team.
-   * @returns {Object}
+   * @type {Object}
    */
   get prefs() {
     return this._trelloObject.prefs
@@ -101,7 +106,7 @@ export default class Team {
 
   /**
    * Returns the URL to the team page on Trello.
-   * @returns {string}
+   * @type {string}
    */
   get url() {
     return this._trelloObject.url
@@ -109,7 +114,7 @@ export default class Team {
 
   /**
    * Returns team related website.
-   * @returns {string}
+   * @type {string}
    */
   get website() {
     return this._trelloObject.website
@@ -117,10 +122,18 @@ export default class Team {
 
   /**
    * Sets team related website.
-   * @param {string} website
+   * @type {string}
    */
   set website(website) {
     this._trelloObject.website = website
+  }
+
+  /**
+   * Returns a copy of the underlying Trello organization object.
+   * @returns {Object} Trello API organization object.
+   */
+  getTrelloObject() {
+    return _.cloneDeep(this._trelloObject)
   }
 
   /**

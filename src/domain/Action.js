@@ -34,7 +34,7 @@ export default class Action {
 
   /**
    * Returns the id of the action.
-   * @returns {string} Action id.
+   * @type {string} Action id.
    */
   get id() {
     return this._trelloObject.id
@@ -42,7 +42,7 @@ export default class Action {
 
   /**
    * Relevant information regarding the action.
-   * @returns {Object} Action information.
+   * @type {Object}
    */
   get data() {
     return _.cloneDeep(this._trelloObject.data)
@@ -50,7 +50,7 @@ export default class Action {
 
   /**
    * When the action occurred.
-   * @returns {Date} Action date
+   * @type {Date}
    */
   get date() {
     return new Date(this._trelloObject.date)
@@ -58,16 +58,16 @@ export default class Action {
 
   /**
    * The id of the member who caused the action.
-   * @returns {string} Creator member id.
+   * @type {string}
    */
-  get memberIdCause() {
+  get memberCreatorId() {
     return this._trelloObject.idMemberCreator
   }
 
   /**
    * The type of the action.
    * @see https://developers.trello.com/reference-link/action-types
-   * @returns {string} Action type.
+   * @type {string}
    */
   get type() {
     return this._trelloObject.type
@@ -79,5 +79,13 @@ export default class Action {
    */
   getTrelloObject() {
     return _.cloneDeep(this._trelloObject)
+  }
+
+  /**
+   * Converts object to JSON.
+   * @returns {string} JSON string.
+   */
+  toJSON() {
+    return JSON.stringify(this._trelloObject)
   }
 }

@@ -15,19 +15,23 @@
  */
 
 import Team from '../../src/domain/Team'
-import ORGANIZATION_FROM_TRELLO from '../data/trello-team'
+import TRELLO_ORGANIZATION from '../data/trello-team'
 
 jest.mock('../../src/services/TrelloService')
 
 describe('Team domain object', () => {
   describe('Constructor', () => {
     test('Should construct an object', () => {
-      const team = new Team(ORGANIZATION_FROM_TRELLO)
+      const team = new Team(TRELLO_ORGANIZATION)
 
       expect(team)
         .not.toBeNull()
       expect(team)
         .toBeInstanceOf(Team)
+      expect(team._trelloObject)
+        .toEqual(TRELLO_ORGANIZATION)
+      expect(team._trelloObject)
+        .not.toBe(TRELLO_ORGANIZATION)
     })
 
     test.each([
@@ -44,12 +48,12 @@ describe('Team domain object', () => {
     let organization = null
 
     beforeEach(() => {
-      organization = new Team(ORGANIZATION_FROM_TRELLO)
+      organization = new Team(TRELLO_ORGANIZATION)
     })
 
     test('Should return id', () =>
       expect(organization.id)
-        .toBe(ORGANIZATION_FROM_TRELLO.id)
+        .toBe(TRELLO_ORGANIZATION.id)
     )
 
     test('Should not set id', () =>
@@ -61,7 +65,7 @@ describe('Team domain object', () => {
 
     test('Should return desc', () =>
       expect(organization.desc)
-        .toBe(ORGANIZATION_FROM_TRELLO.desc)
+        .toBe(TRELLO_ORGANIZATION.desc)
     )
 
     test('Should set desc', () => {
@@ -72,7 +76,7 @@ describe('Team domain object', () => {
 
     test('Should return descData', () =>
       expect(organization.descData)
-        .toBe(ORGANIZATION_FROM_TRELLO.descData)
+        .toBe(TRELLO_ORGANIZATION.descData)
     )
 
     test('Should not set descData', () =>
@@ -84,7 +88,7 @@ describe('Team domain object', () => {
 
     test('Should return displayName', () =>
       expect(organization.displayName)
-        .toBe(ORGANIZATION_FROM_TRELLO.displayName)
+        .toBe(TRELLO_ORGANIZATION.displayName)
     )
 
     test('Should set displayName', () => {
@@ -95,7 +99,7 @@ describe('Team domain object', () => {
 
     test('Should return name', () =>
       expect(organization.name)
-        .toBe(ORGANIZATION_FROM_TRELLO.name)
+        .toBe(TRELLO_ORGANIZATION.name)
     )
 
     test('Should set name', () => {
@@ -106,7 +110,7 @@ describe('Team domain object', () => {
 
     test('Should return prefs', () =>
       expect(organization.prefs)
-        .toBe(ORGANIZATION_FROM_TRELLO.prefs)
+        .toEqual(TRELLO_ORGANIZATION.prefs)
     )
 
     test('Should not set prefs', () =>
@@ -118,7 +122,7 @@ describe('Team domain object', () => {
 
     test('Should return url', () =>
       expect(organization.url)
-        .toBe(ORGANIZATION_FROM_TRELLO.url)
+        .toBe(TRELLO_ORGANIZATION.url)
     )
 
     test('Should not set url', () =>
@@ -130,7 +134,7 @@ describe('Team domain object', () => {
 
     test('Should return website', () =>
       expect(organization.website)
-        .toBe(ORGANIZATION_FROM_TRELLO.website)
+        .toBe(TRELLO_ORGANIZATION.website)
     )
 
     test('Should set website', () => {
@@ -142,9 +146,31 @@ describe('Team domain object', () => {
 
   describe('JSON conversion', () => {
     test('Should convert to JSON', () => {
-      const organization = new Team(ORGANIZATION_FROM_TRELLO)
+      const organization = new Team(TRELLO_ORGANIZATION)
       expect(organization.toJSON())
-        .toEqual(JSON.stringify(ORGANIZATION_FROM_TRELLO))
+        .toEqual(JSON.stringify(TRELLO_ORGANIZATION))
+    })
+  })
+
+  describe('Public methods', () => {
+    let team = null
+
+    beforeEach(() => {
+      team = new Team(TRELLO_ORGANIZATION)
+    })
+
+    test('Should return a copy of the underlying Trello object', () => {
+      const trelloObject = team.getTrelloObject()
+
+      expect(trelloObject)
+        .toEqual(TRELLO_ORGANIZATION)
+      expect(trelloObject)
+        .not.toBe(team._trelloObject)
+    })
+
+    test('Should convert to JSON', () => {
+      expect(team.toJSON())
+        .toEqual(JSON.stringify(TRELLO_ORGANIZATION))
     })
   })
 })

@@ -15,6 +15,8 @@
  */
 
 import _ from 'lodash'
+import {validateNotBlankTextField} from './validators/common-validators'
+import BoardPreferences from './BoardPreferences'
 
 /**
  * Boards are fundamental to Trello. A board may belong to 0
@@ -30,12 +32,13 @@ export default class Board {
     if (_.isNil(trelloBoardObject) || !_.isObject(trelloBoardObject)) {
       throw new TypeError('trelloBoardObject parameter must be a not null object')
     }
-    this._trelloObject = trelloBoardObject
+    this._trelloObject = _.cloneDeep(trelloBoardObject)
+    this._preferences = new BoardPreferences(this._trelloObject.prefs)
   }
 
   /**
    * Returns the ID of the board.
-   * @return {string}
+   * @type {string}
    */
   get id() {
     return this._trelloObject.id
@@ -43,7 +46,7 @@ export default class Board {
 
   /**
    * Returns the name of the board.
-   * @return {string}
+   * @type {string}
    */
   get name() {
     return this._trelloObject.name
@@ -51,15 +54,41 @@ export default class Board {
 
   /**
    * Sets the name of the board.
-   * @param {string} name Board name
+   * @type {string}
    */
   set name(name) {
+    validateNotBlankTextField('name', name)
     this._trelloObject.name = name
   }
 
   /**
+   * Returns the description of the board.
+   * @type {string}
+   */
+  get desc() {
+    return this._trelloObject.desc
+  }
+
+  /**
+   * Sets the description of the board.
+   * @type {string}
+   */
+  set desc(desc) {
+    validateNotBlankTextField('desc', desc)
+    this._trelloObject.desc = desc
+  }
+
+  /**
+   * Custom emoji used in the description.
+   * @type {Object}
+   */
+  get descData() {
+    return _.cloneDeep(this._trelloObject.descData)
+  }
+
+  /**
    * Returns whether the board has been closed or not.
-   * @return {boolean}
+   * @type {boolean}
    */
   get closed() {
     return this._trelloObject.closed
@@ -67,31 +96,40 @@ export default class Board {
 
   /**
    * Sets whether the board has been closed or not.
-   * @param {boolean} closed Closed status.
+   * @type {boolean}
    */
   set closed(closed) {
     this._trelloObject.closed = closed
   }
 
   /**
+   * Returns the id of the team to witch the board belongs.
+   * @type {string}
+   */
+  get teamId() {
+    return this._trelloObject.idOrganization
+  }
+
+  /**
+   * Moves the board to another team.
+   * @type {string}
+   */
+  set teamId(teamId) {
+    validateNotBlankTextField('teamId', teamId)
+    this._trelloObject.idOrganization = teamId
+  }
+
+  /**
    * Returns whether the board has been pinned or not.
-   * @return {boolean}
+   * @type {boolean}
    */
   get pinned() {
     return this._trelloObject.pinned
   }
 
   /**
-   * Sets whether the board has been pinned or not.
-   * @param {boolean} pinned
-   */
-  set pinned(pinned) {
-    this._trelloObject.pinned = pinned
-  }
-
-  /**
    * Persistent URL for the board.
-   * @return {string}
+   * @type {string}
    */
   get url() {
     return this._trelloObject.url
@@ -99,15 +137,23 @@ export default class Board {
 
   /**
    * Returns URL for the board using only its shortMongoID.
-   * @return {string}
+   * @type {string}
    */
   get shortUrl() {
     return this._trelloObject.shortUrl
   }
 
   /**
+   * Board settings.
+   * @type {BoardPreferences}
+   */
+  get preferences() {
+    return this._preferences
+  }
+
+  /**
    * Whether the board is owned by an Enterprise or not.
-   * @returns {boolean}
+   * @type {boolean}
    */
   get enterpriseOwned() {
     return this._trelloObject.enterpriseOwned
