@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-import _ from 'lodash'
+import {isNegative} from '../../src/utils/number-utils'
 
-/**
- * Returns true if a string is blank
- * @param {string} string String
- * @returns {boolean}
- */
-export function isBlank(string) {
-  return _.isNil(string) || _.trim(string) === ''
-}
-
-/**
- * Returns true if an http/https url is valid.
- * @param {string} url
- * @returns {boolean}
- */
-export function isUrl(url) {
-  return /^http(s)?:\/\/[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(url)
-}
+describe('Number utils', () => {
+  describe('isNegative', () => {
+    test.each([
+      [-5, true],
+      [0, false],
+      [15, false]
+    ])('isNegative(%p) should return %p', (value, expected) =>
+      expect(isNegative(value))
+        .toBe(expected)
+    )
+  })
+})

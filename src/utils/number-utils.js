@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-export default class Reaction {
+const ZERO = 0
 
+export function isNegative(value) {
+  return value < ZERO
 }

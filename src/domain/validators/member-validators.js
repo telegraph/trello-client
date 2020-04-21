@@ -14,6 +14,16 @@
  * limitations under the License.
  */
 
-export default class Plugin {
+import _ from 'lodash'
+import {ValidationError} from './ValidationError'
 
+const AVATAR_SOURCE_VALUES = [
+  'gravatar',
+  'upload'
+]
+
+export function validateAvatarSource(value) {
+  if (_.isNil(value) || !_.isString(value) || !AVATAR_SOURCE_VALUES.includes(value)) {
+    throw new ValidationError(`AvatarSource must be gravatar or upload: ${value}`)
+  }
 }

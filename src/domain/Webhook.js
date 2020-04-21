@@ -14,6 +14,104 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
+import {
+  validateNotBlankTextField, validateNotNullBooleanField,
+  validateNotNullUrlField,
+  validateNullableTextField
+} from './validators/common-validators'
+
+/**
+ * Webhooks allow developers to receive updates regarding actions that have occurred in Trello.
+ */
 export default class Webhook {
 
+  /**
+   * Webhook constructor.
+   * @param {!Object} trelloWebhookObject Trello API webhook object.
+   */
+  constructor(trelloWebhookObject) {
+    if (_.isNil(trelloWebhookObject) || !_.isObject(trelloWebhookObject)) {
+      throw new TypeError('trelloCardObject parameter must be a not null object')
+    }
+    this._trelloObject = _.cloneDeep(trelloWebhookObject)
+  }
+
+  /**
+   * ID of the webhook.
+   * @type {string}
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * Webhook's description.
+   * @type {string}
+   */
+  get description() {
+    return this._trelloObject.description
+  }
+
+  /**
+   * Sets webhook's description.
+   * @type {string}
+   */
+  set description(value) {
+    validateNullableTextField('description', value)
+    this._trelloObject.description = value
+  }
+
+  /**
+   * ID of the Trello object the webhook is watching.
+   * This can be any Trello object ID (list, board, card, member, etc.).
+   * @type {string}
+   */
+  get modelId() {
+    return this._trelloObject.idModel
+  }
+
+  /**
+   * Sets ID of the Trello object the webhook is watching.
+   * This can be any Trello object ID (list, board, card, member, etc.).
+   * @type {string}
+   */
+  set modelId(value) {
+    validateNotBlankTextField('modelId', value)
+    this._trelloObject.idModel = value
+  }
+
+  /**
+   * The URL that the webhook will POST information to.
+   * @type {string}
+   */
+  get callbackUrl() {
+    return this._trelloObject.callbackURL
+  }
+
+  /**
+   * Sets the URL that the webhook will POST information to.
+   * @type {string}
+   */
+  set callbackUrl(value) {
+    validateNotNullUrlField('callbackUrl', value)
+    this._trelloObject.callbackURL = value
+  }
+
+  /**
+   * Determines whether the webhook is active or not.
+   * @type {boolean}
+   */
+  get active() {
+    return this._trelloObject.active
+  }
+
+  /**
+   * Sets if the webhook is active or not.
+   * @type {boolean}
+   */
+  set active(value) {
+    validateNotNullBooleanField('active', value)
+    this._trelloObject.active = value
+  }
 }

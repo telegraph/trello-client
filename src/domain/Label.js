@@ -14,6 +14,99 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
+import {validateNullableStringOptionField, validateNullableTextField} from './validators/common-validators'
+
+const COLOR_OPTIONS = [
+  'yellow',
+  'purple',
+  'blue',
+  'red',
+  'green',
+  'orange',
+  'black',
+  'sky',
+  'pink',
+  'lime'
+]
+
 export default class Label {
+
+  /**
+   * Label constructor.
+   * @param {!Object} trelloLabelObject Trello API card object.
+   */
+  constructor(trelloLabelObject) {
+    if (_.isNil(trelloLabelObject) || !_.isObject(trelloLabelObject)) {
+      throw new TypeError('trelloLabelObject parameter must be a not null object')
+    }
+    this._trelloObject = _.cloneDeep(trelloLabelObject)
+  }
+
+  /**
+   * The ID of the label.
+   * @type {string}
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * The optional name of the label.
+   * @type {string}
+   */
+  get name() {
+    return this._trelloObject.name
+  }
+
+  /**
+   * Sets the optional name of the label.
+   * @type {string}
+   */
+  set name(value) {
+    validateNullableTextField('name', value)
+    this._trelloObject.name = value
+  }
+
+  /**
+   * The color of the label.
+   * One of:
+   * - yellow
+   * - purple
+   * - blue
+   * - red
+   * - green
+   * - orange
+   * - black
+   * - sky
+   * - pink
+   * - lime
+   * - null
+   * @type {string}
+   */
+  get color() {
+    return this._trelloObject.color
+  }
+
+  /**
+   * Sets the color of the label.
+   * One of:
+   * - yellow
+   * - purple
+   * - blue
+   * - red
+   * - green
+   * - orange
+   * - black
+   * - sky
+   * - pink
+   * - lime
+   * - null
+   * @type {string}
+   */
+  set color(value) {
+    validateNullableStringOptionField('color', COLOR_OPTIONS, value)
+    this._trelloObject.color = value
+  }
 
 }

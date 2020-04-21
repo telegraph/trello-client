@@ -26,15 +26,6 @@ const DEFAULT_OPTIONS = {
 
 /**
  * Trello client main class.
- *
- * @example
- * const trello = new Trello(
- *   'one-api-key-...',
- *   'one-api-token-...',
- *   {
- *     baseUrl: 'https://api.trello.com/1'
- *   }
- * )
  */
 export default class Trello {
 

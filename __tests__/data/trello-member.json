@@ -1,0 +1,52 @@
+{
+  "id": "50095233f62adbe04d935195",
+  "avatarHash": "10e3fec8aee92d177b22290b7cff669d",
+  "avatarUrl": "https://trello.com/avatar.png",
+  "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "bioData": null,
+  "confirmed": true,
+  "fullName": "Taco",
+  "idPremOrgsAdmin": [
+
+  ],
+  "initials": "T",
+  "memberType": "normal",
+  "products": [
+
+  ],
+  "status": "disconnected",
+  "url": "https://trello.com/taco",
+  "username": "taco",
+  "avatarSource": "upload",
+  "email": null,
+  "gravatarHash": null,
+  "idBoards": [
+    "5824e427857eea92ad0a93fc",
+    "58f7becd7a76210902b2f846",
+    "50e1d37994dd425b620035ff",
+    "51227842c0cb5a7d740002cb",
+    "512e491a6d7fc071590043a6",
+    "58f7b25fcf2a8696f734edfc",
+    "58fa50037361735963976675",
+    "592db6c67e4c126659137b88",
+    "592f28ad8271344b504b016d"
+  ],
+  "idEnterprise": null,
+  "idOrganizations": [
+
+  ],
+  "idEnterprisesAdmin": [
+
+  ],
+  "loginTypes": null,
+  "oneTimeMessagesDismissed": null,
+  "prefs": null,
+  "trophies": [
+
+  ],
+  "uploadedAvatarHash": null,
+  "premiumFeatures": [
+
+  ],
+  "idBoardsPinned": null
+}

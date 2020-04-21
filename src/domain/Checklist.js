@@ -14,6 +14,80 @@
  * limitations under the License.
  */
 
-export default class Checklist {
+import _ from 'lodash'
+import {validateNotNullNumberField, validateNullableNotBlankTextField} from './validators/common-validators'
 
+/**
+ * A checklist is a way of keeping track of subtasks within a card.
+ * You can add multiple checklists to a single card.
+ */
+export default class Checklist {
+  /**
+   * Checklist constructor.
+   * @param {!Object} trelloChecklistObject Trello API card object.
+   */
+  constructor(trelloChecklistObject) {
+    if (_.isNil(trelloChecklistObject) || !_.isObject(trelloChecklistObject)) {
+      throw new TypeError('trelloChecklistObject parameter must be a not null object')
+    }
+    this._trelloObject = _.cloneDeep(trelloChecklistObject)
+  }
+
+  /**
+   * Checklist id.
+   * @type {string}
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * The ID of the board the checklist is on
+   * @type {string}
+   */
+  get boardId() {
+    return this._trelloObject.idBoard
+  }
+
+  /**
+   * The ID of the card the checklist is on.
+   * @type {string}
+   */
+  get cardId() {
+    return this._trelloObject.idCard
+  }
+
+  /**
+   * The name of the checklist.
+   * @type {string}
+   */
+  get name() {
+    return this._trelloObject.name
+  }
+
+  /**
+   * Sets the name of the checklist.
+   * @type {string}
+   */
+  set name(value) {
+    validateNullableNotBlankTextField('name', value)
+    this._trelloObject.name = value
+  }
+
+  /**
+   * The position of the checklist on the card (relative to any other checklists on the card).
+   * @type {number}
+   */
+  get position() {
+    return this._trelloObject.pos
+  }
+
+  /**
+   * Sets the position of the checklist on the card (relative to any other checklists on the card).
+   * @type {number}
+   */
+  set position(value) {
+    validateNotNullNumberField('position', value)
+    this._trelloObject.pos = value
+  }
 }

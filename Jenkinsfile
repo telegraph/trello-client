@@ -54,10 +54,11 @@ pipeline {
           }
           post {
             always {
-              recordIssues aggregatingResults: true, sourceCodeEncoding: 'UTF-8', tools: [
-                esLint(pattern: 'reports/eslint.xml'),
-                cpd(pattern: 'reports/cpd/jscpd-report.xml')
-              ]
+              recordIssues aggregatingResults: true, sourceCodeEncoding: 'UTF-8',
+                referenceJobName: 'Dashboard/trello-client/2.x.x', tools: [
+                  esLint(pattern: 'reports/eslint.xml'),
+                  cpd(pattern: 'reports/cpd/jscpd-report.xml')
+                ]
             }
           }
         }

@@ -14,6 +14,71 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
+import TokenPermission from './TokenPermission'
+
+/**
+ * Trello authentication token.
+ */
 export default class Token {
 
+  /**
+   * Token constructor.
+   * @param {!Object} trelloTokenObject Trello API webhook object.
+   */
+  constructor(trelloTokenObject) {
+    if (_.isNil(trelloTokenObject) || !_.isObject(trelloTokenObject)) {
+      throw new TypeError('trelloTokenObject parameter must be a not null object')
+    }
+    this._trelloObject = _.cloneDeep(trelloTokenObject)
+  }
+
+  /**
+   * The ID of the token.
+   * @type {string}
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * Token test identifier.
+   * @type {string}
+   */
+  get identifier() {
+    return this._trelloObject.identifier
+  }
+
+  /**
+   * Token related member id.
+   * @type {string}
+   */
+  get memberId() {
+    return this._trelloObject.idMember
+  }
+
+  /**
+   * Date when the token was created.
+   * @type {Date}
+   */
+  get dateCreated() {
+    return new Date(this._trelloObject.dateCreated)
+  }
+
+  /**
+   * Date when the token is expired.
+   * @type {Date}
+   */
+  get dateExpires() {
+    return new Date(this._trelloObject.dateExpires)
+  }
+
+  /**
+   * List of authorized permissions.
+   * @type {TokenPermission[]}
+   */
+  get permissions() {
+    return _.get(this._trelloObject, 'permissions', [])
+      .map(permission => new TokenPermission(permission))
+  }
 }

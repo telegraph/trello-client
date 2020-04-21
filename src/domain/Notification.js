@@ -14,6 +14,37 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
+
+/**
+ * Notifications are displayed under the bell icon button, next to a member's avatar.
+ */
 export default class Notification {
 
+  /**
+   * Notification constructor.
+   * @param {!Object} trelloNotificationObject Trello API card object.
+   */
+  constructor(trelloNotificationObject) {
+    if (_.isNil(trelloNotificationObject) || !_.isObject(trelloNotificationObject)) {
+      throw new TypeError('trelloNotificationObject parameter must be a not null object')
+    }
+    this._trelloObject = _.cloneDeep(trelloNotificationObject)
+  }
+
+  /**
+   * The ID of the notification.
+   * @type {string}
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * Relevant data regarding the notification.
+   * @type {Object}
+   */
+  get data() {
+    return this._trelloObject.data
+  }
 }

@@ -16,9 +16,9 @@
 
 import Chance from 'chance'
 import {
-  validateNotBlankTextField, validateNotNullBooleanField,
-  validateNotNullStringOptionField, validateNullableBooleanField,
-  validateNullableStringOptionField, validateNullableTextField
+  validateNotBlankTextField, validateNotNullArrayOfStrings, validateNotNullBooleanField, validateNotNullNumberField,
+  validateNotNullStringOptionField, validateNullableBooleanField, validateNullableNotBlankTextField,
+  validateNullableStringOptionField, validateNullableTextField, validatePosition
 } from '../../../src/domain/validators/common-validators'
 import {ValidationError} from '../../../src/domain/validators/ValidationError'
 
@@ -44,6 +44,31 @@ describe('Common validators', () => {
 
     test('Should not throw an error if text field value is valid', () =>
       expect(() => validateNotBlankTextField('desc', 'Some valid text'))
+        .not.toThrow(ValidationError)
+    )
+  })
+
+  describe('Validate nullable not blank text field', () => {
+    test.each([
+      ['name', ''],
+      ['displayName', '    '],
+      ['name', {foo: 'bar'}]
+    ])('validateNullableNotBlankTextField(%p, %p) should throw ValidationError exception', (fieldName, value) =>
+      expect(() => validateNullableNotBlankTextField(fieldName, value))
+        .toThrow(ValidationError)
+    )
+
+    test('Should throw an error if text field value is longer than 16384 characters', () =>
+      expect(() => validateNullableNotBlankTextField('desc', chance.string({ length: 16385 })))
+        .toThrow(ValidationError)
+    )
+
+    test.each([
+      ['name', null],
+      ['displayName', undefined],
+      ['name', 'Some valid text']
+    ])('validateNullableNotBlankTextField(%p, %p) should not throw ValidationError exception', (fieldName, value) =>
+      expect(() => validateNullableNotBlankTextField(fieldName, value))
         .not.toThrow(ValidationError)
     )
   })
@@ -121,6 +146,30 @@ describe('Common validators', () => {
     )
   })
 
+  describe('Validate not nullable number field', () => {
+    test.each([
+      ['latitude', undefined],
+      ['longitude', null],
+      ['latitude', ''],
+      ['longitude', 'Some text'],
+      ['latitude', true],
+      ['longitude', {foo: 'bar'}],
+      ['latitude', [1, 2, 6]]
+    ])('validateNotNullNumberField(%p, %p) should throw ValidationError exception', (fieldName, value) =>
+      expect(() => validateNotNullNumberField(fieldName, value))
+        .toThrow(ValidationError)
+    )
+
+    test.each([
+      ['latitude', -57],
+      ['longitude', 0],
+      ['latitude', 12.5]
+    ])('validateNotNullNumberField(%p, %p) should not throw ValidationError exception', (fieldName, value) =>
+      expect(() => validateNotNullNumberField(fieldName, value))
+        .not.toThrow(ValidationError)
+    )
+  })
+
   describe('Validate not null string option field', () => {
     const OPTIONS = ['org', 'private', 'public']
 
@@ -170,6 +219,79 @@ describe('Common validators', () => {
     ])('validateNullableStringOptionField(%p, %p, %p) should not throw ValidationError exception', (fieldName, options, value) =>
       expect(() => validateNullableStringOptionField(fieldName, options, value))
         .not.toThrow(ValidationError)
+    )
+  })
+
+  describe('Validate not null array of strings', () => {
+    test.each([
+      ['labelsId', []],
+      ['labelsId', ['item1']],
+      ['labelsId', ['item1', 'item2']]
+    ])('validateNotNullArrayOfStrings(%p, %p) should not throw ValidationError exception', (fieldName, value) =>
+      expect(() => validateNotNullArrayOfStrings(fieldName, value))
+        .not.toThrow(ValidationError)
+    )
+
+    test.each([
+      ['labelsId', undefined],
+      ['labelsId', null],
+      ['labelsId', true],
+      ['labelsId', 'Some string'],
+      ['labelsId', 256],
+      ['labelsId', [1, 2, 3]],
+      ['labelsId', {foo: 'bar'}]
+    ])('validateNotNullArrayOfStrings(%p, %p) should throw ValidationError exception', (fieldName, value) =>
+      expect(() => validateNotNullArrayOfStrings(fieldName, value))
+        .toThrow(ValidationError)
+    )
+  })
+
+  describe('Validate Position', () => {
+    test.each([
+      ['position', 'bottom'],
+      ['position', 'top'],
+      ['position', 0],
+      ['position', 100.67]
+    ])('%p should be valid', (field, value) =>
+      expect(() => validatePosition(field, value))
+        .not.toThrow(ValidationError)
+    )
+
+    test.each([
+      ['position', undefined],
+      ['position', null],
+      ['position', true],
+      ['position', -6.7],
+      ['position', 'sadfdksajalkfds'],
+      ['position', [1, 2, 3]],
+      ['position', {foo: 'bar'}]
+    ])('%p should throw ValidationError', (field, value) =>
+      expect(() => validatePosition(field, value))
+        .toThrow(ValidationError)
+    )
+  })
+
+  describe('Validate Not Null URL', () => {
+    test.each([
+      ['callbackUrl', 'bottom'],
+      ['callbackUrl', 'top'],
+    ])('%p should be valid', (field, value) =>
+      expect(() => validatePosition(field, value))
+        .not.toThrow(ValidationError)
+    )
+
+    test.each([
+      ['callbackUrl', undefined],
+      ['callbackUrl', null],
+      ['callbackUrl', true],
+      ['callbackUrl', -6.7],
+      ['callbackUrl', 'www.example.com'],
+      ['callbackUrl', 'some-string'],
+      ['callbackUrl', [1, 2, 3]],
+      ['callbackUrl', {foo: 'bar'}]
+    ])('%p should throw ValidationError', (field, value) =>
+      expect(() => validatePosition(field, value))
+        .toThrow(ValidationError)
     )
   })
 })

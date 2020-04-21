@@ -14,6 +14,63 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
+import {validateAvatarSource} from './validators/member-validators'
+
+/**
+ * Everyone with a Trello account is called a member.
+ */
 export default class Member {
 
+  /**
+   * Member constructor.
+   * @param {!Object} trelloMemberObject Trello API card object.
+   */
+  constructor(trelloMemberObject) {
+    if (_.isNil(trelloMemberObject) || !_.isObject(trelloMemberObject)) {
+      throw new TypeError('trelloMemberObject parameter must be a not null object')
+    }
+    this._trelloObject = _.cloneDeep(trelloMemberObject)
+  }
+
+  /**
+   * The ID of the member.
+   * @type {string}
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * Member profile images are hosted at: https://trello-avatars.s3.amazonaws.com/{avatarHash}/{size}.png
+   * @type {string}
+   */
+  get avatarHash() {
+    return this._trelloObject.avatarHash
+  }
+
+  /**
+   * The URL of the current avatar being used, regardless of whether it is a gravatar or uploaded avatar.
+   * @type {string}
+   */
+  get avatarUrl() {
+    return this._trelloObject.avatarUrl
+  }
+
+  /**
+   * The source of the user's avatar - either via "upload" or "gravatar".
+   * @type {string}
+   */
+  get avatarSource() {
+    return this._trelloObject.avatarSource
+  }
+
+  /**
+   * Sets the source of the user's avatar - either via "upload" or "gravatar".
+   * @type {string}
+   */
+  set avatarSource(value) {
+    validateAvatarSource(value)
+    this._trelloObject.avatarSource = value
+  }
 }
