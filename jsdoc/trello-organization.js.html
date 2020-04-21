@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: trello-organization.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: trello-organization.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+'use strict';
+
+const _ = require('lodash');
+
+class TrelloOrganizations {
+
+    /**
+     *
+     * @param trelloClient {TrelloClient}
+     */
+    constructor(trelloClient){
+        this._client = trelloClient;
+    }
+
+    /**
+     * This method allow us to search for an organization given a 'searchTerm' String
+     * @param searchTerm {String}
+     *
+     * @return {Promise&lt;Array&lt;Object>>} Array containing organizations
+     */
+    searchFor(searchTerm){
+        return this._client.get(`/search?query="${searchTerm}"&amp;modelTypes=organizations`)
+            .then( body => body.organizations );
+    }
+
+    /**
+     * This method allow us to create an organization if it doesn't exist or force the
+     * creation of it if another organization with the same name already exists.
+     * If the organization contains boards, then they are created.
+     *
+     * @param data {{name:String, boards:?Array&lt;{name:String}>}}
+     * @param force {Boolean} Force the organization creation even if it already exists another
+     * with the same name.
+     * @return {Promise&lt;*>}
+     */
+    create(data, force = false){
+        return (force ? Promise.reject(null) : this.getByName(data.name))
+            .catch( ignore => this._client.post(`/organizations`, _.omit(data, 'boards')) )
+            .then( organization => {
+                let boardsPromise = _.get(data, 'boards', []).length === 0 ? Promise.resolve([]) : Promise.all( data.boards.map( item => {
+                    item.idOrganization = organization.id;
+                    return this._client.board.create(item, force)
+                }));
+                return boardsPromise
+                    .then( boards => _.set(organization, 'boards', boards) );
+            })
+            ;
+    }
+
+    /**
+     * Deletes an organization and inner structure (boards) if the `deleteBoards` is set to true.
+     * At least the organization id or name must be provided.
+     *
+     * @param data {{id:?String, name:?String}}
+     * @param deleteBoards {Boolean} When true, deletes all inner boards.
+     * @return {Promise&lt;*>}
+     */
+    delete(data, deleteBoards = false){
+        if( !data.id &amp;&amp; !data.name ){
+            return Promise.resolve( data );
+        }
+        return (data.id ? Promise.resolve({id:data.id}) : this.getByName(data.name) )
+            .then( organization => {
+                return ( deleteBoards ? this.getBoards(organization.id) : Promise.resolve([]) )
+                    .then( boards => _.set(organization, 'boards', boards) )
+            })
+            .then( organization => {
+                let resultP = organization.boards.map( board => this._client.board.delete(board.id));
+                resultP.push(this._client.delete(`/organizations/${organization.id}`));
+                return Promise.all(resultP)
+            })
+            .then(_ => data, _ => data)
+            ;
+    }
+
+    /**
+     * Gets an organization for a given Id
+     * @param idOrganization {String}
+     * @return {Promise&lt;{*}>} Object that describes an organization wrapped inside a promise
+     */
+    getById(idOrganization){
+        return this._client.get(`/organizations/${idOrganization}`);
+    }
+
+    getByName(organizationName){
+        return this.searchFor(organizationName)
+            .then( organizations => {
+                if(organizations.length === 1){
+                    return organizations[0];
+                }
+                throw new Error(`Zero or multiple organizations were found with the matching name '${organizationName}' - [${organizations.map( item => JSON.stringify(item)).join(",")}]`);
+            })
+            ;
+    }
+
+    getBoards(idOrganization) {
+        return this._client.get(`/organizations/${idOrganization}/boards`);
+    }
+}
+
+module.exports = TrelloOrganizations;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TrelloBoards.html">TrelloBoards</a></li><li><a href="TrelloCards.html">TrelloCards</a></li><li><a href="TrelloClient.html">TrelloClient</a></li><li><a href="TrelloLists.html">TrelloLists</a></li><li><a href="TrelloOrganizations.html">TrelloOrganizations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#validateConfig">validateConfig</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Feb 16 2018 17:26:22 GMT+0000 (GMT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

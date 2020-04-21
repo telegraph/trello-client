@@ -1,0 +1,13 @@
+verbose: false
+instrumentation:
+  root: .
+  extensions:
+    - .js
+  excludes:
+    - spec/**/*
+    - spec/helpers/*
+reporting:
+  print: summary
+  reports:
+    - lcov
+  dir: ./dist/coverage
