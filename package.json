@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "codacy-coverage": "^2.1.0",
-    "lodash": "4.17.4",
+    "lodash": "4.17.15",
     "request": "2.83.0"
   },
   "devDependencies": {
