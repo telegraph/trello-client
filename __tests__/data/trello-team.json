@@ -1,0 +1,99 @@
+{
+  "id": "538627f73cbb44d1bfbb58f0",
+  "name": "trelloinc",
+  "displayName": "Trello Inc",
+  "desc": "Trello.",
+  "descData": null,
+  "idBoards": [
+    "4f7a0080554c5d054c598a9b",
+    "4d5ea62fd76aa1136000000c",
+    "4e9447b45504d8000025e533",
+    "58c9bd28df3ad86346df87b5",
+    "58d404bca430d63349042918",
+    "58f5ddcdc85dc4460b3a5d32",
+    "59355d99e863b0de27f1d3d8",
+    "59398d2370f240bbb199399d"
+  ],
+  "idEnterprise": null,
+  "invited": false,
+  "invitations": [
+
+  ],
+  "memberships": [
+    {
+      "id": "538627f73cbb44d1bfbb58f1",
+      "idMember": "4d5eb12cd76aa113600000c9",
+      "memberType": "admin",
+      "unconfirmed": false
+    },
+    {
+      "id": "53b1a1f8a128e74250f8d0b9",
+      "idMember": "4d68050a81bb57af1e006960",
+      "memberType": "admin",
+      "unconfirmed": false
+    },
+    {
+      "id": "53da3738d5e44eafceb802e1",
+      "idMember": "4e6655412f872f6c9305b71d",
+      "memberType": "normal",
+      "unconfirmed": false
+    },
+    {
+      "id": "53da5e8572a469607aa8c7d8",
+      "idMember": "4f820a995a03e8e82d134ac4",
+      "memberType": "normal",
+      "unconfirmed": false
+    },
+    {
+      "id": "5951237e0f10c6eb9b2476ad",
+      "idMember": "595123526d9a31740725bcc3",
+      "memberType": "normal",
+      "unconfirmed": false
+    }
+  ],
+  "prefs": {
+    "permissionLevel": "public",
+    "orgInviteRestrict": [
+
+    ],
+    "externalMembersDisabled": false,
+    "associatedDomain": "trello.com",
+    "googleAppsVersion": 2,
+    "boardVisibilityRestrict": {
+      "private": "org",
+      "org": "org",
+      "public": "org"
+    }
+  },
+  "powerUps": [
+    100
+  ],
+  "products": [
+    100
+  ],
+  "billableMemberCount": 5,
+  "activeBillableMemberCount": 1,
+  "url": "https://trello.com/trelloinc",
+  "website": "https://trello.com",
+  "logoHash": "da3ff465abd3a3e1b687c52ff803af74",
+  "premiumFeatures": [
+    "export",
+    "observers",
+    "removal",
+    "activity",
+    "deactivated",
+    "googleApps",
+    "superAdmins",
+    "inviteOrg",
+    "restrictVis",
+    "disableExternalMembers",
+    "goldMembers",
+    "csvExport",
+    "shortExportHistory",
+    "tags",
+    "plugins",
+    "starCounts",
+    "readSecrets",
+    "enterpriseUI"
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "extends": [
+    "eslint:recommended"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    // Possible Errors
+    "no-extra-parens": ["error", "all"],
+    "no-import-assign": "error",
+    "no-setter-return": "error",
+    "no-template-curly-in-string": "error",
+
+    // Best Practices
+    "block-scoped-var": "error",
+    "complexity": ["error", 10],
+    "curly": ["error", "all"],
+    "eqeqeq": ["error", "smart"],
+    "max-classes-per-file": ["error", 1],
+    "no-alert": "error",
+    "no-caller": "error",
+    "no-constructor-return": "error",
+    "no-else-return": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
+    "no-extend-native": "error",
+    "no-floating-decimal": "error",
+    "no-implicit-coercion": "error",
+    "no-implied-eval": "error",
+    "no-iterator": "error",
+    "no-labels": "error",
+    "no-lone-blocks": "error",
+    "no-loop-func": "error",
+    "no-magic-numbers": "warn",
+    "no-multi-spaces": "error",
+    "no-multi-str": "error",
+    "no-new": "warn",
+    "no-new-func": "warn",
+    "no-new-wrappers": "error",
+    "no-octal-escape": "error",
+    "no-param-reassign": ["warn", { "props": false }],
+    "no-proto": "error",
+    "no-return-assign": "warn",
+    "no-return-await": "error",
+    "no-script-url": "error",
+    "no-self-compare": "warn",
+    "no-sequences": "warn",
+    "no-throw-literal": "error",
+    "no-unmodified-loop-condition": "warn",
+    "no-unused-expressions": "warn",
+    "no-useless-call": "warn",
+    "no-useless-concat": "error",
+    "no-useless-escape": "warn",
+    "no-useless-return": "error",
+    "no-void": "error",
+    "no-warning-comments": "warn",
+    "prefer-named-capture-group": "warn",
+    "prefer-promise-reject-errors": "warn",
+    "prefer-regex-literals": "warn",
+    "radix": ["error", "as-needed"],
+    "yoda": "error",
+
+    // Variables
+    "init-declarations": "error",
+    "no-shadow": "warn",
+    "no-undef-init": "warn",
+    "no-undefined": "error",
+    "no-use-before-define": ["error", { "functions": false }],
+
+    // Stylistic Issues
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "space-in-parens": ["error", "never"],
+
+    // ECMAScript 6
+    "arrow-body-style": ["error", "as-needed"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "no-undefined": "off",
+        "no-magic-numbers": "off"
+      }
+    },
+    {
+      "files": [
+        "__integration_tests__/**/*.js"
+      ],
+      "env": {
+        "jest": true
+      },
+      "globals": {
+        "trelloDatabase": true
+      }
+    }
+  ]
+}

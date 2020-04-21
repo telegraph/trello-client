@@ -1,0 +1,20 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": "defaults"
+      }
+    ]
+  ],
+  "sourceMaps": "inline",
+  "env": {
+    "production": {
+      "comments": false,
+      "sourceMaps": false
+    },
+    "test": {
+      "plugins": ["@babel/plugin-transform-runtime"]
+    }
+  }
+}

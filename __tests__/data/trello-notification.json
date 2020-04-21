@@ -1,0 +1,23 @@
+{
+  "id": "59531f8674fc80b0b372880e",
+  "unread": true,
+  "type": "addedToBoard",
+  "date": "2017-06-28T03:16:22.628Z",
+  "data": {
+    "memberType": "normal",
+    "idMember": "5813b41ecaaa91c7a5dae8fe",
+    "board": {
+      "shortLink": "tBmYPSYe",
+      "name": "US National Parks",
+      "id": "560bf4298b3dda300c18d09c"
+    }
+  },
+  "idMemberCreator": "556c8537a1928ba745504dd8",
+  "memberCreator": {
+    "id": "556c8537a1928ba745504dd8",
+    "avatarHash": "0b48c7057767cca8f339109b27a064d7",
+    "fullName": "Matt Cowan",
+    "initials": "MC",
+    "username": "mattcowan"
+  }
+}

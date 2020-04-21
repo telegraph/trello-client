@@ -1,19 +1,10 @@
 {
   "name": "@telegraph-engineering/trello-client",
-  "version": "1.1.0",
   "author": "TMG Newsroom Team",
   "description": "Telegraph Trello Client API",
-  "main": "./lib/trello.js",
-  "files": [
-    "lib"
-  ],
+  "main": "lib/trello.js",
   "keywords": [
-    "Telegraph Media Group",
-    "Trello Client API"
-  ],
-  "tags": [
-    "Telegraph Media Group",
-    "Trello Client API"
+    "trello"
   ],
   "homepage": "https://github.com/telegraph/trello-client",
   "repository": {
@@ -23,34 +14,45 @@
   "bugs": {
     "url": "https://github.com/telegraph/trello-client/issues"
   },
-  "engines": {
-    "node": ">=6.0.0"
-  },
   "license": "Apache-2.0",
   "scripts": {
-    "clean": "rm -rf node_modules dist",
-    "test": "istanbul cover --config ./spec/support/.istanbul.yml node_modules/jasmine/bin/jasmine.js",
-    "codacyCoverage": "npm test && cat ./dist/coverage/lcov.info | codacy-coverage",
-    "pack": "npm pack; mkdir -p dist; mv trello-client*.tgz dist/.",
-    "docs": "jsdoc2md lib/*.js --param-list-format list > api.md",
-    "htmlDocs": "jsdoc lib/*.js -d ./jsdoc"
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "clean:all": "gulp clean-all",
+    "cpd": "jscpd src -r console,html,xml -o ./reports/cpd",
+    "doc": "esdoc",
+    "lint": "eslint src __tests__",
+    "test": "jest --colors",
+    "test:integration": "jest --colors --config=jest.config-integration.js",
+    "trello": "node __integration_tests__/trello-simulator/index.js",
+    "trello:watch": "gulp trello-watch"
   },
   "dependencies": {
-    "codacy-coverage": "^2.1.0",
-    "lodash": "4.17.4",
-    "request": "2.83.0"
+    "axios": "^0.19.2",
+    "lodash": "^4.17.15",
+    "regenerator-runtime": "^0.13.5"
   },
   "devDependencies": {
-    "istanbul": "0.4.5",
-    "jasmine": "2.8.0",
-    "jasmine-console-reporter": "2.0.1",
-    "jsdoc": "^3.5.5",
-    "jsdoc-to-markdown": "^3.0.3",
-    "jsdock": "^1.0.4",
-    "proxyquire": "1.8.0"
-  },
-  "directories": {
-    "lib": "lib"
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@types/jest": "^25.2.1",
+    "bson": "^4.0.4",
+    "chance": "^1.1.4",
+    "del": "^5.1.0",
+    "esdoc": "^1.1.0",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-json-editor": "^2.5.4",
+    "gulp-nodemon": "^2.5.0",
+    "jest": "^25.4.0",
+    "jest-junit": "^10.0.0",
+    "jscpd": "^3.2.1",
+    "lokijs": "^1.5.8"
   },
   "publishConfig": {
     "access": "public"
