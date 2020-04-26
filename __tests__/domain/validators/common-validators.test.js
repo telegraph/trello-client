@@ -16,9 +16,17 @@
 
 import Chance from 'chance'
 import {
-  validateNotBlankTextField, validateNotNullArrayOfStrings, validateNotNullBooleanField, validateNotNullNumberField,
-  validateNotNullStringOptionField, validateNullableBooleanField, validateNullableNotBlankTextField,
-  validateNullableStringOptionField, validateNullableTextField, validatePosition
+  validateNotBlankTextField,
+  validateNotNullArrayOfStrings,
+  validateNotNullBooleanField,
+  validateNotNullId,
+  validateNotNullNumberField,
+  validateNotNullStringOptionField,
+  validateNullableBooleanField,
+  validateNullableNotBlankTextField,
+  validateNullableStringOptionField,
+  validateNullableTextField,
+  validatePosition
 } from '../../../src/domain/validators/common-validators'
 import {ValidationError} from '../../../src/domain/validators/ValidationError'
 
@@ -291,6 +299,30 @@ describe('Common validators', () => {
       ['callbackUrl', {foo: 'bar'}]
     ])('%p should throw ValidationError', (field, value) =>
       expect(() => validatePosition(field, value))
+        .toThrow(ValidationError)
+    )
+  })
+
+  describe('Validate Not Null ID', () => {
+    test.each([
+      [undefined, '5ea6062ea0697b9fd521502a'],
+      ['idMember', '5612e4f91b25c15e873722b8'],
+    ])('%p should be valid', (field, value) =>
+      expect(() => validateNotNullId(value, field))
+        .not.toThrow(ValidationError)
+    )
+
+    test.each([
+      ['idMember', undefined],
+      ['idMember', null],
+      ['callbackUrl', true],
+      ['callbackUrl', -6.7],
+      ['callbackUrl', 'www.example.com'],
+      ['callbackUrl', 'some-string'],
+      ['callbackUrl', [1, 2, 3]],
+      ['callbackUrl', {foo: 'bar'}]
+    ])('%p should throw ValidationError', (field, value) =>
+      expect(() => validateNotNullId(value, field))
         .toThrow(ValidationError)
     )
   })

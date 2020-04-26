@@ -16,7 +16,7 @@
 
 import _ from 'lodash'
 import {isBlank, isUrl} from '../../utils/string-utils'
-import {ValidationError} from './ValidationError'
+import ValidationError from './ValidationError'
 import {isNegative} from '../../utils/number-utils'
 
 export const POSITION_STRING_VALID_VALUES = ['bottom', 'top']
@@ -243,5 +243,23 @@ export function validatePosition(fieldName, value) {
 
   if (_.isNumber(value) && isNegative(value)) {
     throw new ValidationError(`${fieldName} string must be a positive float: ${value}`)
+  }
+}
+
+/**
+ * Validates a id value, it should be:
+ *   - not null
+ *   - valid id
+ * @param {*} value
+ * @param {!string} fieldName
+ * @throws {ValidationError}
+ */
+export function validateNotNullId(value, fieldName= 'id') {
+  if (_.isNil(value) || !_.isString(value)) {
+    throw new ValidationError(`${fieldName} must be a not null id string: ${value}`)
+  }
+
+  if (_.isNil(value.match(/^[0-9a-fA-F]{24}$/))) {
+    throw new ValidationError(`${fieldName} must be a valid id: ${value}`)
   }
 }
