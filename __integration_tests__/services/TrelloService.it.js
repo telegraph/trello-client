@@ -29,6 +29,11 @@ describe('Trello service integration test', () => {
       await expect(trelloService.get(`/organizations/${created.id}`))
         .resolves.toEqual(created)
     })
+
+    test('Should process a not found get request', async () =>
+      expect(trelloService.get('/organizations/no-found-id'))
+        .rejects.toThrow(Error)
+    )
   })
 
   describe('Put request', () => {

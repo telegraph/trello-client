@@ -35,7 +35,8 @@ export default class TrelloService {
 
     return axios.get(path, {
       params: params
-    }).then(response => response.data)
+    })
+      .then(response => response.data)
   }
 
   async put(path, params = {}) {
@@ -77,4 +78,5 @@ function configureAxios(apiKey, apiToken, baseUrl) {
     }
     return config
   })
+
 }

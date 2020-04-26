@@ -34,7 +34,7 @@ describe('Common validators', () => {
       ['name', {foo: 'bar'}]
     ])('validateNotBlankTextField(%p, %p) should throw ValidationError exception', (fieldName, value) =>
       expect(() => validateNotBlankTextField(fieldName, value))
-        .toThrow(new ValidationError(`${fieldName} must be a not empty string. Parameter value is '${value}'`))
+        .toThrow(ValidationError)
     )
 
     test('Should throw an error if text field value is longer than 16384 characters', () =>

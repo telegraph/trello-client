@@ -52,7 +52,8 @@
     "jest": "^25.4.0",
     "jest-junit": "^10.0.0",
     "jscpd": "^3.2.1",
-    "lokijs": "^1.5.8"
+    "lokijs": "^1.5.8",
+    "morgan": "^1.10.0"
   },
   "publishConfig": {
     "access": "public"

@@ -17,14 +17,21 @@
 const _ = require('lodash')
 const express = require('express')
 const loki = require('lokijs')
+const morgan = require('morgan')
+
+const actions = require('./actions')
 const organizations = require('./organizations')
+
 const CONFIG = require('./config')
+const ACTIONS = require('./data/actions.json')
 
 global.trelloDatabase = initDatabase()
 
 const app = express()
+app.use(morgan('combined'))
 app.use(authenticationMiddleware)
 app.use('/organizations', organizations)
+app.use('/actions', actions)
 app.get('/health', (req, res) => res.status(200).send('OK'))
 
 app.listen(CONFIG.port, () => console.log(`Trello simulator listening on port ${CONFIG.port}!`))
@@ -40,6 +47,12 @@ function authenticationMiddleware(req, res, next) {
 
 function initDatabase() {
   const database = new loki('Trello Database')
+
+  database.addCollection('actions')
   database.addCollection('organizations')
+
+  ACTIONS.map(action =>
+    database.getCollection('actions').insert(action))
+
   return database
 }

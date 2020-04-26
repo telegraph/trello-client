@@ -15,8 +15,11 @@
  */
 
 import _ from 'lodash'
+import ActionEntity from '../entities/ActionEntity'
 import Trello from '../index'
 import {validateNotBlankTextField} from '../domain/validators/common-validators'
+
+const HTTP_404_ERROR = 404
 
 /**
  * Action objects repository.
@@ -36,13 +39,38 @@ export default class ActionRepository {
   }
 
   /**
+   * Returns one action by id.
+   * @param actionId
+   * @returns {Promise<ActionEntity>}
+   */
+  async findById(actionId) {
+    validateNotBlankTextField('actionId', actionId)
+    return this._trello.get(`/actions/${actionId}`)
+      .then(action => new ActionEntity(action, this))
+      .catch(error => {
+        if (error.isAxiosError
+            && error.response.status === HTTP_404_ERROR) {
+          return Promise.resolve(null)
+        }
+        return Promise.reject(error)
+      })
+  }
+
+  /**
    * Returns the display object of one action.
    * @param {!string} actionId Action id.
    * @returns {Promise<Object>} Display object.
    * @throws {ValidationError} If action id parameter is not valid.
    */
-  async getDisplayById(actionId) {
+  async findDisplayById(actionId) {
     validateNotBlankTextField('actionId', actionId)
     return this._trello.get(`/actions/${actionId}/display`)
+      .catch(error => {
+        if (error.isAxiosError
+          && error.response.status === HTTP_404_ERROR) {
+          return Promise.resolve(null)
+        }
+        return Promise.reject(error)
+      })
   }
 }

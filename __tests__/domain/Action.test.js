@@ -42,24 +42,26 @@ describe('Action domain object', () => {
     )
   })
 
-  describe('Property operations', () => {
+  describe('Properties', () => {
     let action = null
 
     beforeEach(() => {
       action = new Action(TRELLO_ACTION)
     })
 
-    test('Should return action id', () =>
-      expect(action.id)
-        .toBe('592f11060f95a3d3d46a987a')
-    )
+    describe('id', () => {
+      test('Should return action id', () =>
+        expect(action.id)
+          .toBe('592f11060f95a3d3d46a987a')
+      )
 
-    test('Should not set id', () =>
-      expect(() => {
-        action.id = 'asdfasdfasdfasdf'
-      })
-        .toThrow(TypeError)
-    )
+      test('Should not set id', () =>
+        expect(() => {
+          action.id = 'asdfasdfasdfasdf'
+        })
+          .toThrow(TypeError)
+      )
+    })
 
     test('Should return a copy of the action data', () => {
       const data = action.data
@@ -123,7 +125,7 @@ describe('Action domain object', () => {
     })
 
     test('Should return a copy of the underlying Trello object', () => {
-      const trelloObject = action.getTrelloObject()
+      const trelloObject = action.trelloObject
 
       expect(trelloObject)
         .toEqual(TRELLO_ACTION)

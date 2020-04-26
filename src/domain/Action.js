@@ -15,25 +15,15 @@
  */
 
 import _ from 'lodash'
+import TrelloDomain from './TrelloDomain'
 
 /**
  * Actions are generated whenever an action occurs in Trello.
  */
-export default class Action {
+export default class Action extends TrelloDomain {
 
   /**
-   * Action constructor.
-   * @param {!Object} trelloActionObject Trello API action object.
-   */
-  constructor(trelloActionObject) {
-    if (_.isNil(trelloActionObject) || !_.isObject(trelloActionObject)) {
-      throw new TypeError('trelloActionObject parameter must be a not null object')
-    }
-    this._trelloObject = _.cloneDeep(trelloActionObject)
-  }
-
-  /**
-   * Returns the id of the action.
+   * The id of the action.
    * @type {string} Action id.
    */
   get id() {
@@ -71,21 +61,5 @@ export default class Action {
    */
   get type() {
     return this._trelloObject.type
-  }
-
-  /**
-   * Returns a copy of the underlying Trello action object.
-   * @returns {Object} Trello API action object.
-   */
-  getTrelloObject() {
-    return _.cloneDeep(this._trelloObject)
-  }
-
-  /**
-   * Converts object to JSON.
-   * @returns {string} JSON string.
-   */
-  toJSON() {
-    return JSON.stringify(this._trelloObject)
   }
 }

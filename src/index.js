@@ -19,6 +19,7 @@ import 'regenerator-runtime/runtime.js'
 import _ from 'lodash'
 import TeamRepository from './repositories/TeamRepository'
 import TrelloService from './services/TrelloService'
+import ActionRepository from './repositories/ActionRepository'
 
 const DEFAULT_OPTIONS = {
   baseUrl: 'https://api.trello.com/1'
@@ -33,7 +34,7 @@ export default class Trello {
    * Creates a new Trello client instance.
    * @param {!string} apiKey Trello API Key
    * @param {!string} apiToken Trello API Token
-   * @param {{basePath: ?string}} options={baseUrl:https://api.trello.com/1} Additional options
+   * @param {{baseUrl: ?string}} options={baseUrl:https://api.trello.com/1} Additional options
    */
   constructor(apiKey, apiToken, options = {}) {
     if (_.isNil(apiKey) || _.isNil(apiToken)) {
@@ -47,13 +48,24 @@ export default class Trello {
 
   /**
    * Team repository, provides team operations.
-   * @returns {TeamRepository}
+   * @type {TeamRepository}
    */
-  get team() {
+  get teams() {
     if (!_.has(this, '_team')) {
-      this._team = new TeamRepository(this)
+      this._teams = new TeamRepository(this)
     }
-    return this._team
+    return this._teams
+  }
+
+  /**
+   * Actions repository, provides action operations.
+   * @type {ActionRepository}
+   */
+  get actions() {
+    if (!_.has(this, '_action')) {
+      this._actions = new ActionRepository(this)
+    }
+    return this._actions
   }
 
   /**

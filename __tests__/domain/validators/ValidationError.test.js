@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {ValidationError} from '../../../src/domain/validators/ValidationError'
+import ValidationError from '../../../src/domain/validators/ValidationError'
 
 describe('ValidationError exception', () => {
   test('Should set name and message', () => {
