@@ -50,7 +50,7 @@ export default class Action extends TrelloDomain {
    * The id of the member who caused the action.
    * @type {string}
    */
-  get memberCreatorId() {
+  get idMemberCreator() {
     return this._trelloObject.idMemberCreator
   }
 

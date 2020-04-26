@@ -54,7 +54,7 @@ export default class Enterprise {
   }
 
   /**
-   * Object containing information about the preferences set within the enterprise.
+   * Object containing information about the prefs set within the enterprise.
    * @type {Object}
    */
   get preferences() {

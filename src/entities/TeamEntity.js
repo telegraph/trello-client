@@ -15,18 +15,18 @@
  */
 
 import _ from 'lodash'
-import Team from '../domain/Team'
+import Organization from '../domain/Organization'
 import TeamRepository from '../repositories/TeamRepository'
 
 /**
- * Team active record.
+ * Organization active record.
  */
-export default class TeamEntity extends Team {
+export default class TeamEntity extends Organization {
 
   /**
-   * Team entity constructor.
+   * Organization entity constructor.
    * @param {!Object} trelloObject Trello API team object.
-   * @param {!TeamRepository} repository Team repository object.
+   * @param {!TeamRepository} repository Organization repository object.
    * @throws TypeError If parameters are null or not valid objects.
    */
   constructor(trelloObject, repository) {

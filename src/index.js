@@ -47,7 +47,7 @@ export default class Trello {
   }
 
   /**
-   * Team repository, provides team operations.
+   * Organization repository, provides team operations.
    * @type {TeamRepository}
    */
   get teams() {

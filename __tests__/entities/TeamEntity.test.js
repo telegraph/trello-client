@@ -20,7 +20,7 @@ import ORGANIZATION_FROM_TRELLO from '../data/trello-team'
 
 jest.mock('../../src/repositories/TeamRepository')
 
-describe('Team entity test', () => {
+describe('Organization entity test', () => {
   const repository = new TeamRepository()
 
   describe('Constructor', () => {

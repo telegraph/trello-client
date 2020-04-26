@@ -24,12 +24,12 @@ import {
 export default class BoardPreferences {
 
   /**
-   * Board preferences constructor.
+   * Board prefs constructor.
    * @param {Object} trelloBoardPreferences
    */
   constructor(trelloBoardPreferences) {
     if (_.isNil(trelloBoardPreferences) || !_.isObject(trelloBoardPreferences)) {
-      throw new TypeError('trelloBoardPreferences must be a not null Trello board preferences object')
+      throw new TypeError('trelloBoardPreferences must be a not null Trello board prefs object')
     }
 
     this._preferences = trelloBoardPreferences

@@ -26,6 +26,32 @@ export default class TrelloDomain {
       throw new TypeError('trelloObject parameter must be a not null object')
     }
     this._trelloObject = _.cloneDeep(trelloObject)
+    this._updatedFields = []
+  }
+
+  /**
+   * Not saved updated fields.
+   * @type {string[]}
+   */
+  get updatedFields() {
+    return _.cloneDeep(this._updatedFields)
+  }
+
+  /**
+   * Flags a field as updated.
+   * @param name
+   */
+  flagUpdatedField(name) {
+    if (!this._updatedFields.includes(name)) {
+      this._updatedFields.push(name)
+    }
+  }
+
+  /**
+   * Refresh updated fields list.
+   */
+  refreshUpdatedFields() {
+    this._updatedFields = []
   }
 
   /**

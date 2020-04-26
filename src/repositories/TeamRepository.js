@@ -21,7 +21,7 @@ import Trello from '../index'
 import TeamEntity from '../entities/TeamEntity'
 
 /**
- * Team objects repository.
+ * Organization objects repository.
  */
 export default class TeamRepository {
 
@@ -39,7 +39,7 @@ export default class TeamRepository {
 
   /**
    * Creates a new team.
-   * @param {{displayName: string, desc: ?string, name: ?string, website: ?string}} teamData Team data
+   * @param {{displayName: string, desc: ?string, name: ?string, website: ?string}} teamData Organization data
    * @returns {Promise<TeamEntity>} Created team entity.
    * @throws {TypeError} Throw error when teamData properties does not validate.
    */
@@ -62,8 +62,8 @@ export default class TeamRepository {
   }
 
   /**
-   * Loads a Team by id.
-   * @param {string} id Team id.
+   * Loads a Organization by id.
+   * @param {string} id Organization id.
    * @returns {Promise<TeamEntity>} Loaded team entity.
    * @throws {TypeError} Throws error when id is null or empty.
    */
@@ -98,7 +98,7 @@ export default class TeamRepository {
 
   /**
    * Deletes a team by id.
-   * @param {string} id Team id.
+   * @param {string} id Organization id.
    * @returns {Promise} Delete operation promise.
    * @throws {TypeError} Throws error when id is null or empty.
    */

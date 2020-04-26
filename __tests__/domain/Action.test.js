@@ -93,13 +93,13 @@ describe('Action domain object', () => {
     )
 
     test('Should return the member creator id', () =>
-      expect(action.memberCreatorId)
+      expect(action.idMemberCreator)
         .toEqual(TRELLO_ACTION.idMemberCreator)
     )
 
     test('Should not set member creator id', () =>
       expect(() => {
-        action.memberCreatorId = '9834mnf9s8anaf89jsadf89'
+        action.idMemberCreator = '9834mnf9s8anaf89jsadf89'
       })
         .toThrow(TypeError)
     )

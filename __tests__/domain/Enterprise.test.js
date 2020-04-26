@@ -92,14 +92,14 @@ describe('Enterprise domain object', () => {
     })
 
     describe('preferences', () => {
-      test('Should return a copy of the preferences', () => {
+      test('Should return a copy of the prefs', () => {
         expect(enterprise.preferences)
           .toEqual(TRELLO_ENTERPRISE.prefs)
         expect(enterprise.preferences)
           .not.toBe(TRELLO_ENTERPRISE.prefs)
       })
 
-      test('Should not set preferences', () =>
+      test('Should not set prefs', () =>
         expect(() => {
           enterprise.preferences = '5e9dd8888f2c1f46aeb8eff3'
         })

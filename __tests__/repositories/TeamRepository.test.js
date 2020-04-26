@@ -15,14 +15,14 @@
  */
 
 import Trello from '../../src/index'
-import Team from '../../src/domain/Team'
+import Organization from '../../src/domain/Organization'
 import TeamEntity from '../../src/entities/TeamEntity'
 import TeamRepository from '../../src/repositories/TeamRepository'
 import TRELLO_ORGANIZATION from '../data/trello-team'
 
 jest.mock('../../src/index')
 
-describe('Team repository tests', () => {
+describe('Organization repository tests', () => {
 
   const trello = new Trello()
   const repository = new TeamRepository(trello)
@@ -61,7 +61,7 @@ describe('Team repository tests', () => {
         .rejects.toThrow(TypeError)
     )
 
-    test('Should create a team and return the created Team object', async () => {
+    test('Should create a team and return the created Organization object', async () => {
       trello.post = async (path, params) => ({
         ...TRELLO_ORGANIZATION,
         displayName: params.displayName,
@@ -71,14 +71,14 @@ describe('Team repository tests', () => {
       })
 
       const team = await repository.create({
-        displayName: 'New Team',
+        displayName: 'New Organization',
         desc: 'An amazing team',
         name: 'new_team',
         website: 'https://www.example.com'
       })
 
       expect(team).toBeInstanceOf(TeamEntity)
-      expect(team.displayName).toBe('New Team')
+      expect(team.displayName).toBe('New Organization')
       expect(team.desc).toBe('An amazing team')
       expect(team.name).toBe('new_team')
       expect(team.website).toBe('https://www.example.com')
@@ -100,7 +100,7 @@ describe('Team repository tests', () => {
 
       const team = await repository.findById('538627f73cbb44d1bfbb58f0')
 
-      expect(team).toBeInstanceOf(Team)
+      expect(team).toBeInstanceOf(Organization)
       expect(team.id).toBe(TRELLO_ORGANIZATION.id)
     })
   })

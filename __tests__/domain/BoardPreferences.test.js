@@ -19,7 +19,7 @@ import BoardPreferences from '../../src/domain/BoardPreferences'
 import TRELLO_BOARD from '../data/trello-board'
 import {ValidationError} from '../../src/domain/validators/ValidationError'
 
-describe('Board preferences class', () => {
+describe('Board prefs class', () => {
   describe('Constructor', () => {
     test('Should construct an object', () => {
       const preferences = new BoardPreferences(TRELLO_BOARD.prefs)

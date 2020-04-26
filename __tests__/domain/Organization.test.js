@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-import Team from '../../src/domain/Team'
+import Organization from '../../src/domain/Organization'
 import TRELLO_ORGANIZATION from '../data/trello-team'
 
 jest.mock('../../src/services/TrelloService')
 
-describe('Team domain object', () => {
+describe('Organization domain object', () => {
   describe('Constructor', () => {
     test('Should construct an object', () => {
-      const team = new Team(TRELLO_ORGANIZATION)
+      const team = new Organization(TRELLO_ORGANIZATION)
 
       expect(team)
         .not.toBeNull()
       expect(team)
-        .toBeInstanceOf(Team)
+        .toBeInstanceOf(Organization)
       expect(team._trelloObject)
         .toEqual(TRELLO_ORGANIZATION)
       expect(team._trelloObject)
@@ -38,8 +38,8 @@ describe('Team domain object', () => {
       undefined,
       null,
       'foo'
-    ])('Should throw error on construction new Team(%p)', value =>
-      expect(() => new Team(value))
+    ])('Should throw error on construction new Organization(%p)', value =>
+      expect(() => new Organization(value))
         .toThrow(TypeError)
     )
   })
@@ -48,7 +48,7 @@ describe('Team domain object', () => {
     let organization = null
 
     beforeEach(() => {
-      organization = new Team(TRELLO_ORGANIZATION)
+      organization = new Organization(TRELLO_ORGANIZATION)
     })
 
     test('Should return id', () =>
@@ -146,7 +146,7 @@ describe('Team domain object', () => {
 
   describe('JSON conversion', () => {
     test('Should convert to JSON', () => {
-      const organization = new Team(TRELLO_ORGANIZATION)
+      const organization = new Organization(TRELLO_ORGANIZATION)
       expect(organization.toJSON())
         .toEqual(JSON.stringify(TRELLO_ORGANIZATION))
     })
@@ -156,7 +156,7 @@ describe('Team domain object', () => {
     let team = null
 
     beforeEach(() => {
-      team = new Team(TRELLO_ORGANIZATION)
+      team = new Organization(TRELLO_ORGANIZATION)
     })
 
     test('Should return a copy of the underlying Trello object', () => {

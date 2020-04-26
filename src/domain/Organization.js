@@ -19,10 +19,10 @@ import _ from 'lodash'
 /**
  * Teams represent collections of members and boards.
  */
-export default class Team {
+export default class Organization {
 
   /**
-   * Team constructor.
+   * Organization constructor.
    * @param {!Object} trelloOrganizationObject Trello API organization object.
    */
   constructor(trelloOrganizationObject) {

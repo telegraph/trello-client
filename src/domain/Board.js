@@ -17,24 +17,14 @@
 import _ from 'lodash'
 import {validateNotBlankTextField} from './validators/common-validators'
 import BoardPreferences from './BoardPreferences'
+import TrelloDomain from './TrelloDomain'
+import BoardLabelNames from './BoardLabelNames'
 
 /**
  * Boards are fundamental to Trello. A board may belong to 0
  * or 1 teams and can have 0 or more lists.
  */
-export default class Board {
-
-  /**
-   * Board constructor.
-   * @param {!Object} trelloBoardObject Trello API board object
-   */
-  constructor(trelloBoardObject) {
-    if (_.isNil(trelloBoardObject) || !_.isObject(trelloBoardObject)) {
-      throw new TypeError('trelloBoardObject parameter must be a not null object')
-    }
-    this._trelloObject = _.cloneDeep(trelloBoardObject)
-    this._preferences = new BoardPreferences(this._trelloObject.prefs)
-  }
+export default class Board extends TrelloDomain {
 
   /**
    * Returns the ID of the board.
@@ -59,6 +49,7 @@ export default class Board {
   set name(name) {
     validateNotBlankTextField('name', name)
     this._trelloObject.name = name
+    this.flagUpdatedField('name')
   }
 
   /**
@@ -76,6 +67,7 @@ export default class Board {
   set desc(desc) {
     validateNotBlankTextField('desc', desc)
     this._trelloObject.desc = desc
+    this.flagUpdatedField('desc')
   }
 
   /**
@@ -100,13 +92,14 @@ export default class Board {
    */
   set closed(closed) {
     this._trelloObject.closed = closed
+    this.flagUpdatedField('closed')
   }
 
   /**
    * Returns the id of the team to witch the board belongs.
    * @type {string}
    */
-  get teamId() {
+  get idOrganization() {
     return this._trelloObject.idOrganization
   }
 
@@ -114,9 +107,10 @@ export default class Board {
    * Moves the board to another team.
    * @type {string}
    */
-  set teamId(teamId) {
-    validateNotBlankTextField('teamId', teamId)
+  set idOrganization(teamId) {
+    validateNotBlankTextField('idOrganization', teamId)
     this._trelloObject.idOrganization = teamId
+    this.flagUpdatedField('idOrganization')
   }
 
   /**
@@ -147,8 +141,38 @@ export default class Board {
    * Board settings.
    * @type {BoardPreferences}
    */
-  get preferences() {
-    return this._preferences
+  get prefs() {
+    if (!this._prefs) {
+      this._prefs = new BoardPreferences(this._trelloObject.prefs)
+    }
+    return this._prefs
+  }
+
+  /**
+   * Label names.
+   * @type {BoardLabelNames}
+   */
+  get labelNames() {
+    if (!this._labelNames) {
+      this._labelNames = new BoardLabelNames(this._trelloObject.labelNames)
+    }
+    return this._labelNames
+  }
+
+  /**
+   * An object containing information on the limits that exist for the board.
+   * @type {Object}
+   */
+  get limits() {
+    return _.cloneDeep(this._trelloObject.limits)
+  }
+
+  /**
+   * Array of objects that represent the relationship of users to this board as memberships.
+   * @type {Object[]}
+   */
+  get memberships() {
+    return _.cloneDeep(this.trelloObject.memberships)
   }
 
   /**
