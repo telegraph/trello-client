@@ -15,13 +15,13 @@
  */
 
 import TeamEntity from '../../src/entities/TeamEntity'
-import TeamRepository from '../../src/repositories/TeamRepository'
+import OrganizationRepository from '../../src/repositories/OrganizationRepository'
 import ORGANIZATION_FROM_TRELLO from '../data/trello-team'
 
-jest.mock('../../src/repositories/TeamRepository')
+jest.mock('../../src/repositories/OrganizationRepository')
 
 describe('Organization entity test', () => {
-  const repository = new TeamRepository()
+  const repository = new OrganizationRepository()
 
   describe('Constructor', () => {
     test('Should construct object', () => {
@@ -37,7 +37,7 @@ describe('Organization entity test', () => {
         .toThrow(TypeError)
     )
 
-    test('Should thrown an error if repository is not a TeamRepository instance', () =>
+    test('Should thrown an error if repository is not a OrganizationRepository instance', () =>
       expect(() => new TeamEntity(ORGANIZATION_FROM_TRELLO, {}))
         .toThrow(TypeError)
     )

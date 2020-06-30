@@ -17,7 +17,7 @@
 import Trello from '../../src/index'
 import Organization from '../../src/domain/Organization'
 import TeamEntity from '../../src/entities/TeamEntity'
-import TeamRepository from '../../src/repositories/TeamRepository'
+import OrganizationRepository from '../../src/repositories/OrganizationRepository'
 import TRELLO_ORGANIZATION from '../data/trello-team'
 
 jest.mock('../../src/index')
@@ -25,22 +25,22 @@ jest.mock('../../src/index')
 describe('Organization repository tests', () => {
 
   const trello = new Trello()
-  const repository = new TeamRepository(trello)
+  const repository = new OrganizationRepository(trello)
 
   describe('Construction', () => {
     test('Should construct the object', () => {
       expect(repository)
         .not.toBeNull()
       expect(repository)
-        .toBeInstanceOf(TeamRepository)
+        .toBeInstanceOf(OrganizationRepository)
     })
 
     test.each([
       undefined,
       null,
       {}
-    ])('Should throw error on construction new TeamRepository(%p)', value =>
-      expect(() => new TeamRepository(value))
+    ])('Should throw error on construction new OrganizationRepository(%p)', value =>
+      expect(() => new OrganizationRepository(value))
         .toThrow(TypeError)
     )
   })

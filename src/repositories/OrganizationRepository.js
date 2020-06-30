@@ -23,7 +23,7 @@ import TeamEntity from '../entities/TeamEntity'
 /**
  * Organization objects repository.
  */
-export default class TeamRepository {
+export default class OrganizationRepository {
 
   /**
    * Creates a new instance.

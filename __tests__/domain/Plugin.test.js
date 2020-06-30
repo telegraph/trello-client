@@ -14,7 +14,81 @@
  * limitations under the License.
  */
 
+import Plugin from '../../src/domain/Plugin'
+import TRELLO_PLUGIN from '../data/trello-plugin.json'
+
 describe('Plugin domain object', () => {
-  test.todo('Construction')
-  test.todo('Properties')
+  describe('Constructor', () => {
+    test('Should construct an object', () => {
+      const plugin = new Plugin(TRELLO_PLUGIN)
+
+      expect(plugin)
+        .not.toBeNull()
+      expect(plugin)
+        .toBeInstanceOf(Plugin)
+      expect(plugin._trelloObject)
+        .toEqual(TRELLO_PLUGIN)
+      expect(plugin._trelloObject)
+        .not.toBe(TRELLO_PLUGIN)
+    })
+
+    test.each([
+      undefined,
+      null,
+      'foo'
+    ])('Should throw error on construction new Plugin(%p)', value =>
+      expect(() => new Plugin(value))
+        .toThrow(TypeError)
+    )
+  })
+
+  describe('Properties', () => {
+    let plugin = null
+
+    beforeEach(() => {
+      plugin = new Plugin(TRELLO_PLUGIN)
+    })
+
+    describe('id', () => {
+      test('Should return id', () =>
+        expect(plugin.id)
+          .toBe(TRELLO_PLUGIN.id)
+      )
+
+      test('Should not set id', () =>
+        expect(() => {
+          plugin.id = 'asdfasdfasdfasdf'
+        })
+          .toThrow(TypeError)
+      )
+    })
+
+    describe('idBoard', () => {
+      test('Should return idBoard', () =>
+        expect(plugin.idBoard)
+          .toBe(TRELLO_PLUGIN.idBoard)
+      )
+
+      test('Should not set idBoard', () =>
+        expect(() => {
+          plugin.idBoard = 'asdfasdfasdfasdf'
+        })
+          .toThrow(TypeError)
+      )
+    })
+
+    describe('idPlugin', () => {
+      test('Should return idPlugin', () =>
+        expect(plugin.idPlugin)
+          .toBe(TRELLO_PLUGIN.idPlugin)
+      )
+
+      test('Should not set idPlugin', () =>
+        expect(() => {
+          plugin.idPlugin = 'asdfasdfasdfasdf'
+        })
+          .toThrow(TypeError)
+      )
+    })
+  })
 })

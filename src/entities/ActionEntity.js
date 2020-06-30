@@ -29,7 +29,7 @@ export default class ActionEntity extends Action {
   constructor(trelloObject, repository) {
     super(trelloObject)
     if (_.isNil(repository) || !(repository instanceof ActionRepository)) {
-      throw new TypeError('trelloObject parameter must be a not null TeamRepository')
+      throw new TypeError('trelloObject parameter must be a not null OrganizationRepository')
     }
     this._repository = repository
   }

@@ -14,6 +14,41 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
+import Trello from '../index'
+import BoardEntity from '../entities/BoardEntity'
+import {validateNotNullId} from '../domain/validators/common-validators'
+
+const HTTP_404_ERROR = 404
+
 export default class BoardRepository {
-  
+  /**
+   * Creates a new instance.
+   * @param {!Trello} trello Trello object.
+   * @throws {TypeError} If trello is not a valid Trello client object.
+   */
+  constructor(trello) {
+    if (_.isNil(trello) || !(trello instanceof Trello)) {
+      throw new TypeError('trello parameter must be a not null Trello instance')
+    }
+    this._trello = trello
+  }
+
+  /**
+   * Find a board by id.
+   * @param {!string} boardId The board id.
+   * @return {BoardEntity}
+   */
+  findById(boardId) {
+    validateNotNullId(boardId, 'boardId')
+    return this._trello.get(`/boards/${boardId}`)
+      .then(board => new BoardEntity(board, this))
+      .catch(error => {
+        if (error.isAxiosError
+          && error.response.status === HTTP_404_ERROR) {
+          return Promise.resolve(null)
+        }
+        return Promise.reject(error)
+      })
+  }
 }

@@ -254,7 +254,7 @@ export function validatePosition(fieldName, value) {
  * @param {!string} fieldName
  * @throws {ValidationError}
  */
-export function validateNotNullId(value, fieldName= 'id') {
+export function validateNotNullId(value, fieldName = 'id') {
   if (_.isNil(value) || !_.isString(value)) {
     throw new ValidationError(`${fieldName} must be a not null id string: ${value}`)
   }
@@ -262,4 +262,6 @@ export function validateNotNullId(value, fieldName= 'id') {
   if (_.isNil(value.match(/^[0-9a-fA-F]{24}$/))) {
     throw new ValidationError(`${fieldName} must be a valid id: ${value}`)
   }
+
+  return true
 }

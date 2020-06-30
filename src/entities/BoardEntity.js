@@ -14,8 +14,22 @@
  * limitations under the License.
  */
 
+import _ from 'lodash'
 import Board from '../domain/Board'
+import BoardRepository from '../repositories/BoardRepository'
 
 export default class BoardEntity extends Board {
-
+  /**
+   * Board entity constructor.
+   * @param {!Object} trelloObject Trello API board object.
+   * @param {!BoardRepository} repository Board repository object.
+   * @throws TypeError If parameters are null or not valid objects.
+   */
+  constructor(trelloObject, repository) {
+    super(trelloObject)
+    if (_.isNil(repository) || !(repository instanceof BoardRepository)) {
+      throw new TypeError('trelloObject parameter must be a not null OrganizationRepository')
+    }
+    this._repository = repository
+  }
 }

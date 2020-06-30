@@ -16,7 +16,7 @@
 
 import _ from 'lodash'
 import Organization from '../domain/Organization'
-import TeamRepository from '../repositories/TeamRepository'
+import OrganizationRepository from '../repositories/OrganizationRepository'
 
 /**
  * Organization active record.
@@ -26,13 +26,13 @@ export default class TeamEntity extends Organization {
   /**
    * Organization entity constructor.
    * @param {!Object} trelloObject Trello API team object.
-   * @param {!TeamRepository} repository Organization repository object.
+   * @param {!OrganizationRepository} repository Organization repository object.
    * @throws TypeError If parameters are null or not valid objects.
    */
   constructor(trelloObject, repository) {
     super(trelloObject)
-    if (_.isNil(repository) || !(repository instanceof TeamRepository)) {
-      throw new TypeError('trelloObject parameter must be a not null TeamRepository')
+    if (_.isNil(repository) || !(repository instanceof OrganizationRepository)) {
+      throw new TypeError('trelloObject parameter must be a not null OrganizationRepository')
     }
     this._repository = repository
   }

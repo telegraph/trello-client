@@ -14,6 +14,30 @@
  * limitations under the License.
  */
 
-export default class Plugin {
+import TrelloDomain from './TrelloDomain'
 
+export default class Plugin extends TrelloDomain {
+  /**
+   * ID.
+   * @type {string}
+   */
+  get id() {
+    return this._trelloObject.id
+  }
+
+  /**
+   * The board ID.
+   * @type {string}
+   */
+  get idBoard() {
+    return this._trelloObject.idBoard
+  }
+
+  /**
+   * The plugin ID.
+   * @type {string}
+   */
+  get idPlugin() {
+    return this._trelloObject.idPlugin
+  }
 }
