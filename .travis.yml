@@ -6,7 +6,7 @@ jobs:
     script: npm run codacyCoverage
   - script: npm docs
   - stage: npm release
-    script: echo "Deploying to npm ..."
+    script: npm version $TRAVIS_TAG
     deploy:
       provider: npm
       email: telegraph.engineering@telepgraph.co.uk
