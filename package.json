@@ -38,7 +38,7 @@
   "dependencies": {
     "codacy-coverage": "^2.1.0",
     "lodash": "^4.17.15",
-    "request": "2.83.0"
+    "request": "2.88.0"
   },
   "devDependencies": {
     "istanbul": "0.4.5",
